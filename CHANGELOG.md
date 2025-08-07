@@ -5,6 +5,25 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2025-01-07
+
+### Added
+- GitHub Actions workflow for automated theme deployment
+  - Triggers on pull request merge to main branch
+  - Uses rsync over SSH with custom port configuration
+  - Requires only `DEPLOY_SSH_KEY_84EM_THEME` secret
+  - Includes manual workflow dispatch option
+- Deployment documentation in `.github/DEPLOYMENT_SETUP.md`
+
+### Changed
+- Replaced shell script deployment with GitHub Actions CI/CD pipeline
+- Deployment now requires pull request approval before production deployment
+- Updated deployment to use hardcoded server configuration for improved security
+
+### Security
+- SSH credentials now stored as GitHub secrets instead of local configuration
+- Deployment restricted to merged pull requests only
+
 ## [1.1.1] - 2025-08-07
 
 ### Changed
