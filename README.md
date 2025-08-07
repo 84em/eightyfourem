@@ -111,8 +111,4 @@ For theme support and customization services, visit [84EM.com](https://www.84em.
 
 ## Version History
 
-### 1.0.0
-- Initial release based on Twenty Twenty-Four
-- Custom 84EM branding and styling
-- Additional block patterns and templates
-- Multiple style variations
+See [CHANGELOG.md](CHANGELOG.md) for a detailed version history.
