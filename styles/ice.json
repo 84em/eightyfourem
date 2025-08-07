@@ -105,7 +105,8 @@
 							"fontWeight": "300 900",
 							"src": [
 								"file:./assets/fonts/inter/Inter-VariableFont_slnt,wght.woff2"
-							]
+							],
+							"fontDisplay": "swap"
 						}
 					],
 					"fontFamily": "\"Inter\", sans-serif",
@@ -118,7 +119,8 @@
 							"fontFamily": "Jost",
 							"fontStyle": "normal",
 							"fontWeight": "100 900",
-							"src": ["file:./assets/fonts/jost/Jost-VariableFont_wght.woff2"]
+							"src": ["file:./assets/fonts/jost/Jost-VariableFont_wght.woff2"],
+							"fontDisplay": "swap"
 						},
 						{
 							"fontFamily": "Jost",
@@ -126,7 +128,8 @@
 							"fontWeight": "100 900",
 							"src": [
 								"file:./assets/fonts/jost/Jost-Italic-VariableFont_wght.woff2"
-							]
+							],
+							"fontDisplay": "swap"
 						}
 					],
 					"fontFamily": "\"Jost\", sans-serif",
