@@ -7,4 +7,4 @@
 # Destination: Remote server (84em) at /www/g84emcom_126/public/wp-content/themes/eightfourem/
 
 echo "Deploying to remote server..."
-rsync -avz --exclude 'deploy.sh' --exclude '.git' --exclude 'node_modules'  /home/andrew/workspace/84em/app/public/wp-content/themes/eightfourem/ 84em:/www/g84emcom_126/public/wp-content/themes/eightfourem/
+rsync -avz --exclude 'deploy.sh' --exclude '.git' --exclude 'node_modules'  /home/andrew/workspace/84em/app/public/wp-content/themes/eightyfourem/ 84em:/www/g84emcom_126/public/wp-content/themes/eightyfourem/
