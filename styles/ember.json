@@ -109,7 +109,8 @@
 							"fontWeight": "400 700",
 							"src": [
 								"file:./assets/fonts/instrument-sans/InstrumentSans-VariableFont_wdth,wght.woff2"
-							]
+							],
+							"fontDisplay": "swap"
 						},
 						{
 							"fontFamily": "Instrument Sans",
@@ -117,7 +118,8 @@
 							"fontWeight": "400 700",
 							"src": [
 								"file:./assets/fonts/instrument-sans/InstrumentSans-Italic-VariableFont_wdth,wght.woff2"
-							]
+							],
+							"fontDisplay": "swap"
 						}
 					],
 					"fontFamily": "\"Instrument Sans\", sans-serif",
@@ -130,7 +132,8 @@
 							"fontFamily": "Jost",
 							"fontStyle": "normal",
 							"fontWeight": "100 900",
-							"src": ["file:./assets/fonts/jost/Jost-VariableFont_wght.woff2"]
+							"src": ["file:./assets/fonts/jost/Jost-VariableFont_wght.woff2"],
+							"fontDisplay": "swap"
 						},
 						{
 							"fontFamily": "Jost",
@@ -138,7 +141,8 @@
 							"fontWeight": "100 900",
 							"src": [
 								"file:./assets/fonts/jost/Jost-Italic-VariableFont_wght.woff2"
-							]
+							],
+							"fontDisplay": "swap"
 						}
 					],
 					"fontFamily": "\"Jost\", sans-serif",
