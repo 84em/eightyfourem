@@ -1,0 +1,45 @@
+name: Deploy Theme to Production
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+    paths:
+      - 'themes/eightyfourem/**'
+      - '.github/workflows/deploy-theme.yml'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy Theme via rsync
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup SSH Key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_SSH_KEY_84EM_THEME }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H -p 59939 35.224.70.159 >> ~/.ssh/known_hosts
+
+      - name: Deploy theme to production
+        run: |
+          echo "Deploying theme to production server..."
+          rsync -avz \
+            --exclude 'deploy.sh' \
+            --exclude '.git' \
+            --exclude '.github' \
+            --exclude 'node_modules' \
+            -e "ssh -i ~/.ssh/deploy_key -p 59939" \
+            themes/eightyfourem/ \
+            g84emcom@35.224.70.159:/www/g84emcom_126/public/wp-content/themes/eightyfourem/
+
+      - name: Clean up SSH key
+        if: always()
+        run: |
+          rm -f ~/.ssh/deploy_key
