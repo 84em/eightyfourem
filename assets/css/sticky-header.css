@@ -1,0 +1,56 @@
+/**
+ * Sticky Header Styles for 84EM Theme
+ */
+
+/* Make header sticky */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    transition: all 0.3s ease;
+}
+
+/* Admin bar adjustment */
+.admin-bar header {
+    top: 32px;
+}
+
+/* Admin bar adjustment for mobile */
+@media screen and (max-width: 782px) {
+    .admin-bar header {
+        top: 46px;
+    }
+}
+
+/* Add shadow when scrolled */
+header.scrolled {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Smooth transitions */
+.header-1,
+.header-2 {
+    transition: all 0.3s ease;
+}
+
+/* Reduce padding when scrolled */
+header.scrolled .header-1,
+header.scrolled .header-2 {
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+}
+
+/* Hide header-2 when scrolling down - all screen sizes */
+/* Set up transition for smooth animation */
+header .header-2 {
+    transform: translateY(0);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    overflow: hidden;
+}
+
+/* Hide header-2 when scrolling down using transform */
+header.scrolling-down .header-2 {
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+}

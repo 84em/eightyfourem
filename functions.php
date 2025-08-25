@@ -204,3 +204,43 @@ if ( ! function_exists( 'eightyfourem_pattern_categories' ) ) :
 endif;
 
 add_action( 'init', 'eightyfourem_pattern_categories' );
+
+/**
+ * Enqueue theme scripts and styles.
+ */
+if ( ! function_exists( 'eightyfourem_enqueue_scripts' ) ) :
+    /**
+     * Enqueue scripts and styles.
+     *
+     * @return void
+     * @since Eighty Four EM 1.0
+     */
+    function eightyfourem_enqueue_scripts() {
+        // Enqueue customizer CSS
+        wp_enqueue_style(
+            'eightyfourem-customizer',
+            get_theme_file_uri( 'assets/css/customizer.css' ),
+            [],
+            wp_get_theme()->get( 'Version' )
+        );
+        
+        // Enqueue sticky header CSS
+        wp_enqueue_style(
+            'eightyfourem-sticky-header',
+            get_theme_file_uri( 'assets/css/sticky-header.css' ),
+            [],
+            wp_get_theme()->get( 'Version' )
+        );
+
+        // Enqueue sticky header JavaScript
+        wp_enqueue_script(
+            'eightyfourem-sticky-header',
+            get_theme_file_uri( 'assets/js/sticky-header.js' ),
+            [],
+            wp_get_theme()->get( 'Version' ),
+            true // Load in footer
+        );
+    }
+endif;
+
+add_action( 'wp_enqueue_scripts', 'eightyfourem_enqueue_scripts' );
