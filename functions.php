@@ -216,28 +216,31 @@ if ( ! function_exists( 'eightyfourem_enqueue_scripts' ) ) :
      * @since Eighty Four EM 1.0
      */
     function eightyfourem_enqueue_scripts() {
+        $suffix  = ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) ? '.min' : '';
+        $version = wp_get_theme()->get( 'Version' ) . '.' . time();
+
         // Enqueue customizer CSS
         wp_enqueue_style(
             'eightyfourem-customizer',
-            get_theme_file_uri( 'assets/css/customizer.css' ),
+            get_theme_file_uri( "assets/css/customizer{$suffix}.css" ),
             [],
-            wp_get_theme()->get( 'Version' )
+            $version
         );
-        
+
         // Enqueue sticky header CSS
         wp_enqueue_style(
             'eightyfourem-sticky-header',
-            get_theme_file_uri( 'assets/css/sticky-header.css' ),
+            get_theme_file_uri( "assets/css/sticky-header{$suffix}.css" ),
             [],
-            wp_get_theme()->get( 'Version' )
+            $version
         );
 
         // Enqueue sticky header JavaScript
         wp_enqueue_script(
             'eightyfourem-sticky-header',
-            get_theme_file_uri( 'assets/js/sticky-header.js' ),
+            get_theme_file_uri( "assets/js/sticky-header{$suffix}.js" ),
             [],
-            wp_get_theme()->get( 'Version' ),
+            $version,
             true // Load in footer
         );
     }
