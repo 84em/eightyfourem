@@ -74,16 +74,43 @@
             // header.classList.remove('scrolling-down');
         });
 
-        // Hide header when anchor links are clicked
+        // Handle anchor link clicks with offset for sticky header
         document.addEventListener('click', function(e) {
             // Check if clicked element is an anchor link
             const link = e.target.closest('a');
-            if (link && link.getAttribute('href') && link.getAttribute('href').startsWith('#')) {
-                // Hide the header
-                header.classList.add('scrolling-down');
-                isHidden = true;
+            if (link) {
+                const href = link.getAttribute('href');
+                // Check if it's an anchor link
+                if (href && (href.startsWith('#') || href.includes('#'))) {
+                    const hashIndex = href.indexOf('#');
+                    if (hashIndex !== -1) {
+                        const targetId = href.substring(hashIndex + 1);
+                        if (targetId) {
+                            const targetElement = document.getElementById(targetId);
+                            if (targetElement) {
+                                e.preventDefault();
+                                
+                                // Calculate header height for offset
+                                const headerHeight = header.offsetHeight;
+                                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                                const offsetPosition = targetPosition - headerHeight - 20; // 20px extra padding
+                                
+                                // Scroll to position with offset
+                                window.scrollTo({
+                                    top: offsetPosition,
+                                    behavior: 'smooth'
+                                });
+                                
+                                // Update URL hash
+                                if (history.pushState) {
+                                    history.pushState(null, null, href);
+                                }
+                            }
+                        }
+                    }
+                }
             }
-        });
+        }, true); // Use capture phase to handle the event before default behavior
 
         // Initial check
         updateHeader();
