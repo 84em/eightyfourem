@@ -74,6 +74,17 @@
             // header.classList.remove('scrolling-down');
         });
 
+        // Hide header when anchor links are clicked
+        document.addEventListener('click', function(e) {
+            // Check if clicked element is an anchor link
+            const link = e.target.closest('a');
+            if (link && link.getAttribute('href') && link.getAttribute('href').startsWith('#')) {
+                // Hide the header
+                header.classList.add('scrolling-down');
+                isHidden = true;
+            }
+        });
+
         // Initial check
         updateHeader();
     });
