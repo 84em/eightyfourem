@@ -89,3 +89,7 @@ main a:not(.wp-element-button,.wp-block-button__link) {
 main a:hover:not(.wp-element-button,.wp-block-button__link) {
     color: var(--wp--preset--color--contrast-2)!important;
 }
+
+.wp-block-list {
+    padding-left: 2em;
+}
