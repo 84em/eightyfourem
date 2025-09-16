@@ -900,7 +900,7 @@
 					}
 				},
 				"color": {
-					"text": "var(--wp--preset--color--contrast)"
+					"text": "var(--wp--preset--color--custom-color-1)"
 				},
 				"typography": {
 					"fontFamily": "var(--wp--preset--font-family--heading)"
