@@ -82,10 +82,10 @@ body.page-id-357 .global-cta {
     padding-bottom: 1rem;
 }
 
-main a {
+main a:not(.wp-element-button) {
     color: var(--wp--preset--color--custom-color-1)!important;
 }
 
-main a:hover {
+main a:hover:not(.wp-element-button) {
     color: var(--wp--preset--color--contrast-2)!important;
 }
