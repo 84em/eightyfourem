@@ -81,3 +81,11 @@ body.page-id-357 .global-cta {
 .is-style-checkmark-list li {
     padding-bottom: 1rem;
 }
+
+main a {
+    color: var(--wp--preset--color--custom-color-1)!important;
+}
+
+main a:hover {
+    color: var(--wp--preset--color--contrast-2)!important;
+}
