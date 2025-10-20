@@ -6,6 +6,14 @@
     .is-hero-block h1, .is-hero-block h2 {
         padding: 0 1rem;
     }
+
+    .header-mdot {
+        display:none;
+    }
+
+    .header-break {
+        display:block;
+    }
 }
 
 header .header-2 {
