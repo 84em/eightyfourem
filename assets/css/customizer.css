@@ -101,3 +101,9 @@ main a:hover:not(.wp-element-button,.wp-block-button__link) {
 .wp-block-list:not(.is-style-checkmark-list) {
     padding-left: 2em;
 }
+
+@media (max-width: 781px) {
+    body .uag-hide-mob.uagb-google-map__wrap, body .uag-hide-mob {
+        display: none !important;
+    }
+}
