@@ -1,8 +1,4 @@
-@media (max-width: 599px) {
-    header .wp-block-navigation-item__label, header .wp-block-button {
-        font-size: 2em !important;
-    }
-
+@media (max-width: 781px) {
     .is-hero-block h1, .is-hero-block h2 {
         padding: 0 1rem;
     }
