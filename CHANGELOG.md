@@ -5,6 +5,46 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.9] - 2025-10-22
+
+### Fixed
+- Fixed sticky header not working on pages with overflow-x:hidden CSS from Spectra plugin
+- Changed overflow-x from hidden to clip to maintain sticky positioning functionality
+
+### Changed
+- Updated sticky header CSS to override plugin overflow rules that interfere with position:sticky
+
+## [1.2.8] - 2025-09-05
+
+### Added
+- Anchor link navigation with header offset for smooth scrolling
+- Mobile responsive hiding for UAG elements
+- Left padding to WordPress block lists
+- Custom link styling for main content area
+
+### Changed
+- Adjusted mobile breakpoint and removed default navigation styling
+- Updated mobile header layout and regenerated CSS
+- Excluded checkmark lists from default padding
+- Excluded block button links and button elements from custom styling
+- Updated theme color scheme to custom palette
+- Changed theme color variable from contrast to custom-color-1
+
+### Fixed
+- Improved anchor link navigation with proper header offset calculation
+
+## [1.2.5] - 2025-09-05
+
+### Added
+- Header auto-hide on anchor link clicks for better user experience
+- Minified asset compilation for CSS and JavaScript
+- Sticky header functionality with scroll-based behavior
+
+### Changed
+- Removed header shadow and adjusted scroll padding
+- Fixed rsync path in GitHub Actions workflow
+- Removed deploy script exclusion from rsync
+
 ## [1.2.0] - 2025-01-07
 
 ### Added

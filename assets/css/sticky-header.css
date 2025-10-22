@@ -2,6 +2,12 @@
  * Sticky Header Styles for 84EM Theme
  */
 
+/* Fix overflow issue that can break sticky positioning */
+/* Some plugins (like Spectra/UAGB) add overflow-x:hidden to html/body which breaks sticky positioning */
+html, body {
+    overflow-x: clip !important;
+}
+
 /* Make header sticky */
 header {
     position: sticky;
