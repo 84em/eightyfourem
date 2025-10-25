@@ -48,7 +48,7 @@ You can also manually trigger the deployment:
 
 The deployment workflow automatically:
 1. Checks out the code
-2. Sets up Node.js 20
+2. Sets up Node.js 22
 3. Installs npm dependencies (`npm ci`)
 4. Builds and minifies assets (`npm run build`)
 5. Deploys the built theme to production via rsync
