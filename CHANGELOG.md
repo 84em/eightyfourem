@@ -5,6 +5,12 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.1] - 2025-10-25
+### Changed
+- `includes/schema.php` - Updated schema.org structured data for service page
+### Removed
+- `includes/performance.php` - Removed unused performance optimizations
+
 ## [2.0.0] - 2025-10-25
 
 ### Added
@@ -23,7 +29,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `includes/gravity-forms.php` - Gravity Forms integration
   - `includes/meta-tags.php` - SEO meta tags
   - `includes/pattern-categories.php` - Pattern category registration
-  - `includes/performance.php` - Performance optimizations
   - `includes/permalinks.php` - Permalink customizations
   - `includes/schema.php` - Schema.org structured data
   - `includes/search.php` - Search customizations
