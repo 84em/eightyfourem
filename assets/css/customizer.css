@@ -105,17 +105,17 @@ main a:hover:not(.wp-element-button,.wp-block-button__link) {
 }
 
 @media screen and (max-width: 768px) {
-    .wp-block-navigation ul, .wp-block-navigation ul li {
+    header .wp-block-navigation ul, header .wp-block-navigation ul li {
         padding-bottom: 1rem !important;
     }
 
-    .wp-block-navigation .wp-block-navigation-item__label {
+    header .wp-block-navigation header .wp-block-navigation-item__label {
         font-size: 1rem !important;
     }
 }
 
 @media screen and (min-width: 768px) {
-    .wp-block-navigation .wp-block-navigation-item__label {
+    header .wp-block-navigation .wp-block-navigation-item__label {
         font-size: 1.5rem !important;
     }
 }
