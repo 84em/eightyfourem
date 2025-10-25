@@ -16,14 +16,22 @@ const { deleteAsync } = require('del');
 // File paths
 const paths = {
   styles: {
-    src: [
+    theme: [
       './assets/css/customizer.css',
       './assets/css/sticky-header.css'
     ],
+    googleReviews: [
+      './assets/google-reviews-block/style.css',
+      './assets/google-reviews-block/editor.css'
+    ],
+    breadcrumbs: './assets/css/breadcrumbs.css',
+    highlight: './assets/css/highlight.css',
     dest: './assets/css/'
   },
   scripts: {
-    src: './assets/js/sticky-header.js',
+    theme: './assets/js/sticky-header.js',
+    googleReviews: './assets/google-reviews-block/block.js',
+    highlight: './assets/js/highlight.js',
     dest: './assets/js/'
   }
 };
@@ -34,13 +42,17 @@ function clean() {
     './assets/css/*.min.css',
     './assets/css/*.min.css.map',
     './assets/js/*.min.js',
-    './assets/js/*.min.js.map'
+    './assets/js/*.min.js.map',
+    './assets/google-reviews-block/*.min.css',
+    './assets/google-reviews-block/*.min.css.map',
+    './assets/google-reviews-block/*.min.js',
+    './assets/google-reviews-block/*.min.js.map'
   ]);
 }
 
-// CSS optimization task
-function styles() {
-  return gulp.src(paths.styles.src)
+// CSS optimization task - Theme files
+function stylesTheme() {
+  return gulp.src(paths.styles.theme)
     .pipe(sourcemaps.init())
     .pipe(autoprefixer({
       overrideBrowserslist: ['last 2 versions'],
@@ -59,9 +71,63 @@ function styles() {
     .pipe(gulp.dest(paths.styles.dest));
 }
 
-// JavaScript optimization task
-function scripts() {
-  return gulp.src(paths.scripts.src)
+// CSS optimization task - Google Reviews
+function stylesGoogleReviews() {
+  return gulp.src(paths.styles.googleReviews)
+    .pipe(sourcemaps.init())
+    .pipe(cleanCSS({
+      compatibility: 'ie8',
+      level: {
+        1: {
+          specialComments: 0
+        }
+      }
+    }))
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest('./assets/google-reviews-block/'));
+}
+
+// CSS optimization task - Breadcrumbs
+function stylesBreadcrumbs() {
+  return gulp.src(paths.styles.breadcrumbs)
+    .pipe(sourcemaps.init())
+    .pipe(cleanCSS({
+      compatibility: 'ie8',
+      level: {
+        1: {
+          specialComments: 0
+        }
+      }
+    }))
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest(paths.styles.dest));
+}
+
+// CSS optimization task - Highlight
+function stylesHighlight() {
+  return gulp.src(paths.styles.highlight)
+    .pipe(sourcemaps.init())
+    .pipe(cleanCSS({
+      compatibility: 'ie8',
+      level: {
+        1: {
+          specialComments: 0
+        }
+      }
+    }))
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest(paths.styles.dest));
+}
+
+// Combined styles task
+const styles = parallel(stylesTheme, stylesGoogleReviews, stylesBreadcrumbs, stylesHighlight);
+
+// JavaScript optimization task - Theme files
+function scriptsTheme() {
+  return gulp.src(paths.scripts.theme)
     .pipe(sourcemaps.init())
     .pipe(terser({
       compress: {
@@ -73,10 +139,46 @@ function scripts() {
     .pipe(gulp.dest(paths.scripts.dest));
 }
 
+// JavaScript optimization task - Google Reviews
+function scriptsGoogleReviews() {
+  return gulp.src(paths.scripts.googleReviews)
+    .pipe(sourcemaps.init())
+    .pipe(terser({
+      compress: {
+        drop_console: true
+      }
+    }))
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest('./assets/google-reviews-block/'));
+}
+
+// JavaScript optimization task - Highlight
+function scriptsHighlight() {
+  return gulp.src(paths.scripts.highlight)
+    .pipe(sourcemaps.init())
+    .pipe(terser({
+      compress: {
+        drop_console: true
+      }
+    }))
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest(paths.scripts.dest));
+}
+
+// Combined scripts task
+const scripts = parallel(scriptsTheme, scriptsGoogleReviews, scriptsHighlight);
+
 // Watch task for development
 function watchFiles() {
-  watch(paths.styles.src, styles);
-  watch(paths.scripts.src, scripts);
+  watch(paths.styles.theme, stylesTheme);
+  watch(paths.styles.googleReviews, stylesGoogleReviews);
+  watch(paths.styles.breadcrumbs, stylesBreadcrumbs);
+  watch(paths.styles.highlight, stylesHighlight);
+  watch(paths.scripts.theme, scriptsTheme);
+  watch(paths.scripts.googleReviews, scriptsGoogleReviews);
+  watch(paths.scripts.highlight, scriptsHighlight);
 }
 
 // Define complex tasks
