@@ -44,6 +44,17 @@ You can also manually trigger the deployment:
 2. Select "Deploy Theme to Production" workflow
 3. Click "Run workflow" button
 
+## Build Process
+
+The deployment workflow automatically:
+1. Checks out the code
+2. Sets up Node.js 20
+3. Installs npm dependencies (`npm ci`)
+4. Builds and minifies assets (`npm run build`)
+5. Deploys the built theme to production via rsync
+
+**Note:** The minified `.min.css` and `.min.js` files are excluded from git (via `.gitignore`) and built fresh during each deployment. This ensures production always has the latest optimized assets without committing build artifacts to the repository.
+
 ## Migration from Shell Script
 
 After setting up the GitHub Action:
