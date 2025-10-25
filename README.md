@@ -128,9 +128,11 @@ The `theme.json` file controls:
 
 ## License
 
-This theme is licensed under the GNU General Public License v2 or later.
+This theme is licensed under the MIT License. See [LICENSE](LICENSE) file for details.
 
-Based on Twenty Twenty-Four by the WordPress team, distributed under GPL v2 or later.
+Copyright (c) 2025 84EM
+
+Based on Twenty Twenty-Four by the WordPress team.
 
 ### Image Credits
 All images are licensed under CC0 (Creative Commons Zero) from Rawpixel, except for icon-message.webp which uses Unicode License V3.
