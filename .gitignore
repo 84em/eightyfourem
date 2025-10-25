@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+
+# Build artifacts (built automatically during GitHub Actions deployment)
+assets/css/*.min.css
+assets/css/*.min.css.map
+assets/js/*.min.js
+assets/js/*.min.js.map
+
+# macOS
+.DS_Store
+
+# Editor directories
+.vscode/
+.idea/

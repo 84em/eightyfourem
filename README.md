@@ -72,18 +72,48 @@ The theme includes optimized web fonts stored in `/assets/fonts/`:
 
 ## Development
 
+### Build Process
+
+The theme uses Gulp for asset optimization. Before working with the theme, install dependencies:
+
+```bash
+npm install
+```
+
+#### Available Commands
+
+- `npm start` - Build assets and watch for changes (development mode)
+- `npm run build` - Build and minify all assets (production mode)
+- `npm run watch` - Watch files for changes without initial build
+- `npm run clean` - Remove all generated minified files
+
+#### What Gets Built
+
+The build process handles:
+- **CSS files**: `customizer.css`, `sticky-header.css`
+  - Autoprefixer (targets last 2 browser versions)
+  - Minification
+  - Sourcemaps
+- **JavaScript files**: `sticky-header.js`
+  - Minification
+  - Sourcemaps
+
+All minified files are output with `.min.css` or `.min.js` extensions.
+
 ### File Structure
 ```
 eightyfourem/
 ├── assets/
 │   ├── css/          # Custom stylesheets
 │   ├── fonts/        # Web font files
-│   └── images/       # Theme images
+│   └── js/           # JavaScript files
 ├── parts/            # Template parts
 ├── patterns/         # Block patterns
 ├── styles/           # Style variations
 ├── templates/        # Page templates
 ├── functions.php     # Theme functions
+├── gulpfile.js       # Build configuration
+├── package.json      # Node dependencies
 ├── style.css         # Main stylesheet
 └── theme.json        # Theme configuration
 ```
@@ -98,9 +128,11 @@ The `theme.json` file controls:
 
 ## License
 
-This theme is licensed under the GNU General Public License v2 or later.
+This theme is licensed under the MIT License. See [LICENSE](LICENSE) file for details.
 
-Based on Twenty Twenty-Four by the WordPress team, distributed under GPL v2 or later.
+Copyright (c) 2025 84EM
+
+Based on Twenty Twenty-Four by the WordPress team.
 
 ### Image Credits
 All images are licensed under CC0 (Creative Commons Zero) from Rawpixel, except for icon-message.webp which uses Unicode License V3.
