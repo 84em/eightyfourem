@@ -5,6 +5,29 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2025-10-25
+
+### Added
+- Gulp build system for automated asset optimization
+  - `package.json` with npm scripts for development and production builds
+  - `gulpfile.js` with tasks for CSS and JavaScript minification
+  - Autoprefixer support targeting last 2 browser versions
+  - Sourcemap generation for easier debugging
+- Automated build process in GitHub Actions deployment workflow
+  - Assets are now built fresh during deployment
+  - Node.js 22 (latest LTS) setup with npm caching for faster CI builds
+
+### Changed
+- Migrated from Prepros to Gulp for build tooling
+- Build artifacts (`.min.css`, `.min.js`, sourcemaps) now excluded from git
+- Updated `.gitignore` to exclude `node_modules/` and minified files
+- Updated deployment workflow to include `npm ci` and `npm run build` steps
+- Updated documentation in README.md and DEPLOYMENT_SETUP.md
+
+### Removed
+- `prepros.config` file (replaced by Gulp configuration)
+- Prepros dependency for local development
+
 ## [1.2.11] - 2025-10-25
 ### Changed
 - Reduce footer menu font size

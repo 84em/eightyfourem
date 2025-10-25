@@ -1,0 +1,27 @@
+{
+  "name": "eightyfourem-theme",
+  "version": "1.0.0",
+  "description": "Build system for 84EM WordPress theme",
+  "private": true,
+  "scripts": {
+    "start": "gulp",
+    "build": "gulp build",
+    "watch": "gulp watch",
+    "clean": "gulp clean"
+  },
+  "keywords": [
+    "wordpress",
+    "theme"
+  ],
+  "author": "84EM",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "del": "^7.1.0",
+    "gulp": "^5.0.0",
+    "gulp-autoprefixer": "^9.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-terser": "^2.1.0"
+  }
+}
