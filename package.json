@@ -14,7 +14,7 @@
     "theme"
   ],
   "author": "84EM",
-  "license": "MIT",
+  "license": "GPL-2.0-or-later",
   "devDependencies": {
     "del": "^7.1.0",
     "gulp": "^5.0.0",

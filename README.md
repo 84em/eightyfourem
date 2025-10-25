@@ -152,7 +152,7 @@ The `theme.json` file controls:
 
 ## License
 
-This theme is licensed under the MIT License. See [LICENSE](LICENSE) file for details.
+This theme is licensed under the GNU GPL v2.0 or later. See [LICENSE](LICENSE) file for details.
 
 Copyright (c) 2025 84EM
 

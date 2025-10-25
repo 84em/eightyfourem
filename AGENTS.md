@@ -1,0 +1,33 @@
+# Repository Guidelines
+
+## Project Structure & Module Organization
+- `assets/css|js|fonts/` hold front-end sources; compiled files inherit the same path with `.min.(css|js)` suffixes. Keep Google Reviews block assets inside `assets/google-reviews-block/`.
+- `includes/` contains PHP modules loaded by `functions.php`. Add new features by creating a focused include (e.g., `includes/performance.php`) and requiring it in `functions.php`.
+- `patterns/`, `parts/`, `templates/`, and `styles/` mirror core block theme conventions. Keep template-part slugs consistent to prevent Site Editor mismatches.
+- `theme.json` centralizes color, typography, and spacing tokens—extend global styles there before touching individual CSS files.
+
+## Build, Test, and Development Commands
+- `npm install` — install gulp-based tooling; rerun after updating `package.json`.
+- `npm start` — default watcher; compiles CSS/JS with sourcemaps and reloads on change.
+- `npm run build` — production build with minification and autoprefixing; run prior to release tagging.
+- `npm run clean` — remove generated `.min.*` artifacts to ensure a fresh pipeline.
+
+## Coding Style & Naming Conventions
+- PHP follows the WordPress Coding Standards: tabs for indentation, snake_case functions (`eightyfourem_register_patterns`), and early returns. Align enqueue logic with existing helpers in `includes/enqueue.php`.
+- SCSS/CSS files use 2-space indentation inside `assets/css/`; prefer block-specific class prefixes such as `.ef-hero__heading`.
+- JavaScript in `assets/js/` is plain ES2015; keep modules IIFE-scoped and lint manually for now (no automated linter).
+- Block pattern slugs and filenames stay lowercase with hyphens (`patterns/cta-grid.html`).
+
+## Testing Guidelines
+- No automated suite yet; smoke-test changes by running `npm run build`, activating the theme in a local WordPress install, and exercising modified templates/patterns.
+- Validate responsive behavior in Chrome DevTools’ device modes and confirm the sticky header (`assets/js/sticky-header.js`) logs no console errors.
+- When editing data-driven templates, compare rendered markup against `theme.json` tokens to avoid color/spacing regressions.
+
+## Commit & Pull Request Guidelines
+- Use imperative, scope-first commit subjects under 72 chars (e.g., `Enqueue: add critical CSS preload`). Group related edits into a single commit.
+- Reference Jira/GitHub issues in the body when available and describe testing performed (e.g., “Test: npm run build, WP 6.8.3”).
+- Pull requests should summarize the change, outline manual verification, and include before/after screenshots for visual updates. Request design review for pattern tweaks.
+
+## Security & Configuration Tips
+- Never hardcode credentials or API keys; pull secrets from environment variables or WordPress options pages instead.
+- Sanitize and escape all dynamic output using `esc_html`, `wp_kses`, or block supports, matching existing patterns in `includes/meta-tags.php`.
