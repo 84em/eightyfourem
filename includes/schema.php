@@ -244,6 +244,55 @@ defined( 'ABSPATH' ) || exit;
                                         'itemOffered' => [
                                             '@type'    => 'Service',
                                             'name'     => 'Custom WordPress Plugin Development',
+                                            'url'      => $site_url . '/services/custom-wordpress-plugin-development/',
+                                            'provider' => [
+                                                '@type' => 'Organization',
+                                                '@id'   => $site_url . '/#organization',
+                                            ],
+                                        ],
+                                    ],
+                                    [
+                                        '@type'       => 'Offer',
+                                        'itemOffered' => [
+                                            '@type'    => 'Service',
+                                            'name'     => 'White Label WordPress Development for Agencies',
+                                            'url'      => $site_url . '/services/white-label-wordpress-development-for-agencies/',
+                                            'provider' => [
+                                                '@type' => 'Organization',
+                                                '@id'   => $site_url . '/#organization',
+                                            ],
+                                        ],
+                                    ],
+                                    [
+                                        '@type'       => 'Offer',
+                                        'itemOffered' => [
+                                            '@type'    => 'Service',
+                                            'name'     => 'WordPress Consulting & Strategy',
+                                            'url'      => $site_url . '/services/wordpress-consulting-strategy/',
+                                            'provider' => [
+                                                '@type' => 'Organization',
+                                                '@id'   => $site_url . '/#organization',
+                                            ],
+                                        ],
+                                    ],
+                                    [
+                                        '@type'       => 'Offer',
+                                        'itemOffered' => [
+                                            '@type'    => 'Service',
+                                            'name'     => 'WordPress Maintenance & Support',
+                                            'url'      => $site_url . '/services/wordpress-maintenance-support/',
+                                            'provider' => [
+                                                '@type' => 'Organization',
+                                                '@id'   => $site_url . '/#organization',
+                                            ],
+                                        ],
+                                    ],
+                                    [
+                                        '@type'       => 'Offer',
+                                        'itemOffered' => [
+                                            '@type'    => 'Service',
+                                            'name'     => 'AI-Enhanced WordPress Development',
+                                            'url'      => $site_url . '/services/ai-enhanced-wordpress-development/',
                                             'provider' => [
                                                 '@type' => 'Organization',
                                                 '@id'   => $site_url . '/#organization',
@@ -255,11 +304,11 @@ defined( 'ABSPATH' ) || exit;
                         ];
                         break;
 
-                    case 'people':
+                    case 'about':
                         $schema['mainEntity'] = [
                             '@type'      => 'Person',
                             'name'       => 'Andrew Miller',
-                            'jobTitle'   => 'Founder & Lead WordPress Developer',
+                            'jobTitle'   => 'WordPress Developer & Consultant',
                             'worksFor'   => [
                                 '@type' => 'Organization',
                                 '@id'   => $site_url . '/#organization',
