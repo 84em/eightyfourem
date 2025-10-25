@@ -35,6 +35,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Google Reviews block CSS/JS minification
   - Breadcrumbs CSS
   - Highlight CSS/JS
+- `AGENTS.md` contributor guide covering structure, builds, testing, and PR workflow
+- `CLAUDE.md` pointer that redirects AI agents to maintain documentation inside `AGENTS.md`
 
 ### Changed
 - Refactored theme architecture - all functionality now self-contained in theme
@@ -44,15 +46,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated CLAUDE.md and README.md with new architecture documentation
 - **Minimum PHP requirement raised to 8.0** (uses named arguments, union types, mixed type)
 - Tested up to WordPress 6.8.3
+- Reinstated the original GNU GPL v2-or-later licensing across LICENSE, `package*.json`, README, and `style.css`
+- Updated the theme screenshot to reflect the latest visual refinements
 
 ### Removed
 - Dependency on 84em-custom plugin (functionality moved to theme)
-
-### Migration Notes
-- The 84em-custom plugin should be deactivated and can be removed
-- All plugin functionality is now provided by the theme
-- Build process (`npm run build`) now handles all theme and Google Reviews assets
-- No database migration required
 
 ## [1.3.0] - 2025-10-25
 
