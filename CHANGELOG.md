@@ -5,6 +5,55 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2025-10-25
+
+### Added
+- Migrated all functionality from 84em-custom plugin into theme
+- New `includes/` directory structure for organized theme functionality
+  - `includes/acf.php` - ACF customizations
+  - `includes/block-styles.php` - Custom block styles registration
+  - `includes/block-stylesheets.php` - Block-specific stylesheet enqueuing
+  - `includes/breadcrumbs.php` - Breadcrumb functionality for local pages
+  - `includes/dequeue.php` - Script/style dequeuing
+  - `includes/disable-comments.php` - Comments disabling functionality
+  - `includes/document-title.php` - Document title filters
+  - `includes/enqueue.php` - Theme script and style enqueuing
+  - `includes/footer.php` - Footer functionality and UAGB scripts
+  - `includes/google-reviews.php` - Google Reviews Gutenberg block
+  - `includes/gravity-forms.php` - Gravity Forms integration
+  - `includes/meta-tags.php` - SEO meta tags
+  - `includes/pattern-categories.php` - Pattern category registration
+  - `includes/performance.php` - Performance optimizations
+  - `includes/permalinks.php` - Permalink customizations
+  - `includes/schema.php` - Schema.org structured data
+  - `includes/search.php` - Search customizations
+  - `includes/shortcode-last-updated.php` - Last updated shortcode
+  - `includes/shortlinks.php` - Shortlink handling
+  - `includes/sitemap.php` - XML sitemap generation
+- Google Reviews block assets in `assets/google-reviews-block/`
+- Expanded Gulp build system to handle:
+  - Google Reviews block CSS/JS minification
+  - Breadcrumbs CSS
+  - Highlight CSS/JS
+
+### Changed
+- Refactored theme architecture - all functionality now self-contained in theme
+- Updated `functions.php` to load files from `includes/` directory
+- Moved theme-specific functions from functions.php into organized include files
+- Updated build process to compile Google Reviews block assets
+- Updated CLAUDE.md and README.md with new architecture documentation
+- **Minimum PHP requirement raised to 8.0** (uses named arguments, union types, mixed type)
+- Tested up to WordPress 6.8.3
+
+### Removed
+- Dependency on 84em-custom plugin (functionality moved to theme)
+
+### Migration Notes
+- The 84em-custom plugin should be deactivated and can be removed
+- All plugin functionality is now provided by the theme
+- Build process (`npm run build`) now handles all theme and Google Reviews assets
+- No database migration required
+
 ## [1.3.0] - 2025-10-25
 
 ### Added
