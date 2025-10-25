@@ -1,0 +1,9 @@
+/**
+ * Element Highlight Styles
+ * Styling for anchor link highlight animation
+ */
+
+.highlight {
+    background-color: #ffeb3b !important;
+    transition: background-color 0.3s ease !important;
+}

@@ -15,12 +15,15 @@ The 84EM Block Theme is a full site editing (FSE) WordPress theme that provides 
 - **Typography** - Custom web fonts including Cardo, Instrument Sans, Inter, Jost, and Outfit
 - **Responsive Design** - Optimized for all device sizes
 - **Accessibility Ready** - Built with web accessibility standards in mind
+- **SEO Optimized** - Built-in meta tags, schema.org structured data, and XML sitemap
+- **Google Reviews Block** - Custom Gutenberg block for displaying Google Business reviews
+- **Performance Optimized** - Asset minification, lazy loading, and caching support
 
 ## Requirements
 
 - WordPress 6.0 or higher
-- PHP 5.7 or higher
-- Tested up to WordPress 6.4.2
+- PHP 8.0 or higher
+- Tested up to WordPress 6.8.3
 
 ## Installation
 
@@ -90,12 +93,16 @@ npm install
 #### What Gets Built
 
 The build process handles:
-- **CSS files**: `customizer.css`, `sticky-header.css`
+- **CSS files**:
+  - Theme: `customizer.css`, `sticky-header.css`, `breadcrumbs.css`, `highlight.css`
+  - Google Reviews Block: `editor.css`, `style.css` (in `assets/google-reviews-block/`)
   - Autoprefixer (targets last 2 browser versions)
   - Minification
   - Sourcemaps
-- **JavaScript files**: `sticky-header.js`
-  - Minification
+- **JavaScript files**:
+  - Theme: `sticky-header.js`, `highlight.js`
+  - Google Reviews Block: `block.js` (in `assets/google-reviews-block/`)
+  - Minification with terser
   - Sourcemaps
 
 All minified files are output with `.min.css` or `.min.js` extensions.
@@ -104,14 +111,31 @@ All minified files are output with `.min.css` or `.min.js` extensions.
 ```
 eightyfourem/
 ├── assets/
-│   ├── css/          # Custom stylesheets
-│   ├── fonts/        # Web font files
-│   └── js/           # JavaScript files
+│   ├── css/                  # Custom stylesheets
+│   ├── fonts/                # Web font files
+│   ├── js/                   # JavaScript files
+│   └── google-reviews-block/ # Google Reviews block assets
+├── includes/                 # Theme functionality modules
+│   ├── acf.php              # ACF customizations
+│   ├── block-styles.php     # Custom block styles
+│   ├── block-stylesheets.php # Block-specific stylesheets
+│   ├── breadcrumbs.php      # Breadcrumb functionality
+│   ├── document-title.php   # Document title filters
+│   ├── enqueue.php          # Script/style enqueuing
+│   ├── google-reviews.php   # Google Reviews block
+│   ├── gravity-forms.php    # Gravity Forms integration
+│   ├── meta-tags.php        # SEO meta tags
+│   ├── pattern-categories.php # Pattern categories
+│   ├── performance.php      # Performance optimizations
+│   ├── permalinks.php       # Permalink customizations
+│   ├── schema.php           # Schema.org structured data
+│   ├── sitemap.php          # XML sitemap generation
+│   └── ... (additional includes)
 ├── parts/            # Template parts
 ├── patterns/         # Block patterns
 ├── styles/           # Style variations
 ├── templates/        # Page templates
-├── functions.php     # Theme functions
+├── functions.php     # Theme loader (includes files from includes/)
 ├── gulpfile.js       # Build configuration
 ├── package.json      # Node dependencies
 ├── style.css         # Main stylesheet
