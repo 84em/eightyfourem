@@ -5,6 +5,22 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.2] - 2025-10-28
+### Added
+- WP-CLI command `wp 84em regenerate-schema` to manually regenerate schema.org structured data
+  - Supports `--all`, `--pages`, `--posts`, `--projects`, `--slug`, and `--service-pages` flags
+  - Added `includes/cli.php` with ThemeCLI class for command registration
+
+### Changed
+- Enhanced pricing schema to include both standard ($150/hr) and after-hours ($225/hr) rates across all service pages
+  - `custom-wordpress-plugin-development`
+  - `white-label-wordpress-development-for-agencies`
+  - `ai-enhanced-wordpress-development`
+  - `wordpress-consulting-strategy`
+  - `wordpress-maintenance-support`
+- Each service now has array of offers instead of single offer for better pricing visibility
+- Updated permission check in `includes/schema.php` to support WP-CLI execution context
+
 ## [2.0.1] - 2025-10-25
 ### Changed
 - `includes/schema.php` - Updated schema.org structured data for service page
