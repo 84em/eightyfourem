@@ -34,13 +34,14 @@ The 84EM Block Theme is a full site editing (FSE) WordPress theme that provides 
 ## Theme Structure
 
 ### Templates
-- **Page Templates**: Standard page, page with sidebar, page without title, wide image page
+- **Page Templates**: Standard page, page with sidebar, page without title, wide image page, no CTA page
 - **Post Templates**: Single post, single with sidebar
 - **Archive Templates**: Blog and portfolio archives
+- **Custom Post Types**: Local pages template (single-local.html)
 - **Special Templates**: 404 error, search results, home variations
 
 ### Block Patterns
-The theme includes over 40 block patterns organized by category:
+The theme includes 56 block patterns organized by category:
 - **Banners**: Hero sections and project descriptions
 - **Call-to-Actions**: Pricing, RSVP, subscription forms
 - **Galleries**: Full-screen, grid, and offset image layouts
@@ -74,6 +75,24 @@ The theme includes optimized web fonts stored in `/assets/fonts/`:
 - **Outfit**: Display font for headers
 
 ## Development
+
+### WP-CLI Commands
+
+The theme includes WP-CLI commands for schema regeneration:
+
+```bash
+# Regenerate schema for all content
+wp 84em regenerate-schema --all
+
+# Regenerate schema for specific content types
+wp 84em regenerate-schema --pages
+wp 84em regenerate-schema --posts
+wp 84em regenerate-schema --projects
+wp 84em regenerate-schema --service-pages
+
+# Regenerate schema for specific content by slug
+wp 84em regenerate-schema --slug=about
+```
 
 ### Build Process
 
@@ -117,20 +136,26 @@ eightyfourem/
 │   └── google-reviews-block/ # Google Reviews block assets
 ├── includes/                 # Theme functionality modules
 │   ├── acf.php              # ACF customizations
+│   ├── author-pages.php     # Author page customizations
 │   ├── block-styles.php     # Custom block styles
 │   ├── block-stylesheets.php # Block-specific stylesheets
 │   ├── breadcrumbs.php      # Breadcrumb functionality
+│   ├── cli.php              # WP-CLI commands
+│   ├── dequeue.php          # Script/style dequeuing
+│   ├── disable-comments.php # Comments disabling functionality
 │   ├── document-title.php   # Document title filters
 │   ├── enqueue.php          # Script/style enqueuing
+│   ├── footer.php           # Footer functionality and UAGB scripts
 │   ├── google-reviews.php   # Google Reviews block
 │   ├── gravity-forms.php    # Gravity Forms integration
 │   ├── meta-tags.php        # SEO meta tags
 │   ├── pattern-categories.php # Pattern categories
-│   ├── performance.php      # Performance optimizations
 │   ├── permalinks.php       # Permalink customizations
 │   ├── schema.php           # Schema.org structured data
-│   ├── sitemap.php          # XML sitemap generation
-│   └── ... (additional includes)
+│   ├── search.php           # Search customizations
+│   ├── shortcode-last-updated.php # Last updated shortcode
+│   ├── shortlinks.php       # Shortlink functionality
+│   └── sitemap.php          # XML sitemap generation
 ├── parts/            # Template parts
 ├── patterns/         # Block patterns
 ├── styles/           # Style variations
