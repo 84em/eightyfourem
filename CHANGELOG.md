@@ -5,6 +5,20 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2025-10-28
+### Added
+- Added 'local' custom post type to XML sitemap generation
+- Implemented batch processing for sitemap generation using Action Scheduler
+  - Processes posts in batches of 200 for better performance and reliability
+  - Sequential scheduling with 5-second delays to guarantee processing order
+  - File locking to prevent concurrent write conflicts
+
+### Changed
+- Refactored sitemap generation to use constant array for post types and priorities
+- Replaced direct file write with append-based approach using file locking
+- Split sitemap generation into coordinator and batch processor functions
+- Updated to use `as_schedule_single_action()` instead of `as_enqueue_async_action()` for guaranteed execution order
+
 ## [2.0.2] - 2025-10-28
 ### Added
 - WP-CLI command `wp 84em regenerate-schema` to manually regenerate schema.org structured data
