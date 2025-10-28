@@ -98,7 +98,7 @@ function create_xml_sitemap_84em( array|null $args ): void {
     $xml_header = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 
     // Add static /lp/ entry first
-    $lp_index_path = \ABSPATH . '/lp/index.php';
+    $lp_index_path = \ABSPATH . 'lp/index.php';
     if ( file_exists( $lp_index_path ) ) {
         $xml_header .= '<url>' .
                       '<loc>' . site_url( '/lp/' ) . '</loc>' .
