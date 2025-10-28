@@ -196,47 +196,49 @@ function process_sitemap_batch_84em( array $args ): void {
 
     // Open file for appending with file locking
     $fp = fopen( $sitemap_path, 'a' );
-    if ( $fp ) {
-        // Acquire exclusive lock
-        if ( flock( $fp, LOCK_EX ) ) {
-            fwrite( $fp, $xml );
-            fflush( $fp );
-            // Release lock
-            flock( $fp, LOCK_UN );
-        } else {
-            // Log lock acquisition failure
-            trigger_error( sprintf(
-                'Sitemap generation: Failed to acquire lock for batch with %d posts',
-                count( $post_ids )
-            ), E_USER_WARNING );
-        }
-        fclose( $fp );
-    } else {
-        // Log file open failure
-        trigger_error( sprintf(
+    if ( ! $fp ) {
+        // Throw exception to trigger Action Scheduler retry
+        throw new \Exception( sprintf(
             'Sitemap generation: Failed to open file for batch with %d posts',
             count( $post_ids )
-        ), E_USER_WARNING );
+        ) );
     }
+
+    // Acquire exclusive lock
+    if ( ! flock( $fp, LOCK_EX ) ) {
+        fclose( $fp );
+        // Throw exception to trigger Action Scheduler retry
+        throw new \Exception( sprintf(
+            'Sitemap generation: Failed to acquire lock for batch with %d posts',
+            count( $post_ids )
+        ) );
+    }
+
+    fwrite( $fp, $xml );
+    fflush( $fp );
+    // Release lock
+    flock( $fp, LOCK_UN );
+    fclose( $fp );
 
     // If this is the last batch, append XML footer
     if ( $is_last ) {
         $fp = fopen( $sitemap_path, 'a' );
-        if ( $fp ) {
-            // Acquire exclusive lock
-            if ( flock( $fp, LOCK_EX ) ) {
-                fwrite( $fp, '</urlset>' );
-                fflush( $fp );
-                // Release lock
-                flock( $fp, LOCK_UN );
-            } else {
-                // Log lock acquisition failure for closing tag
-                trigger_error( 'Sitemap generation: Failed to acquire lock for closing </urlset> tag', E_USER_WARNING );
-            }
-            fclose( $fp );
-        } else {
-            // Log file open failure for closing tag
-            trigger_error( 'Sitemap generation: Failed to open file for closing </urlset> tag', E_USER_WARNING );
+        if ( ! $fp ) {
+            // Throw exception to trigger Action Scheduler retry
+            throw new \Exception( 'Sitemap generation: Failed to open file for closing </urlset> tag' );
         }
+
+        // Acquire exclusive lock
+        if ( ! flock( $fp, LOCK_EX ) ) {
+            fclose( $fp );
+            // Throw exception to trigger Action Scheduler retry
+            throw new \Exception( 'Sitemap generation: Failed to acquire lock for closing </urlset> tag' );
+        }
+
+        fwrite( $fp, '</urlset>' );
+        fflush( $fp );
+        // Release lock
+        flock( $fp, LOCK_UN );
+        fclose( $fp );
     }
 }
