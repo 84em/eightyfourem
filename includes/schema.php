@@ -46,8 +46,8 @@ defined( 'ABSPATH' ) || exit;
             return;
         }
 
-        // Check user permissions
-        if ( ! \current_user_can( 'edit_post', $post_id ) ) {
+        // Check user permissions (skip for WP-CLI)
+        if ( ! \defined( 'WP_CLI' ) && ! \current_user_can( 'edit_post', $post_id ) ) {
             return;
         }
 
@@ -149,29 +149,58 @@ defined( 'ABSPATH' ) || exit;
                 $content  = \strip_tags( $post->post_content );
                 $keywords = [];
 
-                // Common WordPress development keywords to look for
-                $tech_keywords = [
-                    'WordPress',
-                    'plugin',
-                    'API',
-                    'WooCommerce',
-                    'custom',
-                    'integration',
-                    'security',
-                    'database',
-                    'PHP',
-                    'JavaScript',
-                    'migration',
-                    'multisite',
-                    'theme',
-                    'Gravity Forms',
-                    'LearnDash',
-                    'financial',
-                    'healthcare',
-                    'banking',
-                    'enterprise',
-                    'white label',
-                ];
+                // Try to get keywords from 84em-local-pages plugin first
+                $tech_keywords = [];
+                if ( \class_exists( 'EightyFourEM\LocalPages\Plugin' ) ) {
+                    try {
+                        $plugin = \EightyFourEM\LocalPages\Plugin::getInstance();
+                        $container = $plugin->getContainer();
+                        if ( $container->has( 'EightyFourEM\LocalPages\Data\KeywordsProvider' ) ) {
+                            $keywordsProvider = $container->get( 'EightyFourEM\LocalPages\Data\KeywordsProvider' );
+                            $tech_keywords = $keywordsProvider->getKeys();
+                        }
+                    } catch ( \Exception $e ) {
+                        // Silently fall back to hardcoded list if container fails
+                    }
+                }
+
+                // Fallback to hardcoded keywords if plugin not available
+                if ( empty( $tech_keywords ) ) {
+                    $tech_keywords = [
+                        'WordPress',
+                        'plugin',
+                        'API',
+                        'WooCommerce',
+                        'custom',
+                        'integration',
+                        'security',
+                        'database',
+                        'PHP',
+                        'JavaScript',
+                        'migration',
+                        'multisite',
+                        'theme',
+                        'Gravity Forms',
+                        'LearnDash',
+                        'financial',
+                        'healthcare',
+                        'banking',
+                        'enterprise',
+                        'white label',
+                        'API integration',
+                        'data migration',
+                        'platform migration',
+                        'platform transfer',
+                        'security audit',
+                        'AI',
+                        'artificial intelligence',
+                        'automation',
+                        'maintenance',
+                        'support',
+                        'consulting',
+                        'troubleshooting',
+                    ];
+                }
 
                 foreach ( $tech_keywords as $keyword ) {
                     if ( \stripos( $content, $keyword ) !== false ) {
@@ -299,6 +328,30 @@ defined( 'ABSPATH' ) || exit;
                                             ],
                                         ],
                                     ],
+                                    [
+                                        '@type'       => 'Offer',
+                                        'itemOffered' => [
+                                            '@type'    => 'Service',
+                                            'name'     => 'Data Migrations & Platform Transfers',
+                                            'url'      => $site_url . '/services/',
+                                            'provider' => [
+                                                '@type' => 'Organization',
+                                                '@id'   => $site_url . '/#organization',
+                                            ],
+                                        ],
+                                    ],
+                                    [
+                                        '@type'       => 'Offer',
+                                        'itemOffered' => [
+                                            '@type'    => 'Service',
+                                            'name'     => 'Security & Troubleshooting',
+                                            'url'      => $site_url . '/services/',
+                                            'provider' => [
+                                                '@type' => 'Organization',
+                                                '@id'   => $site_url . '/#organization',
+                                            ],
+                                        ],
+                                    ],
                                 ],
                             ],
                         ];
@@ -318,6 +371,14 @@ defined( 'ABSPATH' ) || exit;
                                 'PHP Programming',
                                 'API Integration',
                                 'WordPress Security',
+                                'Data Migration',
+                                'Platform Transfers',
+                                'AI-Enhanced WordPress Development',
+                                'White Label Development',
+                                'WordPress Maintenance',
+                                'Security Audits',
+                                'WordPress Consulting',
+                                'Custom WordPress Development',
                             ],
                         ];
                         break;
@@ -327,6 +388,397 @@ defined( 'ABSPATH' ) || exit;
                             '@type'       => 'ItemList',
                             'name'        => 'Current Development Projects',
                             'description' => 'Projects we\'re actively involved with, updated frequently',
+                        ];
+                        break;
+
+                    case 'pricing':
+                        // Add Service schema with comprehensive pricing information
+                        $schema['mainEntity'] = [
+                            '@type'            => 'Service',
+                            '@id'              => $post_url . '#service',
+                            'serviceType'      => 'WordPress Development',
+                            'name'             => 'WordPress Development Services',
+                            'description'      => 'Professional WordPress development including custom themes, plugins, performance optimization, and maintenance',
+                            'provider'         => [
+                                '@type' => 'Organization',
+                                '@id'   => $site_url . '/#organization',
+                                'name'  => '84EM',
+                                'url'   => $site_url,
+                            ],
+                            'areaServed'       => [
+                                '@type' => 'Country',
+                                'name'  => 'United States',
+                            ],
+                            'hasOfferCatalog'  => [
+                                '@type'           => 'OfferCatalog',
+                                'name'            => 'WordPress Development Services',
+                                'itemListElement' => [
+                                    [
+                                        '@type'              => 'Offer',
+                                        'itemOffered'        => [
+                                            '@type'       => 'Service',
+                                            'name'        => 'Custom WordPress Plugin Development',
+                                            'description' => 'Custom WordPress plugin development tailored to your specific needs',
+                                            'url'         => $site_url . '/services/custom-wordpress-plugin-development/',
+                                            'provider'    => [
+                                                '@type' => 'Organization',
+                                                '@id'   => $site_url . '/#organization',
+                                            ],
+                                        ],
+                                        'priceSpecification' => [
+                                            '@type'        => 'UnitPriceSpecification',
+                                            'price'        => '150',
+                                            'priceCurrency' => 'USD',
+                                            'unitText'     => 'HOUR',
+                                        ],
+                                        'availability'       => 'https://schema.org/InStock',
+                                    ],
+                                    [
+                                        '@type'              => 'Offer',
+                                        'itemOffered'        => [
+                                            '@type'       => 'Service',
+                                            'name'        => 'White Label WordPress Development for Agencies',
+                                            'description' => 'White label WordPress development services for agencies and resellers',
+                                            'url'         => $site_url . '/services/white-label-wordpress-development-for-agencies/',
+                                            'provider'    => [
+                                                '@type' => 'Organization',
+                                                '@id'   => $site_url . '/#organization',
+                                            ],
+                                        ],
+                                        'priceSpecification' => [
+                                            '@type'        => 'UnitPriceSpecification',
+                                            'price'        => '150',
+                                            'priceCurrency' => 'USD',
+                                            'unitText'     => 'HOUR',
+                                        ],
+                                        'availability'       => 'https://schema.org/InStock',
+                                    ],
+                                    [
+                                        '@type'              => 'Offer',
+                                        'itemOffered'        => [
+                                            '@type'       => 'Service',
+                                            'name'        => 'WordPress Consulting & Strategy',
+                                            'description' => 'Expert WordPress consulting and strategic planning services',
+                                            'url'         => $site_url . '/services/wordpress-consulting-strategy/',
+                                            'provider'    => [
+                                                '@type' => 'Organization',
+                                                '@id'   => $site_url . '/#organization',
+                                            ],
+                                        ],
+                                        'priceSpecification' => [
+                                            '@type'        => 'UnitPriceSpecification',
+                                            'price'        => '150',
+                                            'priceCurrency' => 'USD',
+                                            'unitText'     => 'HOUR',
+                                        ],
+                                        'availability'       => 'https://schema.org/InStock',
+                                    ],
+                                    [
+                                        '@type'              => 'Offer',
+                                        'itemOffered'        => [
+                                            '@type'       => 'Service',
+                                            'name'        => 'WordPress Maintenance & Support',
+                                            'description' => 'Ongoing WordPress maintenance, updates, and technical support',
+                                            'url'         => $site_url . '/services/wordpress-maintenance-support/',
+                                            'provider'    => [
+                                                '@type' => 'Organization',
+                                                '@id'   => $site_url . '/#organization',
+                                            ],
+                                        ],
+                                        'priceSpecification' => [
+                                            '@type'        => 'UnitPriceSpecification',
+                                            'price'        => '150',
+                                            'priceCurrency' => 'USD',
+                                            'unitText'     => 'HOUR',
+                                        ],
+                                        'availability'       => 'https://schema.org/InStock',
+                                    ],
+                                    [
+                                        '@type'              => 'Offer',
+                                        'itemOffered'        => [
+                                            '@type'       => 'Service',
+                                            'name'        => 'AI-Enhanced WordPress Development',
+                                            'description' => 'WordPress development enhanced with AI tools and automation',
+                                            'url'         => $site_url . '/services/ai-enhanced-wordpress-development/',
+                                            'provider'    => [
+                                                '@type' => 'Organization',
+                                                '@id'   => $site_url . '/#organization',
+                                            ],
+                                        ],
+                                        'priceSpecification' => [
+                                            '@type'        => 'UnitPriceSpecification',
+                                            'price'        => '150',
+                                            'priceCurrency' => 'USD',
+                                            'unitText'     => 'HOUR',
+                                        ],
+                                        'availability'       => 'https://schema.org/InStock',
+                                    ],
+                                    [
+                                        '@type'              => 'Offer',
+                                        'itemOffered'        => [
+                                            '@type'       => 'Service',
+                                            'name'        => 'After-Hours WordPress Development',
+                                            'description' => 'After-hours and emergency WordPress development services',
+                                            'provider'    => [
+                                                '@type' => 'Organization',
+                                                '@id'   => $site_url . '/#organization',
+                                            ],
+                                        ],
+                                        'priceSpecification' => [
+                                            '@type'        => 'UnitPriceSpecification',
+                                            'price'        => '225',
+                                            'priceCurrency' => 'USD',
+                                            'unitText'     => 'HOUR',
+                                        ],
+                                        'availability'       => 'https://schema.org/InStock',
+                                    ],
+                                ],
+                            ],
+                        ];
+
+                        // Add 'about' property to WebPage schema to reference the Service
+                        $schema['about'] = [
+                            '@id' => $post_url . '#service',
+                        ];
+                        break;
+
+                    case 'custom-wordpress-plugin-development':
+                        $schema['mainEntity'] = [
+                            '@type'              => 'Service',
+                            '@id'                => $post_url . '#service',
+                            'serviceType'        => 'Custom WordPress Plugin Development',
+                            'name'               => 'Custom WordPress Plugin Development',
+                            'description'        => 'Custom WordPress plugin development tailored to your specific business requirements, from simple integrations to complex multi-system architectures',
+                            'provider'           => [
+                                '@type' => 'Organization',
+                                '@id'   => $site_url . '/#organization',
+                                'name'  => '84EM',
+                                'url'   => $site_url,
+                            ],
+                            'areaServed'         => [
+                                '@type' => 'Country',
+                                'name'  => 'United States',
+                            ],
+                            'offers'             => [
+                                [
+                                    '@type'              => 'Offer',
+                                    'name'               => 'Standard Rate',
+                                    'priceSpecification' => [
+                                        '@type'         => 'UnitPriceSpecification',
+                                        'price'         => '150',
+                                        'priceCurrency' => 'USD',
+                                        'unitText'      => 'HOUR',
+                                    ],
+                                    'availability'       => 'https://schema.org/InStock',
+                                ],
+                                [
+                                    '@type'              => 'Offer',
+                                    'name'               => 'After-Hours Rate',
+                                    'description'        => 'After-hours and emergency WordPress development services',
+                                    'priceSpecification' => [
+                                        '@type'         => 'UnitPriceSpecification',
+                                        'price'         => '225',
+                                        'priceCurrency' => 'USD',
+                                        'unitText'      => 'HOUR',
+                                    ],
+                                    'availability'       => 'https://schema.org/InStock',
+                                ],
+                            ],
+                        ];
+                        $schema['about'] = [
+                            '@id' => $post_url . '#service',
+                        ];
+                        break;
+
+                    case 'white-label-wordpress-development-for-agencies':
+                        $schema['mainEntity'] = [
+                            '@type'              => 'Service',
+                            '@id'                => $post_url . '#service',
+                            'serviceType'        => 'White Label WordPress Development',
+                            'name'               => 'White Label WordPress Development for Agencies',
+                            'description'        => 'White label WordPress development services for digital agencies and resellers, providing project-based and ongoing partnership solutions',
+                            'provider'           => [
+                                '@type' => 'Organization',
+                                '@id'   => $site_url . '/#organization',
+                                'name'  => '84EM',
+                                'url'   => $site_url,
+                            ],
+                            'areaServed'         => [
+                                '@type' => 'Country',
+                                'name'  => 'United States',
+                            ],
+                            'offers'             => [
+                                [
+                                    '@type'              => 'Offer',
+                                    'name'               => 'Standard Rate',
+                                    'priceSpecification' => [
+                                        '@type'         => 'UnitPriceSpecification',
+                                        'price'         => '150',
+                                        'priceCurrency' => 'USD',
+                                        'unitText'      => 'HOUR',
+                                    ],
+                                    'availability'       => 'https://schema.org/InStock',
+                                ],
+                                [
+                                    '@type'              => 'Offer',
+                                    'name'               => 'After-Hours Rate',
+                                    'description'        => 'After-hours and emergency WordPress development services',
+                                    'priceSpecification' => [
+                                        '@type'         => 'UnitPriceSpecification',
+                                        'price'         => '225',
+                                        'priceCurrency' => 'USD',
+                                        'unitText'      => 'HOUR',
+                                    ],
+                                    'availability'       => 'https://schema.org/InStock',
+                                ],
+                            ],
+                        ];
+                        $schema['about'] = [
+                            '@id' => $post_url . '#service',
+                        ];
+                        break;
+
+                    case 'ai-enhanced-wordpress-development':
+                        $schema['mainEntity'] = [
+                            '@type'              => 'Service',
+                            '@id'                => $post_url . '#service',
+                            'serviceType'        => 'AI-Enhanced WordPress Development',
+                            'name'               => 'AI-Enhanced WordPress Development',
+                            'description'        => 'WordPress development enhanced with artificial intelligence tools to deliver solutions faster with better quality at reduced costs',
+                            'provider'           => [
+                                '@type' => 'Organization',
+                                '@id'   => $site_url . '/#organization',
+                                'name'  => '84EM',
+                                'url'   => $site_url,
+                            ],
+                            'areaServed'         => [
+                                '@type' => 'Country',
+                                'name'  => 'United States',
+                            ],
+                            'offers'             => [
+                                [
+                                    '@type'              => 'Offer',
+                                    'name'               => 'Standard Rate',
+                                    'priceSpecification' => [
+                                        '@type'         => 'UnitPriceSpecification',
+                                        'price'         => '150',
+                                        'priceCurrency' => 'USD',
+                                        'unitText'      => 'HOUR',
+                                    ],
+                                    'availability'       => 'https://schema.org/InStock',
+                                ],
+                                [
+                                    '@type'              => 'Offer',
+                                    'name'               => 'After-Hours Rate',
+                                    'description'        => 'After-hours and emergency WordPress development services',
+                                    'priceSpecification' => [
+                                        '@type'         => 'UnitPriceSpecification',
+                                        'price'         => '225',
+                                        'priceCurrency' => 'USD',
+                                        'unitText'      => 'HOUR',
+                                    ],
+                                    'availability'       => 'https://schema.org/InStock',
+                                ],
+                            ],
+                        ];
+                        $schema['about'] = [
+                            '@id' => $post_url . '#service',
+                        ];
+                        break;
+
+                    case 'wordpress-consulting-strategy':
+                        $schema['mainEntity'] = [
+                            '@type'              => 'Service',
+                            '@id'                => $post_url . '#service',
+                            'serviceType'        => 'WordPress Consulting',
+                            'name'               => 'WordPress Consulting & Strategy',
+                            'description'        => 'Expert WordPress consulting and strategic planning services including technical audits and architecture planning',
+                            'provider'           => [
+                                '@type' => 'Organization',
+                                '@id'   => $site_url . '/#organization',
+                                'name'  => '84EM',
+                                'url'   => $site_url,
+                            ],
+                            'areaServed'         => [
+                                '@type' => 'Country',
+                                'name'  => 'United States',
+                            ],
+                            'offers'             => [
+                                [
+                                    '@type'              => 'Offer',
+                                    'name'               => 'Standard Rate',
+                                    'priceSpecification' => [
+                                        '@type'         => 'UnitPriceSpecification',
+                                        'price'         => '150',
+                                        'priceCurrency' => 'USD',
+                                        'unitText'      => 'HOUR',
+                                    ],
+                                    'availability'       => 'https://schema.org/InStock',
+                                ],
+                                [
+                                    '@type'              => 'Offer',
+                                    'name'               => 'After-Hours Rate',
+                                    'description'        => 'After-hours and emergency WordPress development services',
+                                    'priceSpecification' => [
+                                        '@type'         => 'UnitPriceSpecification',
+                                        'price'         => '225',
+                                        'priceCurrency' => 'USD',
+                                        'unitText'      => 'HOUR',
+                                    ],
+                                    'availability'       => 'https://schema.org/InStock',
+                                ],
+                            ],
+                        ];
+                        $schema['about'] = [
+                            '@id' => $post_url . '#service',
+                        ];
+                        break;
+
+                    case 'wordpress-maintenance-support':
+                        $schema['mainEntity'] = [
+                            '@type'              => 'Service',
+                            '@id'                => $post_url . '#service',
+                            'serviceType'        => 'WordPress Maintenance',
+                            'name'               => 'WordPress Maintenance & Support',
+                            'description'        => 'Ongoing WordPress maintenance, updates, security monitoring, backups, and troubleshooting to keep your site running reliably',
+                            'provider'           => [
+                                '@type' => 'Organization',
+                                '@id'   => $site_url . '/#organization',
+                                'name'  => '84EM',
+                                'url'   => $site_url,
+                            ],
+                            'areaServed'         => [
+                                '@type' => 'Country',
+                                'name'  => 'United States',
+                            ],
+                            'offers'             => [
+                                [
+                                    '@type'              => 'Offer',
+                                    'name'               => 'Standard Rate',
+                                    'priceSpecification' => [
+                                        '@type'         => 'UnitPriceSpecification',
+                                        'price'         => '150',
+                                        'priceCurrency' => 'USD',
+                                        'unitText'      => 'HOUR',
+                                    ],
+                                    'availability'       => 'https://schema.org/InStock',
+                                ],
+                                [
+                                    '@type'              => 'Offer',
+                                    'name'               => 'After-Hours Rate',
+                                    'description'        => 'After-hours and emergency WordPress development services',
+                                    'priceSpecification' => [
+                                        '@type'         => 'UnitPriceSpecification',
+                                        'price'         => '225',
+                                        'priceCurrency' => 'USD',
+                                        'unitText'      => 'HOUR',
+                                    ],
+                                    'availability'       => 'https://schema.org/InStock',
+                                ],
+                            ],
+                        ];
+                        $schema['about'] = [
+                            '@id' => $post_url . '#service',
                         ];
                         break;
 
