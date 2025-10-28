@@ -109,7 +109,10 @@ function create_xml_sitemap_84em( array|null $args ): void {
     }
 
     // Write header to file
-    file_put_contents( $sitemap_path, $xml_header, LOCK_EX );
+    if ( file_put_contents( $sitemap_path, $xml_header, LOCK_EX ) === false ) {
+        trigger_error( 'Sitemap generation: Failed to write sitemap header to file', E_USER_WARNING );
+        return;
+    }
 
     // Split into batches of 200 and schedule sequentially with delays
     $batches = array_chunk( $post_ids, 200 );
@@ -128,7 +131,7 @@ function create_xml_sitemap_84em( array|null $args ): void {
             ] ]
         );
 
-        // Add 5 second delay between batches to guarantee order
+        // Add 5 second delay between batches to encourage sequential processing
         $delay += 5;
     }
 }
