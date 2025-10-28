@@ -200,8 +200,20 @@ function process_sitemap_batch_84em( array $args ): void {
             fflush( $fp );
             // Release lock
             flock( $fp, LOCK_UN );
+        } else {
+            // Log lock acquisition failure
+            trigger_error( sprintf(
+                'Sitemap generation: Failed to acquire lock for batch with %d posts',
+                count( $post_ids )
+            ), E_USER_WARNING );
         }
         fclose( $fp );
+    } else {
+        // Log file open failure
+        trigger_error( sprintf(
+            'Sitemap generation: Failed to open file for batch with %d posts',
+            count( $post_ids )
+        ), E_USER_WARNING );
     }
 
     // If this is the last batch, append XML footer
@@ -214,8 +226,14 @@ function process_sitemap_batch_84em( array $args ): void {
                 fflush( $fp );
                 // Release lock
                 flock( $fp, LOCK_UN );
+            } else {
+                // Log lock acquisition failure for closing tag
+                trigger_error( 'Sitemap generation: Failed to acquire lock for closing </urlset> tag', E_USER_WARNING );
             }
             fclose( $fp );
+        } else {
+            // Log file open failure for closing tag
+            trigger_error( 'Sitemap generation: Failed to open file for closing </urlset> tag', E_USER_WARNING );
         }
     }
 }
