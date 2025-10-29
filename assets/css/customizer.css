@@ -106,7 +106,7 @@ main a:hover:not(.wp-element-button,.wp-block-button__link) {
 
 @media screen and (max-width: 768px) {
     header .wp-block-navigation ul, header .wp-block-navigation ul li {
-        padding-bottom: 1rem !important;
+        padding-bottom: 0!important;
     }
 
     header .wp-block-navigation header .wp-block-navigation-item__label {
