@@ -95,17 +95,18 @@ function create_xml_sitemap_84em( array|null $args ): void {
 
     // Initialize sitemap file with XML header
     $sitemap_path = \ABSPATH . 'sitemap.xml';
-    $xml_header = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+    $xml_header = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" .
+                  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
 
     // Add static /lp/ entry first
     $lp_index_path = \ABSPATH . 'lp/index.php';
     if ( file_exists( $lp_index_path ) ) {
-        $xml_header .= '<url>' .
-                      '<loc>' . site_url( '/lp/' ) . '</loc>' .
-                      '<lastmod>' . date( 'Y-m-d', filemtime( $lp_index_path ) ) . '</lastmod>' .
-                      '<changefreq>daily</changefreq>' .
-                      '<priority>1.0</priority>' .
-                      '</url>';
+        $xml_header .= "\t" . '<url>' . "\n" .
+                      "\t\t" . '<loc>' . site_url( '/lp/' ) . '</loc>' . "\n" .
+                      "\t\t" . '<lastmod>' . date( 'Y-m-d', filemtime( $lp_index_path ) ) . '</lastmod>' . "\n" .
+                      "\t\t" . '<changefreq>daily</changefreq>' . "\n" .
+                      "\t\t" . '<priority>1.0</priority>' . "\n" .
+                      "\t" . '</url>' . "\n";
     }
 
     // Write header to file
@@ -183,12 +184,12 @@ function process_sitemap_batch_84em( array $args ): void {
         }
 
         $postdate = \explode( ' ', $post->post_modified );
-        $xml .= '<url>' .
-                '<loc>' . $link . '</loc>' .
-                '<lastmod>' . $postdate[0] . '</lastmod>' .
-                '<changefreq>daily</changefreq>' .
-                '<priority>' . $priority . '</priority>' .
-                '</url>';
+        $xml .= "\t" . '<url>' . "\n" .
+                "\t\t" . '<loc>' . $link . '</loc>' . "\n" .
+                "\t\t" . '<lastmod>' . $postdate[0] . '</lastmod>' . "\n" .
+                "\t\t" . '<changefreq>daily</changefreq>' . "\n" .
+                "\t\t" . '<priority>' . $priority . '</priority>' . "\n" .
+                "\t" . '</url>' . "\n";
     }
 
     // Append to sitemap file with file locking
@@ -196,47 +197,49 @@ function process_sitemap_batch_84em( array $args ): void {
 
     // Open file for appending with file locking
     $fp = fopen( $sitemap_path, 'a' );
-    if ( $fp ) {
-        // Acquire exclusive lock
-        if ( flock( $fp, LOCK_EX ) ) {
-            fwrite( $fp, $xml );
-            fflush( $fp );
-            // Release lock
-            flock( $fp, LOCK_UN );
-        } else {
-            // Log lock acquisition failure
-            trigger_error( sprintf(
-                'Sitemap generation: Failed to acquire lock for batch with %d posts',
-                count( $post_ids )
-            ), E_USER_WARNING );
-        }
-        fclose( $fp );
-    } else {
-        // Log file open failure
-        trigger_error( sprintf(
+    if ( ! $fp ) {
+        // Throw exception to trigger Action Scheduler retry
+        throw new \Exception( sprintf(
             'Sitemap generation: Failed to open file for batch with %d posts',
             count( $post_ids )
-        ), E_USER_WARNING );
+        ) );
     }
+
+    // Acquire exclusive lock
+    if ( ! flock( $fp, LOCK_EX ) ) {
+        fclose( $fp );
+        // Throw exception to trigger Action Scheduler retry
+        throw new \Exception( sprintf(
+            'Sitemap generation: Failed to acquire lock for batch with %d posts',
+            count( $post_ids )
+        ) );
+    }
+
+    fwrite( $fp, $xml );
+    fflush( $fp );
+    // Release lock
+    flock( $fp, LOCK_UN );
+    fclose( $fp );
 
     // If this is the last batch, append XML footer
     if ( $is_last ) {
         $fp = fopen( $sitemap_path, 'a' );
-        if ( $fp ) {
-            // Acquire exclusive lock
-            if ( flock( $fp, LOCK_EX ) ) {
-                fwrite( $fp, '</urlset>' );
-                fflush( $fp );
-                // Release lock
-                flock( $fp, LOCK_UN );
-            } else {
-                // Log lock acquisition failure for closing tag
-                trigger_error( 'Sitemap generation: Failed to acquire lock for closing </urlset> tag', E_USER_WARNING );
-            }
-            fclose( $fp );
-        } else {
-            // Log file open failure for closing tag
-            trigger_error( 'Sitemap generation: Failed to open file for closing </urlset> tag', E_USER_WARNING );
+        if ( ! $fp ) {
+            // Throw exception to trigger Action Scheduler retry
+            throw new \Exception( 'Sitemap generation: Failed to open file for closing </urlset> tag' );
         }
+
+        // Acquire exclusive lock
+        if ( ! flock( $fp, LOCK_EX ) ) {
+            fclose( $fp );
+            // Throw exception to trigger Action Scheduler retry
+            throw new \Exception( 'Sitemap generation: Failed to acquire lock for closing </urlset> tag' );
+        }
+
+        fwrite( $fp, '</urlset>' . "\n" );
+        fflush( $fp );
+        // Release lock
+        flock( $fp, LOCK_UN );
+        fclose( $fp );
     }
 }
