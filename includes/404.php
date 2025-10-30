@@ -32,7 +32,7 @@ add_action(
 
         if ( str_starts_with( $path, 'project/' ) ) {
 
-            $slug = str_replace( 'project/', '', $path );
+            $slug = substr( $path, strlen( 'project/' ) );
 
             $redirect_url = home_url( '/case-studies/' . $slug );
 
