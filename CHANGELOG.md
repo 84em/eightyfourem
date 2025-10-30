@@ -5,9 +5,19 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.0] - 2025-10-30
+### Added
+- Custom 404 error handling with automatic redirects (`includes/404.php`)
+  - Redirects `/project/*` URLs to `/case-studies/*` with 301 permanent redirects
+  - Maintains URL structure and query parameters
+  - Uses anonymous function with PHP 8.0+ named parameters
+
+### Changed
+- Updated `AGENTS.md` to document GitHub Actions automated build process
+
 ## [2.1.2] - 2025-10-29
 ### Fixed
-- Adjusted padding on mobile nav styling to accomodate shorter screens
+- Adjusted padding on mobile nav styling to accommodate shorter screens
 
 ## [2.1.1] - 2025-10-29
 ### Fixed
