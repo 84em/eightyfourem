@@ -22,7 +22,7 @@ add_action(
             return;
         }
 
-        $request_uri = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
+        $request_uri = isset( $_SERVER['REQUEST_URI'] ) ? esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
 
         $parsed_url = wp_parse_url( $request_uri );
         $path       = $parsed_url['path'] ?? '';
