@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.1.2] - 2025-10-29
 ### Fixed
-- Adjusted padding on mobile nav styling to accomodate shorter screens
+- Adjusted padding on mobile nav styling to accommodate shorter screens
 
 ## [2.1.1] - 2025-10-29
 ### Fixed
