@@ -5,6 +5,24 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.0] - 2025-10-31
+### Added
+- Sticky header table of contents navigation (`assets/js/sticky-header.js`, `assets/css/sticky-header.css`)
+  - Replaces header-2 content with hamburger menu TOC after 50px scroll
+  - Auto-generates navigation from H2 headings on the page
+  - Excludes hero headings and first H2 from TOC
+  - "Jump to Section →" clickable label with hamburger icon
+  - Dropdown menu with full heading text (no truncation)
+  - Smooth scroll to sections with header offset
+  - Auto-closes menu when clicking link or outside menu
+
+### Changed
+- Updated sticky header behavior to show TOC instead of hiding header-2
+- Header-2 overflow changed from `hidden` to `visible` to accommodate dropdown menu
+- Hamburger icon styled to match main navigation (48px, white color)
+- TOC menu link font sizes match main navigation (1rem mobile, 1.5rem desktop)
+- Updated `AGENTS.md` testing guidelines to reflect 50px scroll threshold for TOC
+
 ## [2.2.1] - 2025-10-30
 ### Changed
 - Updated color scheme to match 84EM logo
