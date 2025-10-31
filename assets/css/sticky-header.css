@@ -184,7 +184,8 @@ header .header-2.ef-sticky-toc-active .ef-sticky-toc {
     position: absolute;
     bottom: 8px;
     right: 10px;
-    font-size: 24px;
+    font-size: 2rem;
+    font-weight:bold;
     color: #4f7606;
     pointer-events: none;
     z-index: 10;
