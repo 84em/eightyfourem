@@ -41,8 +41,8 @@ header.scrolled .header-1 {
 }
 
 header.scrolled .header-2 {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
 }
 
 header .header-2 {
