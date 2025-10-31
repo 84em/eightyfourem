@@ -160,10 +160,9 @@ header .header-2 {
     content: '↓';
     position: absolute;
     bottom: 8px;
-    left: 50%;
-    transform: translateX(-50%);
+    right: 10px;
     font-size: 24px;
-    color: #004C7E;
+    color: #4f7606;
     pointer-events: none;
     z-index: 10;
     animation: bounce 2s infinite;
@@ -171,10 +170,10 @@ header .header-2 {
 
 @keyframes bounce {
     0%, 100% {
-        transform: translateX(-50%) translateY(0);
+        transform: translateY(0);
     }
     50% {
-        transform: translateX(-50%) translateY(-5px);
+        transform: translateY(-5px);
     }
 }
 
