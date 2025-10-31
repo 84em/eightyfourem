@@ -148,6 +148,26 @@ header .header-2 {
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: #004C7E transparent;
+    position: relative;
+}
+
+/* Scroll indicator gradient at bottom */
+.ef-sticky-toc__menu::after {
+    content: '';
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: linear-gradient(to bottom, transparent, var(--wp--preset--color--contrast));
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Show gradient when menu is scrollable */
+.ef-sticky-toc.is-open .ef-sticky-toc__menu::after {
+    opacity: 1;
 }
 
 /* Webkit scrollbar styling */
