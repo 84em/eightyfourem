@@ -74,6 +74,8 @@ header .header-2.ef-sticky-toc-active .ef-sticky-toc {
     gap: 12px;
     width: 100%;
     position: relative;
+    padding: 0;
+    margin: 0;
 }
 
 .ef-sticky-toc__label {
