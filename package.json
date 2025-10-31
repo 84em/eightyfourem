@@ -1,6 +1,6 @@
 {
   "name": "eightyfourem-theme",
-  "version": "2.3.4",
+  "version": "2.3.5",
   "description": "Build system for 84EM WordPress theme",
   "private": true,
   "scripts": {
