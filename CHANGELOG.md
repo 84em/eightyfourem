@@ -5,6 +5,27 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.3] - 2025-10-31
+### Changed
+- TOC menu refinements (`assets/css/sticky-header.css`, `assets/js/sticky-header.js`)
+  - Removed drop shadow from header-2
+  - Menu now scrollable when content exceeds viewport height
+  - Desktop menu matches page content width
+  - Mobile menu spans full screen width (100vw)
+  - Removed spacing between menu and header-2
+  - Custom scrollbar styled with brand color (#004C7E)
+  - Down arrow scroll indicator positioned at bottom-right (#4f7606 color)
+  - Used CSS display toggle instead of innerHTML swap to eliminate glitches
+  - Added hysteresis (40px-60px range) to prevent flickering at scroll threshold
+  - Removed scroll-based padding changes for consistent header height
+  - Set header-1 and header-2 to consistent 10px padding always
+  - Added Jost font family to TOC label
+
+### Fixed
+- Eliminated visual glitching during content swap by using pure CSS visibility toggle
+- Fixed mobile menu height issues with max-height transitions
+- Prevented constant class toggling with scroll hysteresis
+
 ## [2.3.1] - 2025-10-31
 ### Changed
 - Removed padding from header-2 when scrolled (`assets/css/sticky-header.css`)
