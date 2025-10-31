@@ -196,16 +196,17 @@
         function updateHeader() {
             var currentScrollY = window.scrollY || window.pageYOffset || 0;
 
-            if (currentScrollY > 50) {
+            // Add hysteresis to prevent flickering at threshold
+            if (currentScrollY > 60) {
                 header.classList.add('scrolled');
-            } else {
+            } else if (currentScrollY < 40) {
                 header.classList.remove('scrolled');
             }
 
             if (tocNav) {
-                if (currentScrollY > tocOffset && !tocActive) {
+                if (currentScrollY > 60 && !tocActive) {
                     activateToc();
-                } else if (currentScrollY <= tocOffset && tocActive) {
+                } else if (currentScrollY < 40 && tocActive) {
                     restoreOriginal();
                 }
             }
