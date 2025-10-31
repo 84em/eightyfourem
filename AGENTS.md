@@ -33,6 +33,7 @@
 - No automated suite yet; smoke-test changes by activating the theme in a local WordPress install and exercising modified templates/patterns.
 - Validate responsive behavior in Chrome DevTools' device modes and confirm the sticky header (`assets/js/sticky-header.js`) logs no console errors.
 - When editing data-driven templates, compare rendered markup against `theme.json` tokens to avoid color/spacing regressions.
+- For the sticky header TOC, scroll past 50px to confirm the anchor menu appears, caps long labels with ellipses, skips hero headings, and swaps back to the original promo copy when returning to the top.
 
 ## Release Process
 When preparing a release with version bump:
