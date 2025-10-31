@@ -18,7 +18,6 @@
         const tocNav = tocItems.length ? buildToc(tocItems) : null;
         let tocActive = false;
         let ticking = false;
-        let isTransitioning = false;
         const tocOffset = 50;
 
         function collectHeadings() {
@@ -172,38 +171,24 @@
         }
 
         function activateToc() {
-            if (!tocNav || tocActive || isTransitioning) {
+            if (!tocNav || tocActive) {
                 return;
             }
 
-            isTransitioning = true;
-            header2.style.opacity = '0';
-
-            setTimeout(function() {
-                header2.classList.add('ef-sticky-toc-active');
-                header2.innerHTML = '';
-                header2.appendChild(tocNav);
-                tocActive = true;
-                header2.style.opacity = '1';
-                isTransitioning = false;
-            }, 150);
+            header2.classList.add('ef-sticky-toc-active');
+            header2.innerHTML = '';
+            header2.appendChild(tocNav);
+            tocActive = true;
         }
 
         function restoreOriginal() {
-            if (!tocActive || isTransitioning) {
+            if (!tocActive) {
                 return;
             }
 
-            isTransitioning = true;
-            header2.style.opacity = '0';
-
-            setTimeout(function() {
-                header2.classList.remove('ef-sticky-toc-active');
-                header2.innerHTML = originalMarkup;
-                tocActive = false;
-                header2.style.opacity = '1';
-                isTransitioning = false;
-            }, 150);
+            header2.classList.remove('ef-sticky-toc-active');
+            header2.innerHTML = originalMarkup;
+            tocActive = false;
         }
 
         function updateHeader() {
