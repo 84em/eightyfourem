@@ -41,17 +41,154 @@ header.scrolled .header-2 {
     padding-bottom: 10px !important;
 }
 
-/* Hide header-2 when scrolling down - all screen sizes */
-/* Set up transition for smooth animation */
 header .header-2 {
-    transform: translateY(0);
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    overflow: hidden;
+    overflow: visible;
 }
 
-/* Hide header-2 when scrolling down using transform */
-header.scrolling-down .header-2 {
-    transform: translateY(-100%);
+.ef-sticky-toc {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    position: relative;
+}
+
+.ef-sticky-toc__label {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: transparent;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: none;
+    font-size:1.5rem;
+}
+
+.ef-sticky-toc__arrow {
+    display: inline-block;
+}
+
+.ef-sticky-toc__toggle {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+}
+
+.ef-sticky-toc__icon {
+    width: 24px;
+    height: 2px;
+    background-color: #ffffff;
+    position: relative;
+    transition: background-color 0.3s ease;
+}
+
+.ef-sticky-toc__icon::before,
+.ef-sticky-toc__icon::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 2px;
+    background-color: #ffffff;
+    left: 0;
+    transition: transform 0.3s ease;
+}
+
+.ef-sticky-toc__icon::before {
+    top: -8px;
+}
+
+.ef-sticky-toc__icon::after {
+    top: 8px;
+}
+
+/* Hamburger animation when open */
+.ef-sticky-toc.is-open .ef-sticky-toc__icon {
+    background-color: transparent;
+}
+
+.ef-sticky-toc.is-open .ef-sticky-toc__icon::before {
+    transform: rotate(45deg);
+    top: 0;
+}
+
+.ef-sticky-toc.is-open .ef-sticky-toc__icon::after {
+    transform: rotate(-45deg);
+    top: 0;
+}
+
+.ef-sticky-toc__menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 8px;
+    background-color: var(--wp--preset--color--contrast);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    min-width: 280px;
+    max-width: 90vw;
     opacity: 0;
-    pointer-events: none;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1000;
+}
+
+.ef-sticky-toc.is-open .ef-sticky-toc__menu {
+    opacity: 1;
+    visibility: visible;
+}
+
+.ef-sticky-toc__list {
+    list-style: none;
+    margin: 0;
+    padding: 8px 0;
+}
+
+.ef-sticky-toc__list li {
+    margin: 0;
+    padding: 0;
+}
+
+.ef-sticky-toc__link {
+    display: block;
+    padding: 12px 20px;
+    color: inherit;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+    .ef-sticky-toc__link {
+        font-size: 1.5rem;
+    }
+}
+
+.ef-sticky-toc__link:hover,
+.ef-sticky-toc__link:focus {
+    background-color: rgba(255, 255, 255, 0.1);
+    outline: none;
+}
+
+.ef-sticky-toc-active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ef-sticky-toc-active .ef-sticky-toc {
+    width: 100%;
 }
