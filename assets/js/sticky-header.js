@@ -18,6 +18,7 @@
         const tocNav = tocItems.length ? buildToc(tocItems) : null;
         let tocActive = false;
         let ticking = false;
+        let isTransitioning = false;
         const tocOffset = 50;
 
         function collectHeadings() {
@@ -171,10 +172,11 @@
         }
 
         function activateToc() {
-            if (!tocNav || tocActive) {
+            if (!tocNav || tocActive || isTransitioning) {
                 return;
             }
 
+            isTransitioning = true;
             header2.style.opacity = '0';
 
             setTimeout(function() {
@@ -183,14 +185,16 @@
                 header2.appendChild(tocNav);
                 tocActive = true;
                 header2.style.opacity = '1';
+                isTransitioning = false;
             }, 150);
         }
 
         function restoreOriginal() {
-            if (!tocActive) {
+            if (!tocActive || isTransitioning) {
                 return;
             }
 
+            isTransitioning = true;
             header2.style.opacity = '0';
 
             setTimeout(function() {
@@ -198,11 +202,18 @@
                 header2.innerHTML = originalMarkup;
                 tocActive = false;
                 header2.style.opacity = '1';
+                isTransitioning = false;
             }, 150);
         }
 
         function updateHeader() {
             var currentScrollY = window.scrollY || window.pageYOffset || 0;
+
+            if (currentScrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
 
             if (tocNav) {
                 if (currentScrollY > tocOffset && !tocActive) {
@@ -210,12 +221,6 @@
                 } else if (currentScrollY <= tocOffset && tocActive) {
                     restoreOriginal();
                 }
-            }
-
-            if (currentScrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
             }
 
             ticking = false;
