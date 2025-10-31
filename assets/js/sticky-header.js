@@ -175,10 +175,15 @@
                 return;
             }
 
-            header2.classList.add('ef-sticky-toc-active');
-            header2.innerHTML = '';
-            header2.appendChild(tocNav);
-            tocActive = true;
+            header2.style.visibility = 'hidden';
+
+            requestAnimationFrame(function() {
+                header2.classList.add('ef-sticky-toc-active');
+                header2.innerHTML = '';
+                header2.appendChild(tocNav);
+                tocActive = true;
+                header2.style.visibility = 'visible';
+            });
         }
 
         function restoreOriginal() {
@@ -186,9 +191,14 @@
                 return;
             }
 
-            header2.classList.remove('ef-sticky-toc-active');
-            header2.innerHTML = originalMarkup;
-            tocActive = false;
+            header2.style.visibility = 'hidden';
+
+            requestAnimationFrame(function() {
+                header2.classList.remove('ef-sticky-toc-active');
+                header2.innerHTML = originalMarkup;
+                tocActive = false;
+                header2.style.visibility = 'visible';
+            });
         }
 
         function updateHeader() {
