@@ -47,6 +47,7 @@ header.scrolled .header-2 {
 
 header .header-2 {
     overflow: visible;
+    transition: opacity 0.15s ease-in-out;
 }
 
 .ef-sticky-toc {

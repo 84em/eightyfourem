@@ -175,10 +175,15 @@
                 return;
             }
 
-            header2.classList.add('ef-sticky-toc-active');
-            header2.innerHTML = '';
-            header2.appendChild(tocNav);
-            tocActive = true;
+            header2.style.opacity = '0';
+
+            setTimeout(function() {
+                header2.classList.add('ef-sticky-toc-active');
+                header2.innerHTML = '';
+                header2.appendChild(tocNav);
+                tocActive = true;
+                header2.style.opacity = '1';
+            }, 150);
         }
 
         function restoreOriginal() {
@@ -186,9 +191,14 @@
                 return;
             }
 
-            header2.classList.remove('ef-sticky-toc-active');
-            header2.innerHTML = originalMarkup;
-            tocActive = false;
+            header2.style.opacity = '0';
+
+            setTimeout(function() {
+                header2.classList.remove('ef-sticky-toc-active');
+                header2.innerHTML = originalMarkup;
+                tocActive = false;
+                header2.style.opacity = '1';
+            }, 150);
         }
 
         function updateHeader() {
