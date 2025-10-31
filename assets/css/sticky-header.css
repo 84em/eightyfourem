@@ -40,7 +40,8 @@ header.scrolled .header-1 {
     padding-bottom: 10px !important;
 }
 
-header.scrolled .header-2 {
+header.scrolled .header-2,
+header.scrolled .header-2.wp-block-group {
     padding-top: 0 !important;
     padding-bottom: 0 !important;
 }
