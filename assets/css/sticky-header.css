@@ -110,13 +110,13 @@ header .header-2.ef-sticky-toc-active .ef-sticky-toc {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #ffffff!important;
+    color: inherit;
 }
 
 .ef-sticky-toc__icon {
     width: 24px;
     height: 2px;
-    background-color: #ffffff;
+    background-color: currentColor;
     position: relative;
     transition: background-color 0.3s ease;
 }
@@ -127,7 +127,7 @@ header .header-2.ef-sticky-toc-active .ef-sticky-toc {
     position: absolute;
     width: 24px;
     height: 2px;
-    background-color: #ffffff;
+    background-color: currentColor;
     left: 0;
     transition: transform 0.3s ease;
 }
