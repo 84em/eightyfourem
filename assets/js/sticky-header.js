@@ -175,15 +175,13 @@
                 return;
             }
 
-            header2.style.visibility = 'hidden';
-
-            requestAnimationFrame(function() {
-                header2.classList.add('ef-sticky-toc-active');
-                header2.innerHTML = '';
+            // Append TOC only once
+            if (!header2.contains(tocNav)) {
                 header2.appendChild(tocNav);
-                tocActive = true;
-                header2.style.visibility = 'visible';
-            });
+            }
+
+            header2.classList.add('ef-sticky-toc-active');
+            tocActive = true;
         }
 
         function restoreOriginal() {
@@ -191,14 +189,8 @@
                 return;
             }
 
-            header2.style.visibility = 'hidden';
-
-            requestAnimationFrame(function() {
-                header2.classList.remove('ef-sticky-toc-active');
-                header2.innerHTML = originalMarkup;
-                tocActive = false;
-                header2.style.visibility = 'visible';
-            });
+            header2.classList.remove('ef-sticky-toc-active');
+            tocActive = false;
         }
 
         function updateHeader() {
