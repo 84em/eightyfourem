@@ -5,6 +5,13 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.2] - 2025-10-31
+### Changed
+- Mobile TOC dropdown menu spans full screen width (`assets/css/sticky-header.css`)
+  - Uses 100vw width on screens ≤768px for edge-to-edge display
+  - Removes border-radius and margins on mobile
+  - Maintains centered dropdown on desktop
+
 ## [2.3.1] - 2025-10-31
 ### Changed
 - Removed padding from header-2 when scrolled (`assets/css/sticky-header.css`)
