@@ -34,19 +34,39 @@ header {
     transition: all 0.3s ease;
 }
 
-/* Reduce padding when scrolled */
-header.scrolled .header-1 {
+/* Set consistent padding for header-1 - no changes on scroll */
+header .header-1,
+header .header-1.wp-block-group {
     padding-top: 10px !important;
     padding-bottom: 10px !important;
 }
 
-header.scrolled .header-2 {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
+/* Header-2: consistent 10px padding always to maintain height */
+header .header-2,
+header .header-2.wp-block-group {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
 }
 
 header .header-2 {
     overflow: visible;
+}
+
+/* Hide original content when TOC is active */
+header .header-2 > .wp-block-group {
+    display: block;
+}
+
+header .header-2.ef-sticky-toc-active > .wp-block-group:not(.ef-sticky-toc) {
+    display: none;
+}
+
+header .header-2 .ef-sticky-toc {
+    display: none;
+}
+
+header .header-2.ef-sticky-toc-active .ef-sticky-toc {
+    display: flex;
 }
 
 .ef-sticky-toc {
@@ -56,6 +76,8 @@ header .header-2 {
     gap: 12px;
     width: 100%;
     position: relative;
+    padding: 0;
+    margin: 0;
 }
 
 .ef-sticky-toc__label {
@@ -69,7 +91,8 @@ header .header-2 {
     cursor: pointer;
     padding: 0;
     text-decoration: none;
-    font-size:1.5rem;
+    font-size: 1rem;
+    font-family: Jost, sans-serif;
 }
 
 .ef-sticky-toc__arrow {
@@ -87,7 +110,7 @@ header .header-2 {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #ffffff;
+    color: #ffffff!important;
 }
 
 .ef-sticky-toc__icon {
@@ -135,18 +158,64 @@ header .header-2 {
 .ef-sticky-toc__menu {
     position: absolute;
     top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-top: 8px;
+    left: 0;
+    right: 0;
+    margin-top: 0;
     background-color: var(--wp--preset--color--contrast);
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    min-width: 280px;
-    max-width: 90vw;
+    border-radius: 0;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, max-height 0.3s ease;
     z-index: 1000;
+    scrollbar-width: thin;
+    scrollbar-color: #004C7E transparent;
+}
+
+.ef-sticky-toc.is-open .ef-sticky-toc__menu {
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+}
+
+/* Scroll indicator - down arrow at bottom */
+.ef-sticky-toc__menu::after {
+    content: '↓';
+    position: absolute;
+    bottom: 8px;
+    right: 10px;
+    font-size: 24px;
+    color: #4f7606;
+    pointer-events: none;
+    z-index: 10;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Webkit scrollbar styling */
+.ef-sticky-toc__menu::-webkit-scrollbar {
+    width: 8px;
+}
+
+.ef-sticky-toc__menu::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.ef-sticky-toc__menu::-webkit-scrollbar-thumb {
+    background-color: #004C7E;
+    border-radius: 4px;
+}
+
+.ef-sticky-toc__menu::-webkit-scrollbar-thumb:hover {
+    background-color: #003D65;
 }
 
 @media screen and (max-width: 768px) {
@@ -185,6 +254,26 @@ header .header-2 {
     transition: background-color 0.2s ease;
     font-weight: 500;
     font-size: 1rem;
+}
+
+/* Mobile: Full width with no side padding/margins */
+@media screen and (max-width: 767px) {
+    .ef-sticky-toc__menu {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+        width: 100vw;
+        max-width: 100vw;
+    }
+
+    .ef-sticky-toc__list {
+        padding: 8px 0;
+    }
+
+    .ef-sticky-toc__link {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
 }
 
 @media screen and (min-width: 768px) {

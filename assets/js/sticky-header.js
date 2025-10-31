@@ -175,9 +175,12 @@
                 return;
             }
 
+            // Append TOC only once
+            if (!header2.contains(tocNav)) {
+                header2.appendChild(tocNav);
+            }
+
             header2.classList.add('ef-sticky-toc-active');
-            header2.innerHTML = '';
-            header2.appendChild(tocNav);
             tocActive = true;
         }
 
@@ -187,25 +190,25 @@
             }
 
             header2.classList.remove('ef-sticky-toc-active');
-            header2.innerHTML = originalMarkup;
             tocActive = false;
         }
 
         function updateHeader() {
             var currentScrollY = window.scrollY || window.pageYOffset || 0;
 
-            if (tocNav) {
-                if (currentScrollY > tocOffset && !tocActive) {
-                    activateToc();
-                } else if (currentScrollY <= tocOffset && tocActive) {
-                    restoreOriginal();
-                }
+            // Add hysteresis to prevent flickering at threshold
+            if (currentScrollY > 60) {
+                header.classList.add('scrolled');
+            } else if (currentScrollY < 40) {
+                header.classList.remove('scrolled');
             }
 
-            if (currentScrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
+            if (tocNav) {
+                if (currentScrollY > 60 && !tocActive) {
+                    activateToc();
+                } else if (currentScrollY < 40 && tocActive) {
+                    restoreOriginal();
+                }
             }
 
             ticking = false;
