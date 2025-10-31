@@ -183,6 +183,15 @@ header .header-2 {
         width: 100vw;
         max-width: 100vw;
     }
+
+    .ef-sticky-toc__list {
+        padding: 8px 0;
+    }
+
+    .ef-sticky-toc__link {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
 }
 
 @media screen and (min-width: 768px) {
