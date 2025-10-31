@@ -69,7 +69,8 @@ header .header-2 {
     cursor: pointer;
     padding: 0;
     text-decoration: none;
-    font-size:1.5rem;
+    font-size: 1rem;
+    font-family: Jost, sans-serif;
 }
 
 .ef-sticky-toc__arrow {
