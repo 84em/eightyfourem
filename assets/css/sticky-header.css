@@ -34,14 +34,15 @@ header {
     transition: all 0.3s ease;
 }
 
-/* Reduce padding when scrolled */
-header.scrolled .header-1 {
+/* Set consistent padding - no changes on scroll */
+header .header-1,
+header .header-1.wp-block-group {
     padding-top: 10px !important;
     padding-bottom: 10px !important;
 }
 
-header.scrolled .header-2,
-header.scrolled .header-2.wp-block-group {
+header .header-2,
+header .header-2.wp-block-group {
     padding-top: 0 !important;
     padding-bottom: 0 !important;
 }
