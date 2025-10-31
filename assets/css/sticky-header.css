@@ -49,6 +49,23 @@ header .header-2 {
     overflow: visible;
 }
 
+/* Hide original content when TOC is active */
+header .header-2 > .wp-block-group {
+    display: block;
+}
+
+header .header-2.ef-sticky-toc-active > .wp-block-group:not(.ef-sticky-toc) {
+    display: none;
+}
+
+header .header-2 .ef-sticky-toc {
+    display: none;
+}
+
+header .header-2.ef-sticky-toc-active .ef-sticky-toc {
+    display: flex;
+}
+
 .ef-sticky-toc {
     display: flex;
     align-items: center;
