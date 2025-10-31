@@ -35,10 +35,14 @@ header {
 }
 
 /* Reduce padding when scrolled */
-header.scrolled .header-1,
-header.scrolled .header-2 {
+header.scrolled .header-1 {
     padding-top: 10px !important;
     padding-bottom: 10px !important;
+}
+
+header.scrolled .header-2 {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
 }
 
 /* Hide header-2 when scrolling down - all screen sizes */
