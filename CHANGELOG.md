@@ -5,6 +5,18 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.5.3] - 2025-11-01
+### Removed
+- **Unused Patterns** - Removed 22 unused block patterns inherited from Twenty Twenty-Four theme
+  - Patterns were not used anywhere in templates, parts, or page content
+  - Kept only 2 patterns actually used: `posts-3-col` and `template-home-business`
+  - Removed: banner-hero, cta-content-image-on-right, cta-pricing, cta-services-image-left, cta-subscribe-centered, footer-centered-logo-nav, footer-colophon-3-col, footer, gallery-offset-images-grid-2-col, gallery-offset-images-grid-3-col, gallery-offset-images-grid-4-col, page-about-business, page-home-business, team-4-col, testimonial-centered, text-alternating-images, text-centered-statement, text-centered-statement-small, text-faq, text-feature-grid-3-col, text-project-details, text-title-left-image-right
+
+### Added
+- **AI Filter** - Added new AI filter to case study filters (`includes/case-study-filters.php`)
+  - Comprehensive AI/ML keywords: ai-powered, ai analysis, claude, openai, chatgpt, codex, copilot, machine learning, artificial intelligence
+  - Reordered filters for better logical grouping (API and AI filters moved near top)
+
 ## [2.5.2] - 2025-11-01
 ### Removed
 - **Test Images** - Removed 6 test PNG files from theme root directory that should never have been committed
