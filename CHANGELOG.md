@@ -5,6 +5,28 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.5.4] - 2025-11-01
+### Changed
+- **Architecture Standardization** - Refactored 4 include files to use anonymous functions with PHP 8.0+ named parameters
+  - `includes/enqueue.php` - Split into 3 focused callbacks, removed function_exists wrapper
+  - `includes/block-styles.php` - Converted to anonymous function, uses short array syntax
+  - `includes/block-stylesheets.php` - Converted to anonymous function
+  - `includes/pattern-categories.php` - Converted to anonymous function
+  - All files now follow consistent modern PHP patterns with named parameters (`hook_name:`, `callback:`, `priority:`)
+  - Replaced `array()` with `[]` throughout
+  - Better code organization with early returns and focused logic
+
+- **Navigation Styles** - Simplified navigation font size CSS (`assets/css/customizer.css`)
+  - Removed redundant media query and duplicate selector
+  - Navigation labels now consistently use 1.5rem font size
+  - Cleaner, more maintainable stylesheet
+
+### Added
+- **Documentation** - Updated `AGENTS.md` with comprehensive PHP architecture guidelines
+  - Purpose-based approach for when to use anonymous vs named functions
+  - Code examples for both patterns
+  - Clear decision criteria and benefits
+
 ## [2.5.3] - 2025-11-01
 ### Removed
 - **Unused Patterns** - Removed 22 unused block patterns inherited from Twenty Twenty-Four theme

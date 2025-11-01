@@ -60,12 +60,53 @@ Files in `includes/` directory provide modular functionality:
 - `cli.php` - WP-CLI commands for schema regeneration
 
 ## Coding Style & Naming Conventions
-- PHP follows the WordPress Coding Standards: tabs for indentation, snake_case functions (`eightyfourem_register_patterns`), and early returns. Align enqueue logic with existing helpers in `includes/enqueue.php`.
-- Files in `/includes/` directory are named for their purpose and use anonymous functions with PHP 8.0+ named parameters (e.g., `hook_name:`, `callback:`).
-- Use namespace `EightyFourEM\` for modular features (e.g., `namespace EightyFourEM\CaseStudyFilters;`)
-- SCSS/CSS files use 2-space indentation inside `assets/css/`; prefer block-specific class prefixes such as `.case-study-filter-btn`.
-- JavaScript in `assets/js/` is plain ES2015; keep modules IIFE-scoped and lint manually for now (no automated linter).
-- Block pattern slugs and filenames stay lowercase with hyphens (`patterns/posts-3-col.php`).
+
+### PHP Architecture
+All files in `includes/` follow a **purpose-based approach** to function organization:
+
+**Use Anonymous Functions (Default):**
+- ✅ Single-purpose hook/filter callbacks
+- ✅ Self-contained logic only called by WordPress
+- ✅ Functions under 50 lines
+- ✅ PHP 8.0+ named parameters (`hook_name:`, `callback:`, `priority:`)
+- ✅ Short array syntax `[]` instead of `array()`
+- ✅ No `function_exists()` checks needed
+
+**Example:**
+```php
+\add_action(
+	hook_name: 'wp_head',
+	callback: function () {
+		// Simple, focused logic
+	},
+	priority: 1
+);
+```
+
+**Use Named Functions (When Needed):**
+- ✅ Functions called from multiple places (helpers, utilities)
+- ✅ Complex logic benefiting from descriptive names in stack traces
+- ✅ Exposed via shortcodes, WP-CLI, or public API
+- ✅ Functions you might unit test
+- ✅ Functions over 50 lines
+
+**Example:**
+```php
+namespace EightyFourEM\CaseStudyFilters;
+
+function get_filters() {
+	return [ /* ... */ ];
+}
+
+add_shortcode( 'case_study_filters', __NAMESPACE__ . '\\render_filters' );
+```
+
+### General Conventions
+- PHP follows WordPress Coding Standards: tabs for indentation, early returns
+- All custom code uses `namespace EightyFourEM\` or sub-namespaces
+- SCSS/CSS files use 2-space indentation; prefer block-specific class prefixes (`.case-study-filter-btn`)
+- JavaScript in `assets/js/` is plain ES2015; keep modules IIFE-scoped
+- Block pattern slugs and filenames use lowercase with hyphens (`patterns/posts-3-col.php`)
 
 ## Testing Guidelines
 - No automated suite yet; smoke-test changes by activating the theme in a local WordPress install and exercising modified templates/patterns.
