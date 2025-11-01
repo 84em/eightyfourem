@@ -33,14 +33,14 @@ The 84EM Block Theme is a full site editing (FSE) WordPress theme that provides 
 ## Theme Structure
 
 ### Templates
-- **Page Templates**: Standard page, page with sidebar, page without title, wide image page, no CTA page
-- **Post Templates**: Single post, single with sidebar
-- **Archive Templates**: Blog and portfolio archives
+- **Page Templates**: Standard page, page without title, no CTA page
+- **Post Templates**: Single post
+- **Archive Templates**: Archive and index templates
 - **Custom Post Types**: Local pages template (single-local.html)
-- **Special Templates**: 404 error, search results, home variations
+- **Special Templates**: 404 error, search results, home template
 
 ### Block Patterns
-The theme includes 56 block patterns organized by category:
+The theme includes block patterns optimized for business websites, organized by category:
 - **Banners**: Hero sections and project descriptions
 - **Call-to-Actions**: Pricing, RSVP, subscription forms
 - **Galleries**: Full-screen, grid, and offset image layouts
@@ -57,11 +57,8 @@ The theme includes 56 block patterns organized by category:
 
 ### Custom Fonts
 The theme includes optimized web fonts stored in `/assets/fonts/`:
-- **Cardo**: Serif font for elegant typography
-- **Instrument Sans**: Modern sans-serif
-- **Inter**: Versatile system font
-- **Jost**: Geometric sans-serif
-- **Outfit**: Display font for headers
+- **Instrument Sans**: Modern sans-serif for body text
+- **Jost**: Geometric sans-serif for headings
 
 ## Development
 
