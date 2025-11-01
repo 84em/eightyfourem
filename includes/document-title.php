@@ -21,6 +21,11 @@ defined( 'ABSPATH' ) || exit;
 \add_filter(
     hook_name: 'document_title',
     callback: function ( $title ) {
+        // Only apply custom title on singular posts/pages, not on archives or search results
+        if ( ! \is_singular() ) {
+            return $title;
+        }
+
         $_genesis_title = \get_post_meta( \get_the_ID(), '_genesis_title', true );
         if ( ! empty( $_genesis_title ) ) {
             $title = \wp_strip_all_tags( $_genesis_title );
