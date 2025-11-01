@@ -5,6 +5,21 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+### Removed
+- Removed all 7 unused style variation files from `styles/` directory
+  - `ember.json` (warm oranges)
+  - `fossil.json` (earth tones)
+  - `ice.json` (cool blues)
+  - `maelstrom.json` (dark theme)
+  - `mint.json` (green accents)
+  - `onyx.json` (monochrome)
+  - `rust.json` (rich browns)
+  - These style variations were never activated or used on the site
+  - Site uses custom global styles instead
+  - Reduces theme file count and maintenance overhead
+- Updated README.md to remove references to style variations
+
 ## [2.3.5] - 2025-10-31
 ### Fixed
 - Fixed TOC hamburger icon color inheritance for dark mode support (`assets/css/sticky-header.css`)

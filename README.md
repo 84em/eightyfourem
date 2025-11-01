@@ -4,13 +4,12 @@ A modern WordPress block theme for 84EM, based on Twenty Twenty-Four with custom
 
 ## Overview
 
-The 84EM Block Theme is a full site editing (FSE) WordPress theme that provides a flexible foundation for building modern websites. Built on the WordPress block editor, it offers extensive customization options through block patterns, style variations, and custom templates.
+The 84EM Block Theme is a full site editing (FSE) WordPress theme that provides a flexible foundation for building modern websites. Built on the WordPress block editor, it offers extensive customization options through block patterns and custom templates.
 
 ## Features
 
 - **Full Site Editing (FSE)** - Complete control over your site's layout and design
 - **Block Patterns** - Pre-designed content layouts for quick page building
-- **Style Variations** - Multiple color schemes (Ember, Fossil, Ice, Maelstrom, Mint, Onyx, Rust)
 - **Custom Templates** - Specialized page layouts including sidebar and wide image options
 - **Typography** - Custom web fonts including Cardo, Instrument Sans, Inter, Jost, and Outfit
 - **Responsive Design** - Optimized for all device sizes
@@ -48,23 +47,13 @@ The theme includes 56 block patterns organized by category:
 - **Content**: FAQ, testimonials, feature grids
 - **Footer**: Various footer layouts
 
-### Style Variations
-Choose from 7 built-in color schemes:
-- Ember (warm oranges)
-- Fossil (earth tones)
-- Ice (cool blues)
-- Maelstrom (dark theme)
-- Mint (green accents)
-- Onyx (monochrome)
-- Rust (rich browns)
-
 ## Customization
 
 ### Using the Site Editor
 1. Go to Appearance > Site Editor
 2. Select templates or template parts to edit
 3. Use block patterns for quick content creation
-4. Apply style variations from the Global Styles panel
+4. Customize colors and typography from the Global Styles panel
 
 ### Custom Fonts
 The theme includes optimized web fonts stored in `/assets/fonts/`:
@@ -158,7 +147,6 @@ eightyfourem/
 │   └── sitemap.php          # XML sitemap generation
 ├── parts/            # Template parts
 ├── patterns/         # Block patterns
-├── styles/           # Style variations
 ├── templates/        # Page templates
 ├── functions.php     # Theme loader (includes files from includes/)
 ├── gulpfile.js       # Build configuration
