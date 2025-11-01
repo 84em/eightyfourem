@@ -5,6 +5,21 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.1] - 2025-11-01
+### Fixed
+- **Search Page Title** - Fixed bug where search results page displayed the title of the first search result instead of "Search Results for: [query]"
+  - Added `is_singular()` check to `document_title` filter in `includes/document-title.php`
+  - Custom `_genesis_title` meta field now only applies to individual posts/pages, not archives or search results
+  - Resolves issue where `?s=woo` showed "Woonsocket, Rhode Island" title instead of proper search title
+
+### Changed
+- **Search Results Filtering** - Updated search query to exclude local pages and specific content (`includes/search.php`)
+  - Changed search to only include `page` post type (previously included `project` post type)
+  - Added meta query to exclude pages with `_local_page_state` meta key (local pages converted from custom post type)
+  - Excluded post 2507 (WordPress Development Services USA landing page) from search results
+  - Fixed `post_parent` typo (corrected to `post_type`)
+  - Updated docblock to reflect current functionality
+
 ## [2.4.0] - 2025-11-01
 ### Removed
 - **Style Variations** - Removed all 7 unused style variation files from `styles/` directory
