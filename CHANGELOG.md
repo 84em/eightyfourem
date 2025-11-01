@@ -5,7 +5,7 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [2.4.0] - 2025-11-01
 ### Removed
 - **Style Variations** - Removed all 7 unused style variation files from `styles/` directory
   - `ember.json`, `fossil.json`, `ice.json`, `maelstrom.json`, `mint.json`, `onyx.json`, `rust.json`
