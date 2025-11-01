@@ -40,12 +40,11 @@ The 84EM Block Theme is a full site editing (FSE) WordPress theme that provides 
 - **Special Templates**: 404 error, search results, home template
 
 ### Block Patterns
-The theme includes block patterns optimized for business websites, organized by category:
-- **Banners**: Hero sections and project descriptions
-- **Call-to-Actions**: Pricing, RSVP, subscription forms
-- **Galleries**: Full-screen, grid, and offset image layouts
-- **Content**: FAQ, testimonials, feature grids
-- **Footer**: Various footer layouts
+The theme includes a minimal set of block patterns in active use:
+- **posts-3-col**: Three-column post layout
+- **template-home-business**: Business homepage template
+
+Note: Unused patterns inherited from Twenty Twenty-Four have been removed to keep the theme lean and focused on actual site needs.
 
 ## Customization
 
