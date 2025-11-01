@@ -5,6 +5,20 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.5.0] - 2025-11-01
+### Added
+- **Case Study Filters** - Interactive filtering system for case studies page (`includes/case-study-filters.php`)
+  - PHP-based filter configuration with shortcode `[case_study_filters]`
+  - Client-side keyword filtering with smooth fade/scale animations
+  - Real-time result counter showing "X of Y projects"
+  - Shareable URL hash support (e.g., `#filter=woocommerce`)
+  - Filter keywords localized to JavaScript via `wp_localize_script()`
+  - Filters: All Projects, API, Financial, Gravity Forms, Affiliates, WooCommerce, Security, Reporting, Automation
+  - Custom CSS for filter buttons and transitions (`assets/css/case-study-filter.css`)
+  - Custom JavaScript for filtering logic (`assets/js/case-study-filter.js`)
+  - Updated Query Loop to display 50 case studies (removed pagination)
+  - Centralized filter management in single PHP file
+
 ## [2.4.2] - 2025-11-01
 ### Fixed
 - **Search Results Display** - Filter out "Challenge" headings from search result excerpts (`includes/search.php`)

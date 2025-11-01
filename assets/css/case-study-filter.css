@@ -1,0 +1,101 @@
+/**
+ * Case Study Filter Styles
+ * Styling for case study filter buttons
+ *
+ * @package EightyFourEM
+ */
+
+/* Filter button container */
+.case-study-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-bottom: var(--wp--preset--spacing--40, 2rem);
+  padding: 0;
+}
+
+/* Filter buttons */
+.case-study-filter-btn {
+  background: transparent;
+  border: 2px solid currentColor;
+  border-radius: 0.25rem;
+  color: var(--wp--preset--color--contrast, #111);
+  cursor: pointer;
+  font-family: var(--wp--preset--font-family--heading, inherit);
+  font-size: var(--wp--preset--font-size--medium, 1rem);
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.case-study-filter-btn:hover {
+  background: var(--wp--preset--color--contrast, #111);
+  color: var(--wp--preset--color--base, #fff);
+  transform: translateY(-2px);
+}
+
+.case-study-filter-btn.is-active {
+  background: var(--wp--preset--color--contrast, #111);
+  color: var(--wp--preset--color--base, #fff);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .case-study-filters {
+    gap: 0.5rem;
+  }
+
+  .case-study-filter-btn {
+    font-size: var(--wp--preset--font-size--small, 0.875rem);
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* Result counter */
+.case-study-result-count {
+  color: var(--wp--preset--color--contrast, #111);
+  font-family: var(--wp--preset--font-family--heading, inherit);
+  font-size: var(--wp--preset--font-size--medium, 1rem);
+  font-weight: 600;
+  margin-top: 1.5rem;
+  opacity: 0;
+  text-align: center;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+}
+
+.case-study-result-count.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.case-study-result-count.is-filtering {
+  opacity: 0.5;
+}
+
+/* Smooth fade effect for filtered items */
+.wp-block-post {
+  opacity: 1;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: scale(1);
+}
+
+.wp-block-post.filtered-out {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.95);
+}
+
+/* Loading state for filter buttons */
+.case-study-filter-btn {
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.case-study-filter-btn.is-active {
+  background: var(--wp--preset--color--contrast, #111);
+  color: var(--wp--preset--color--base, #fff);
+  transform: scale(1.05);
+}
