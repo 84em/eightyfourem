@@ -26,25 +26,25 @@ function get_filters() {
                     'label'    => 'All Projects',
                     'keywords' => [],
             ],
-            'api'         => [
-                    'label'    => 'API',
-                    'keywords' => [ 'api', 'integration' ],
-            ],
             'financial'   => [
                     'label'    => 'Financial',
                     'keywords' => [ 'financial', 'fintech', 'banking', 'crypto' ],
             ],
-            'gravity'     => [
-                    'label'    => 'Gravity Forms',
-                    'keywords' => [ 'gravity forms' ],
-            ],
             'affiliate'   => [
                     'label'    => 'Affiliates',
-                    'keywords' => [ 'affiliate' ],
+                    'keywords' => [ 'affiliate', 'affiliates', 'affiliatewp' ],
             ],
-            'woocommerce' => [
-                    'label'    => 'WooCommerce',
-                    'keywords' => [ 'woocommerce' ],
+            'ecommerce' => [
+                    'label'    => 'E-Commerce',
+                    'keywords' => [ 'woocommerce', 'ecommerce' ],
+            ],
+            'learning'    => [
+                    'label'    => 'Education',
+                    'keywords' => [ 'education', 'lms', 'learning' ],
+            ],
+            'api'         => [
+                    'label'    => 'API',
+                    'keywords' => [ 'api', 'integration' ],
             ],
             'security'    => [
                     'label'    => 'Security',
