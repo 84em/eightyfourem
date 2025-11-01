@@ -5,6 +5,15 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.6.0] - 2025-11-01
+### Added
+- **Sticky TOC Disable Option** - Added ability to disable sticky table of contents on specific pages
+  - New `body_class` filter in `includes/enqueue.php` applies `disable-sticky-toc` class to designated pages
+  - Updated `assets/js/sticky-header.js` to detect body class and skip TOC generation while maintaining header scroll behavior
+  - Case studies page (ID: 4406) now disabled by default due to high heading count
+  - Easily extensible by adding page IDs to `$disabled_pages` array
+  - Prevents navigation clutter on pages with many sections
+
 ## [2.5.4] - 2025-11-01
 ### Changed
 - **Architecture Standardization** - Refactored 4 include files to use anonymous functions with PHP 8.0+ named parameters
