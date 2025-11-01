@@ -13,6 +13,37 @@
             return;
         }
 
+        // Check if sticky TOC is disabled for this page
+        if (document.body.classList.contains('disable-sticky-toc')) {
+            // Still handle scrolled header class, but skip TOC entirely
+            let ticking = false;
+
+            function updateHeaderOnly() {
+                var currentScrollY = window.scrollY || window.pageYOffset || 0;
+
+                if (currentScrollY > 60) {
+                    header.classList.add('scrolled');
+                } else if (currentScrollY < 40) {
+                    header.classList.remove('scrolled');
+                }
+
+                ticking = false;
+            }
+
+            function requestTick() {
+                if (!ticking) {
+                    window.requestAnimationFrame(updateHeaderOnly);
+                    ticking = true;
+                }
+            }
+
+            window.addEventListener('scroll', requestTick);
+            window.addEventListener('resize', requestTick);
+            updateHeaderOnly();
+
+            return;
+        }
+
         const originalMarkup = header2.innerHTML;
         const tocItems = collectHeadings();
         const tocNav = tocItems.length ? buildToc(tocItems) : null;
