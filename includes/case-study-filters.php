@@ -30,6 +30,14 @@ function get_filters() {
                     'label'    => 'Financial',
                     'keywords' => [ 'financial', 'fintech', 'banking', 'crypto' ],
             ],
+            'api'         => [
+                    'label'    => 'API',
+                    'keywords' => [ 'api', 'integration' ],
+            ],
+            'ai'         => [
+                    'label'    => 'AI',
+                    'keywords' => [ 'ai-powered', 'ai analysis', 'claude', 'openai', 'chatgpt', 'codex', 'copilot', 'machine learning', 'artificial intelligence' ],
+            ],
             'affiliate'   => [
                     'label'    => 'Affiliates',
                     'keywords' => [ 'affiliate', 'affiliates', 'affiliatewp' ],
@@ -41,10 +49,6 @@ function get_filters() {
             'learning'    => [
                     'label'    => 'Education',
                     'keywords' => [ 'education', 'lms', 'learning' ],
-            ],
-            'api'         => [
-                    'label'    => 'API',
-                    'keywords' => [ 'api', 'integration' ],
             ],
             'security'    => [
                     'label'    => 'Security',
