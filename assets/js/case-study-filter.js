@@ -23,9 +23,9 @@
 		function updateCounter(visibleCount) {
 			if (resultCounter) {
 				if (visibleCount === totalItems) {
-					resultCounter.textContent = 'Showing all ' + totalItems + ' projects';
+					resultCounter.textContent = 'Showing all ' + totalItems + ' case studies';
 				} else {
-					resultCounter.textContent = 'Showing ' + visibleCount + ' of ' + totalItems + ' projects';
+					resultCounter.textContent = 'Showing ' + visibleCount + ' of ' + totalItems + ' case studies';
 				}
 				resultCounter.classList.add('is-visible');
 			}
