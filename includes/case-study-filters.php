@@ -23,7 +23,7 @@ defined( 'ABSPATH' ) || exit;
 function get_filters() {
     return [
             'all'         => [
-                    'label'    => 'All Projects',
+                    'label'    => 'All',
                     'keywords' => [],
             ],
             'financial'   => [
