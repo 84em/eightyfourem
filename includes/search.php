@@ -53,7 +53,7 @@ defined( 'ABSPATH' ) || exit;
 
         // Check if first block is a heading containing "Challenge"
         if ( isset( $first_block['blockName'] ) &&
-             strpos( $first_block['blockName'], 'core/heading' ) !== false ) {
+             $first_block['blockName'] === 'core/heading' ) {
 
             $content = $first_block['innerHTML'] ?? '';
             $text = \wp_strip_all_tags( $content );
