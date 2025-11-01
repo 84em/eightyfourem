@@ -5,6 +5,38 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.0] - 2025-11-01
+### Removed
+- **Style Variations** - Removed all 7 unused style variation files from `styles/` directory
+  - `ember.json`, `fossil.json`, `ice.json`, `maelstrom.json`, `mint.json`, `onyx.json`, `rust.json`
+  - These style variations were never activated or used on the site
+  - Site uses custom global styles instead
+
+- **Unused Fonts** - Removed 3 font families never referenced in theme (776KB savings)
+  - `assets/fonts/cardo/` (392KB) - Serif font
+  - `assets/fonts/inter/` (332KB) - Sans-serif font
+  - `assets/fonts/spectra/` (52KB) - Outfit font files
+  - Only Instrument Sans (body) and Jost (headings) are now included
+
+- **Unused Templates** - Removed 3 template files never assigned to any pages
+  - `templates/page-wide.html`
+  - `templates/page-with-sidebar.html`
+  - `templates/single-with-sidebar.html`
+
+- **Blogging/Portfolio Patterns** - Removed 32 unused pattern files
+  - 9 template patterns (blogging/portfolio archive, index, search, single templates)
+  - 6 page patterns (blogging/portfolio home pages, newsletter, RSVP landing pages)
+  - 5 post display patterns (1-col, grid, images-only variations)
+  - 8 hidden component patterns (404, comments, portfolio hero, post meta, etc.)
+  - 4 gallery/project patterns (full-screen, project layouts, banners, RSVP CTAs)
+  - Site is business-focused with 0 blog posts, these patterns were inherited from Twenty Twenty-Four
+
+- **Documentation Updates**
+  - Updated README.md to reflect streamlined font selection and pattern library
+  - Updated CHANGELOG.md with comprehensive removal details
+
+**Total Impact**: 45 files removed, ~800KB size reduction, significantly cleaner theme structure
+
 ## [2.3.5] - 2025-10-31
 ### Fixed
 - Fixed TOC hamburger icon color inheritance for dark mode support (`assets/css/sticky-header.css`)
