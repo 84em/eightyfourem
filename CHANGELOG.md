@@ -5,6 +5,14 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.2] - 2025-11-01
+### Fixed
+- **Excerpt Display Filtering** - Filter out "Challenge" headings from excerpts on search results and case studies page (`includes/search.php`)
+  - Added `get_the_excerpt` filter to remove first block when it's a heading containing "Challenge"
+  - Applies to search results page and case studies archive page (ID 4406)
+  - Pages with "Challenge" headings still appear in results, but excerpt is generated from subsequent blocks
+  - Improves display by showing relevant content instead of case study section headings
+
 ## [2.4.1] - 2025-11-01
 ### Fixed
 - **Search Page Title** - Fixed bug where search results page displayed the title of the first search result instead of "Search Results for: [query]"
