@@ -107,14 +107,8 @@ main a:hover:not(.wp-element-button,.wp-block-button__link) {
     header .wp-block-navigation ul, header .wp-block-navigation ul li {
         padding-bottom: 0!important;
     }
-
-    header .wp-block-navigation header .wp-block-navigation-item__label {
-        font-size: 1rem !important;
-    }
 }
 
-@media screen and (min-width: 768px) {
-    header .wp-block-navigation .wp-block-navigation-item__label {
-        font-size: 1.5rem !important;
-    }
+header .wp-block-navigation .wp-block-navigation-item__label {
+    font-size: 1.5rem !important;
 }
