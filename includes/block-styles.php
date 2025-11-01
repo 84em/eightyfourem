@@ -10,23 +10,18 @@ namespace EightyFourEM;
 
 defined( 'ABSPATH' ) || exit;
 
-if ( ! function_exists( 'EightyFourEM\eightyfourem_block_styles' ) ) :
-	/**
-	 * Register custom block styles
-	 *
-	 * @since Eighty Four EM 1.0
-	 * @return void
-	 */
-	function eightyfourem_block_styles() {
-
+/**
+ * Register custom block styles
+ */
+\add_action(
+	hook_name: 'init',
+	callback: function () {
+		// Arrow icon style for Details block
 		\register_block_style(
 			'core/details',
-			array(
+			[
 				'name'         => 'arrow-icon-details',
-				'label'        => __( 'Arrow icon', 'eightyfourem' ),
-				/*
-				 * Styles for the custom Arrow icon style of the Details block
-				 */
+				'label'        => \__( 'Arrow icon', 'eightyfourem' ),
 				'inline_style' => '
 				.is-style-arrow-icon-details {
 					padding-top: var(--wp--preset--spacing--10);
@@ -40,17 +35,15 @@ if ( ! function_exists( 'EightyFourEM\eightyfourem_block_styles' ) ) :
 				.is-style-arrow-icon-details[open]>summary {
 					list-style-type: "\2192\00a0\00a0\00a0";
 				}',
-			)
+			]
 		);
+
+		// Pill style for Post Terms
 		\register_block_style(
 			'core/post-terms',
-			array(
+			[
 				'name'         => 'pill',
-				'label'        => __( 'Pill', 'eightyfourem' ),
-				/*
-				 * Styles variation for post terms
-				 * https://github.com/WordPress/gutenberg/issues/24956
-				 */
+				'label'        => \__( 'Pill', 'eightyfourem' ),
 				'inline_style' => '
 				.is-style-pill a,
 				.is-style-pill span:not([class], [data-rich-text-placeholder]) {
@@ -63,17 +56,15 @@ if ( ! function_exists( 'EightyFourEM\eightyfourem_block_styles' ) ) :
 				.is-style-pill a:hover {
 					background-color: var(--wp--preset--color--contrast-3);
 				}',
-			)
+			]
 		);
+
+		// Checkmark style for List block
 		\register_block_style(
 			'core/list',
-			array(
+			[
 				'name'         => 'checkmark-list',
-				'label'        => __( 'Checkmark', 'eightyfourem' ),
-				/*
-				 * Styles for the custom checkmark list block style
-				 * https://github.com/WordPress/gutenberg/issues/51480
-				 */
+				'label'        => \__( 'Checkmark', 'eightyfourem' ),
 				'inline_style' => '
 				ul.is-style-checkmark-list {
 					list-style-type: "\2713";
@@ -82,16 +73,15 @@ if ( ! function_exists( 'EightyFourEM\eightyfourem_block_styles' ) ) :
 				ul.is-style-checkmark-list li {
 					padding-inline-start: 1ch;
 				}',
-			)
+			]
 		);
+
+		// Arrow style for Navigation Link
 		\register_block_style(
 			'core/navigation-link',
-			array(
+			[
 				'name'         => 'arrow-link',
-				'label'        => __( 'With arrow', 'eightyfourem' ),
-				/*
-				 * Styles for the custom arrow nav link block style
-				 */
+				'label'        => \__( 'With arrow', 'eightyfourem' ),
 				'inline_style' => '
 				.is-style-arrow-link .wp-block-navigation-item__label:after {
 					content: "\2197";
@@ -100,13 +90,15 @@ if ( ! function_exists( 'EightyFourEM\eightyfourem_block_styles' ) ) :
 					text-decoration: none;
 					display: inline-block;
 				}',
-			)
+			]
 		);
+
+		// Asterisk style for Heading block
 		\register_block_style(
 			'core/heading',
-			array(
+			[
 				'name'         => 'asterisk',
-				'label'        => __( 'With asterisk', 'eightyfourem' ),
+				'label'        => \__( 'With asterisk', 'eightyfourem' ),
 				'inline_style' => "
 				.is-style-asterisk:before {
 					content: '';
@@ -117,7 +109,6 @@ if ( ! function_exists( 'EightyFourEM\eightyfourem_block_styles' ) ) :
 					display: block;
 				}
 
-				/* Hide the asterisk if the heading has no content, to avoid using empty headings to display the asterisk only, which is an A11Y issue */
 				.is-style-asterisk:empty:before {
 					content: none;
 				}
@@ -137,9 +128,8 @@ if ( ! function_exists( 'EightyFourEM\eightyfourem_block_styles' ) ) :
 				.rtl .is-style-asterisk.has-text-align-left:before {
 					margin-right: auto;
 				}",
-			)
+			]
 		);
-	}
-endif;
-
-\add_action( 'init', 'EightyFourEM\eightyfourem_block_styles' );
+	},
+	priority: 10
+);
