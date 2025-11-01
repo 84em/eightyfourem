@@ -13,3 +13,12 @@ assets/js/*.min.js.map
 # Editor directories
 .vscode/
 .idea/
+
+# Root directory images (allow only screenshot.png)
+/*.png
+/*.jpg
+/*.jpeg
+/*.gif
+/*.svg
+/*.webp
+!screenshot.png
