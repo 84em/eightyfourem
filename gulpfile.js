@@ -18,7 +18,8 @@ const paths = {
   styles: {
     theme: [
       './assets/css/customizer.css',
-      './assets/css/sticky-header.css'
+      './assets/css/sticky-header.css',
+      './assets/css/case-study-filter.css'
     ],
     googleReviews: [
       './assets/google-reviews-block/style.css',
@@ -29,7 +30,10 @@ const paths = {
     dest: './assets/css/'
   },
   scripts: {
-    theme: './assets/js/sticky-header.js',
+    theme: [
+      './assets/js/sticky-header.js',
+      './assets/js/case-study-filter.js'
+    ],
     googleReviews: './assets/google-reviews-block/block.js',
     highlight: './assets/js/highlight.js',
     dest: './assets/js/'
