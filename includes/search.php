@@ -24,6 +24,7 @@ defined( 'ABSPATH' ) || exit;
     callback: function ( \WP_Query $query ) {
         if ( $query->is_search && ! \is_admin() && $query->is_main_query() ) {
             $query->set( 'post_type', [ 'page' ] );
+            $query->set( 'post__not_in', [ 2507 ] );
             $query->set( 'meta_query', [
                 [
                     'key'     => '_local_page_state',
