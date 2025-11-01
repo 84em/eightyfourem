@@ -104,3 +104,24 @@ defined( 'ABSPATH' ) || exit;
 	},
 	priority: 10
 );
+
+/**
+ * Add body class to disable sticky TOC on specific pages
+ * Allows pages with many headings to opt out of jump navigation
+ */
+\add_filter(
+	hook_name: 'body_class',
+	callback: function ( array $classes ): array {
+		// Pages where sticky TOC should be disabled
+		$disabled_pages = [
+			4406, // Case Studies page
+		];
+
+		if ( \is_page( $disabled_pages ) ) {
+			$classes[] = 'disable-sticky-toc';
+		}
+
+		return $classes;
+	},
+	priority: 10
+);
