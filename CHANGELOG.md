@@ -5,6 +5,22 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.5.2] - 2025-11-01
+### Removed
+- **Test Images** - Removed 6 test PNG files from theme root directory that should never have been committed
+  - `menu-closed-fixed.png`
+  - `menu-closed.png`
+  - `privacy-policy-1024.png`
+  - `privacy-policy-check.png`
+  - `scroll-50px.png`
+  - `test-padding-mobile.png`
+
+### Changed
+- **Git Ignore** - Updated `.gitignore` to prevent future accidental commits of test images
+  - Added rules to ignore all image files in root theme directory (PNG, JPG, JPEG, GIF, SVG, WEBP)
+  - Exception added for `screenshot.png` (required WordPress theme file)
+  - Prevents test images from being committed while preserving theme screenshot
+
 ## [2.5.1] - 2025-11-01
 ### Fixed
 - **Case Study Excerpts** - Fixed Challenge heading filter to work on case studies archive page (`includes/search.php`)
