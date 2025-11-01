@@ -39,7 +39,8 @@ defined( 'ABSPATH' ) || exit;
 \add_filter(
     hook_name: 'get_the_excerpt',
     callback: function ( string $excerpt, \WP_Post $post ) {
-        if ( ! \is_search() ) {
+        // Only apply on search pages or case studies (parent 4406)
+        if ( ! \is_search() && $post->post_parent !== 4406 ) {
             return $excerpt;
         }
 
@@ -49,28 +50,35 @@ defined( 'ABSPATH' ) || exit;
             return $excerpt;
         }
 
-        $first_block = $blocks[0];
+        // Find and remove any Challenge heading block (and everything before it)
+        $challenge_index = -1;
 
-        // Check if first block is a heading containing "Challenge"
-        if ( isset( $first_block['blockName'] ) &&
-             $first_block['blockName'] === 'core/heading' ) {
+        foreach ( $blocks as $index => $block ) {
+            if ( isset( $block['blockName'] ) &&
+                 $block['blockName'] === 'core/heading' ) {
 
-            $content = $first_block['innerHTML'] ?? '';
-            $text = \wp_strip_all_tags( $content );
+                $content = $block['innerHTML'] ?? '';
+                $text = \wp_strip_all_tags( $content );
 
-            // If first heading contains "Challenge", remove it from excerpt generation
-            if ( stripos( $text, 'Challenge' ) !== false ) {
-                // Rebuild content without the first block
-                $filtered_blocks = \array_slice( $blocks, 1 );
-                $filtered_content = '';
-
-                foreach ( $filtered_blocks as $block ) {
-                    $filtered_content .= \render_block( $block );
+                if ( stripos( $text, 'Challenge' ) !== false ) {
+                    $challenge_index = $index;
+                    break;
                 }
-
-                // Generate excerpt from filtered content
-                return \wp_trim_words( \wp_strip_all_tags( $filtered_content ), 55, '...' );
             }
+        }
+
+        // If we found a Challenge heading, remove everything up to and including it
+        if ( $challenge_index !== -1 ) {
+            // Rebuild content without blocks up to and including the Challenge heading
+            $filtered_blocks = \array_slice( $blocks, $challenge_index + 1 );
+            $filtered_content = '';
+
+            foreach ( $filtered_blocks as $block ) {
+                $filtered_content .= \render_block( $block );
+            }
+
+            // Generate excerpt from filtered content
+            return \wp_trim_words( \wp_strip_all_tags( $filtered_content ), 55, '...' );
         }
 
         return $excerpt;

@@ -5,6 +5,14 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.5.1] - 2025-11-01
+### Fixed
+- **Case Study Excerpts** - Fixed Challenge heading filter to work on case studies archive page (`includes/search.php`)
+  - Extended `get_the_excerpt` filter to apply on case studies page (parent ID 4406) in addition to search results
+  - Updated logic to find and remove Challenge heading regardless of position (not just first block)
+  - Now properly removes separator blocks and other content before Challenge heading from excerpts
+  - Ensures case study excerpts on `/case-studies/` page start with actual project description instead of "Challenge"
+
 ## [2.5.0] - 2025-11-01
 ### Added
 - **Case Study Filters** - Interactive filtering system for case studies page (`includes/case-study-filters.php`)
