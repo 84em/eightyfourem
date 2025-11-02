@@ -19,6 +19,7 @@ namespace EightyFourEM;
 
 defined( 'ABSPATH' ) || exit;
 
+return;
 \add_filter(
     hook_name: 'pre_get_posts',
     callback: function ( \WP_Query $query ) {
