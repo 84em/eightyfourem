@@ -5,6 +5,40 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.8.0] - 2025-11-02
+### Added
+- **Search Result Type Indicators** - Visual badges for search results (`includes/search.php`, `assets/css/search.css`)
+  - Service pages display blue badge
+  - Case Study pages display green badge
+  - Regular pages display gray badge
+  - Badges appear before post titles in search results
+  - Uses `render_block` filter for FSE compatibility
+
+- **Search Result Ordering** - Prioritized search results by content type (`includes/search.php`)
+  - Service pages (ID 2129 and children) appear first
+  - Case Study pages (ID 4406 and children) appear second
+  - Regular pages appear last
+  - Within each group, results sorted by post date (newest first)
+  - Uses `posts_orderby` filter with custom SQL CASE statement
+
+### Changed
+- **Search Exclusion Optimization** - Improved performance of local page exclusion (`includes/search.php`)
+  - Replaced recursive parent ID lookup with efficient meta query
+  - Excludes pages with `_local_page_state` meta key (state pages)
+  - Excludes pages with `_local_page_city` meta key (city pages)
+  - Single database query instead of multiple recursive lookups
+  - Excludes 350+ local pages from search results
+
+- **Build Configuration** - Added search.css to build pipeline (`gulpfile.js`)
+  - Processes and minifies search.css
+  - Generates sourcemaps for debugging
+  - Enqueued only on search results pages for performance (`includes/enqueue.php`)
+
+### Fixed
+- **Search Filter Registration** - Removed erroneous `return;` statement that prevented filters from loading
+  - All search-related filters now properly registered
+  - Search customizations now active on search results pages
+
 ## [2.7.1] - 2025-11-02
 ### Changed
 - **Deployment Optimization** - Exclude documentation files from production deployment (`.github/workflows/deploy-theme.yml`)
