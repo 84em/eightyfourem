@@ -5,6 +5,31 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.8.1] - 2025-11-02
+### Fixed
+- **Performance Optimization** - Fixed cache busting to enable proper browser caching (`includes/enqueue.php`)
+  - Removed `time()` from version string in all asset enqueuing functions
+  - Now uses theme version only for cache busting
+  - CSS/JS files now properly cached by browsers until theme version changes
+  - Significantly improves page load performance by eliminating unnecessary re-downloads
+
+- **Search Performance** - Optimized post type detection to use post relationships instead of URL parsing (`includes/search.php`)
+  - Replaced `get_permalink()` and `wp_parse_url()` with direct `post_parent` checks
+  - Checks against known parent IDs (2129 for Services, 4406 for Case Studies)
+  - Much faster and more reliable than string matching on URLs
+  - Reduces database queries per search result
+
+- **Code Quality** - Removed unnecessary `orderby` parameter (`includes/search.php`)
+  - Removed non-standard `orderby` value that could cause issues if filter doesn't execute
+  - `posts_orderby` filter completely replaces ORDER BY clause regardless of orderby parameter
+  - Cleaner, more predictable code
+
+### Security
+- **XSS Protection** - Added HTML class sanitization for defensive coding (`includes/search.php`)
+  - Added `sanitize_html_class()` to badge class name generation
+  - Prevents potential XSS vulnerability if `get_post_type_indicator()` function is modified in future
+  - Follows WordPress security best practices
+
 ## [2.8.0] - 2025-11-02
 ### Added
 - **Search Result Type Indicators** - Visual badges for search results (`includes/search.php`, `assets/css/search.css`)

@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
 	hook_name: 'wp_enqueue_scripts',
 	callback: function () {
 		$suffix  = ( ! \defined( 'WP_DEBUG' ) || ! WP_DEBUG ) ? '.min' : '';
-		$version = \wp_get_theme()->get( 'Version' ) . '.' . \time();
+		$version = \wp_get_theme()->get( 'Version' );
 
 		// Enqueue customizer CSS
 		\wp_enqueue_style(
@@ -61,7 +61,7 @@ defined( 'ABSPATH' ) || exit;
 		}
 
 		$suffix  = ( ! \defined( 'WP_DEBUG' ) || ! WP_DEBUG ) ? '.min' : '';
-		$version = \wp_get_theme()->get( 'Version' ) . '.' . \time();
+		$version = \wp_get_theme()->get( 'Version' );
 
 		\wp_enqueue_style(
 			'eightyfourem-search',
@@ -85,7 +85,7 @@ defined( 'ABSPATH' ) || exit;
 		}
 
 		$suffix  = ( ! \defined( 'WP_DEBUG' ) || ! WP_DEBUG ) ? '.min' : '';
-		$version = \wp_get_theme()->get( 'Version' ) . '.' . \time();
+		$version = \wp_get_theme()->get( 'Version' );
 
 		\wp_enqueue_style(
 			'eightyfourem-case-study-filter',
