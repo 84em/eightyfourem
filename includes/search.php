@@ -20,20 +20,19 @@ namespace EightyFourEM;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Get post type indicator label based on URL path.
+ * Get post type indicator label based on post parent.
  *
  * @param \WP_Post $post The post object.
  * @return string The post type label (Service, Case Study, or Page).
  */
 function get_post_type_indicator( \WP_Post $post ): string {
-	$permalink = \get_permalink( $post->ID );
-	$path = \wp_parse_url( $permalink, PHP_URL_PATH );
-
-	if ( strpos( $path, '/services/' ) !== false ) {
+	// Check if it's the Services page or a child of Services (ID: 2129)
+	if ( $post->ID === 2129 || $post->post_parent === 2129 ) {
 		return 'Service';
 	}
 
-	if ( strpos( $path, '/case-studies/' ) !== false ) {
+	// Check if it's the Case Studies page or a child of Case Studies (ID: 4406)
+	if ( $post->ID === 4406 || $post->post_parent === 4406 ) {
 		return 'Case Study';
 	}
 
@@ -61,9 +60,6 @@ function get_post_type_indicator( \WP_Post $post ): string {
                     'compare' => 'NOT EXISTS',
                 ],
             ] );
-
-            // Custom ordering will be applied via posts_orderby filter
-            $query->set( 'orderby', 'custom_search_order' );
         }
 
         return $query;
@@ -120,7 +116,7 @@ function get_post_type_indicator( \WP_Post $post ): string {
 		}
 
 		$indicator = get_post_type_indicator( $post );
-		$badge_class = 'post-type-badge post-type-' . strtolower( str_replace( ' ', '-', $indicator ) );
+		$badge_class = 'post-type-badge post-type-' . \sanitize_html_class( strtolower( str_replace( ' ', '-', $indicator ) ) );
 
 		$badge = sprintf(
 			'<span class="%s">%s</span> ',
