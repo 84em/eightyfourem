@@ -19,7 +19,8 @@ const paths = {
     theme: [
       './assets/css/customizer.css',
       './assets/css/sticky-header.css',
-      './assets/css/case-study-filter.css'
+      './assets/css/case-study-filter.css',
+      './assets/css/search.css'
     ],
     googleReviews: [
       './assets/google-reviews-block/style.css',

@@ -50,6 +50,30 @@ defined( 'ABSPATH' ) || exit;
 );
 
 /**
+ * Enqueue search results styles
+ * Only loads on search results pages
+ */
+\add_action(
+	hook_name: 'wp_enqueue_scripts',
+	callback: function () {
+		if ( ! \is_search() ) {
+			return;
+		}
+
+		$suffix  = ( ! \defined( 'WP_DEBUG' ) || ! WP_DEBUG ) ? '.min' : '';
+		$version = \wp_get_theme()->get( 'Version' ) . '.' . \time();
+
+		\wp_enqueue_style(
+			'eightyfourem-search',
+			\get_theme_file_uri( "assets/css/search{$suffix}.css" ),
+			[],
+			$version
+		);
+	},
+	priority: 10
+);
+
+/**
  * Enqueue case study filter assets
  * Only loads on case studies page (ID: 4406)
  */
