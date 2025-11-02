@@ -16,10 +16,7 @@ defined( 'ABSPATH' ) || exit;
 
 // Post types to include in sitemap with their priorities
 const SITEMAP_POST_TYPES = [
-    'post'    => '0.8',
     'page'    => '0.9',
-    'project' => '0.7',
-    'local'   => '0.9',
 ];
 
 // Register publish hooks for each post type
@@ -97,17 +94,6 @@ function create_xml_sitemap_84em( array|null $args ): void {
     $sitemap_path = \ABSPATH . 'sitemap.xml';
     $xml_header = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" .
                   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
-
-    // Add static /lp/ entry first
-    $lp_index_path = \ABSPATH . 'lp/index.php';
-    if ( file_exists( $lp_index_path ) ) {
-        $xml_header .= "\t" . '<url>' . "\n" .
-                      "\t\t" . '<loc>' . site_url( '/lp/' ) . '</loc>' . "\n" .
-                      "\t\t" . '<lastmod>' . date( 'Y-m-d', filemtime( $lp_index_path ) ) . '</lastmod>' . "\n" .
-                      "\t\t" . '<changefreq>daily</changefreq>' . "\n" .
-                      "\t\t" . '<priority>1.0</priority>' . "\n" .
-                      "\t" . '</url>' . "\n";
-    }
 
     // Write header to file
     if ( file_put_contents( $sitemap_path, $xml_header, LOCK_EX ) === false ) {
