@@ -5,6 +5,13 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.7.1] - 2025-11-02
+### Changed
+- **Deployment Optimization** - Exclude documentation files from production deployment (`.github/workflows/deploy-theme.yml`)
+  - Added `--exclude '*.md'` to rsync command
+  - Prevents unnecessary documentation files (README.md, CHANGELOG.md, CLAUDE.md, AGENTS.md) from being deployed to production
+  - Reduces deployment payload and keeps production lean
+
 ## [2.7.0] - 2025-11-02
 ### Changed
 - **Search Functionality** - Disabled search query filtering and excerpt modifications (`includes/search.php`)
