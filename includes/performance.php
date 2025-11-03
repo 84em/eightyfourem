@@ -38,15 +38,8 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Add DNS prefetch for external resources
  * Helps browser resolve DNS earlier for third-party domains
+ * (Hook registration will be added here if/when external resources are used.)
  */
-\add_action(
-	hook_name: 'wp_head',
-	callback: function () {
-		// Add any external domains that fonts or critical resources load from
-		// Currently using local fonts, but this is here for future use
-	},
-	priority: 1
-);
 
 /**
  * Add resource hints for font preconnect
