@@ -5,6 +5,19 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.8.3] - 2025-11-02
+### Changed
+- **Case Study Filters** - Reordered filters and enhanced keyword matching (`includes/case-study-filters.php`, `assets/css/case-study-filter.css`)
+  - Reordered filters: Financial, Security, Automation, Marketing, AI, Affiliates, Education, E-Commerce, Reporting, API
+  - Enhanced Automation keywords: added scheduler, schedule, cron
+  - Added new Marketing filter with keywords: marketing, lead, advertising, ads, leads
+  - Reduced filter button padding from 1.5rem to 0.75rem for more compact layout
+
+- **Search Exclusions** - Enhanced search filtering to exclude additional pages and respect noindex meta (`includes/search.php`)
+  - Added exclusion for post ID 4507
+  - Added meta query to exclude posts with `_genesis_noindex` meta set to 1
+  - Improved code formatting for better readability
+
 ## [2.8.1] - 2025-11-02
 ### Fixed
 - **Performance Optimization** - Fixed cache busting to enable proper browser caching (`includes/enqueue.php`)
