@@ -31,7 +31,7 @@ if ( empty( $first_name ) ) {
 }
 ?>
 
-<div <?php echo $wrapper_attributes; ?>>
+<div <?php echo wp_kses_post( $wrapper_attributes ); ?>>
 	<div class="calendly-booking-details__content">
 		<h2 class="calendly-booking-details__heading">
 			<?php
