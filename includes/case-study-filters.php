@@ -40,7 +40,7 @@ function get_filters() {
             ],
             'marketing'         => [
                     'label'    => 'Marketing',
-                    'keywords' => [ 'marketing', 'lead', 'advertising', 'ads', 'leads' ],
+                    'keywords' => [ 'twilio', 'onsignal', 'marketing', 'lead', 'advertising', 'ads', 'leads', 'sms', 'email', 'marketing automation', 'marketing automation software', 'marketing automation software' ],
             ],
             'ai'         => [
                     'label'    => 'AI',
