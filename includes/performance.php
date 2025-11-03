@@ -45,17 +45,6 @@ defined( 'ABSPATH' ) || exit;
  * Add resource hints for font preconnect
  * Establishes early connection to font origins
  */
-\add_filter(
-	hook_name: 'wp_resource_hints',
-	callback: function ( array $hints, string $relation_type ): array {
-		// Since fonts are local, we don't need external preconnect
-		// but this filter is here for future external font CDN use
-		return $hints;
-	},
-	priority: 10,
-	accepted_args: 2
-);
-
 /**
  * Inline critical font-face declarations
  * Embeds font declarations directly in HTML to avoid render-blocking CSS
