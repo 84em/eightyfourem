@@ -36,7 +36,11 @@ function get_filters() {
             ],
             'automation' => [
                     'label'    => 'Automation',
-                    'keywords' => [ 'automation', 'klaviyo', 'zapier', 'calendly', 'webhook', 'zapier', 'automatic', 'automatically' ],
+                    'keywords' => [ 'scheduler', 'schedule', 'cron', 'automation', 'klaviyo', 'zapier', 'calendly', 'webhook', 'zapier', 'automatic', 'automatically' ],
+            ],
+            'marketing'         => [
+                    'label'    => 'Marketing',
+                    'keywords' => [ 'marketing', 'lead', 'advertising', 'ads', 'leads' ],
             ],
             'ai'         => [
                     'label'    => 'AI',
