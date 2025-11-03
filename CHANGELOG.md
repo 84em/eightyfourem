@@ -5,6 +5,30 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.8.8] - 2025-11-03
+### Added
+- **Calendly Booking Details Block** - New custom Gutenberg block for Calendly redirects (`blocks/calendly-booking-details/`)
+  - Displays personalized thank you message using first name from URL parameter
+  - Parses `invitee_full_name` parameter from Calendly redirect URLs
+  - Shows "Thanks, {FIRST NAME}." on booking confirmation page
+  - Placeholder message only visible in block editor, not on front-end
+  - Fully responsive with centered text alignment
+  - Added block registration in `includes/calendly-booking-details.php`
+  - Integrated into gulp build process for CSS/JS minification
+  - Added to `/booked/` page (post ID 4507) for Calendly booking confirmations
+
+### Changed
+- **Build Process** - Updated gulpfile to compile Calendly block assets (`gulpfile.js`)
+  - Added Calendly block CSS and JS to build pipeline
+  - Added to clean, watch, and build tasks
+  - Generates minified assets with source maps
+
+- **Theme Functions** - Added Calendly block include (`functions.php`)
+  - Loads `includes/calendly-booking-details.php` on theme initialization
+
+### Fixed
+- **GitHub Issue #67** - Created enhancement issue for future improvements to use block editor settings instead of hard-coded CSS values
+
 ## [2.8.7] - 2025-11-03
 ### Added
 - **Font Loading Performance** - New performance module to eliminate FOUT/FOIT (`includes/performance.php`)

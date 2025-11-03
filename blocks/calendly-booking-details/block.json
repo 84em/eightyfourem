@@ -1,0 +1,32 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "eightyfourem/calendly-booking-details",
+	"version": "1.0.0",
+	"title": "Calendly Booking Details",
+	"category": "widgets",
+	"icon": "calendar-alt",
+	"description": "Display booking details from Calendly redirect URL parameters",
+	"keywords": ["calendly", "booking", "appointment", "confirmation"],
+	"textdomain": "eightyfourem",
+	"editorScript": "file:./index.min.js",
+	"editorStyle": "file:./editor.min.css",
+	"style": "file:./style.min.css",
+	"render": "file:./render.php",
+	"supports": {
+		"html": false,
+		"align": true,
+		"spacing": {
+			"margin": true,
+			"padding": true
+		},
+		"color": {
+			"background": true,
+			"text": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true
+		}
+	}
+}

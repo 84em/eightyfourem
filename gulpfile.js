@@ -26,6 +26,10 @@ const paths = {
       './assets/google-reviews-block/style.css',
       './assets/google-reviews-block/editor.css'
     ],
+    calendlyBooking: [
+      './blocks/calendly-booking-details/style.css',
+      './blocks/calendly-booking-details/editor.css'
+    ],
     breadcrumbs: './assets/css/breadcrumbs.css',
     highlight: './assets/css/highlight.css',
     dest: './assets/css/'
@@ -36,6 +40,7 @@ const paths = {
       './assets/js/case-study-filter.js'
     ],
     googleReviews: './assets/google-reviews-block/block.js',
+    calendlyBooking: './blocks/calendly-booking-details/index.js',
     highlight: './assets/js/highlight.js',
     dest: './assets/js/'
   }
@@ -51,7 +56,11 @@ function clean() {
     './assets/google-reviews-block/*.min.css',
     './assets/google-reviews-block/*.min.css.map',
     './assets/google-reviews-block/*.min.js',
-    './assets/google-reviews-block/*.min.js.map'
+    './assets/google-reviews-block/*.min.js.map',
+    './blocks/calendly-booking-details/*.min.css',
+    './blocks/calendly-booking-details/*.min.css.map',
+    './blocks/calendly-booking-details/*.min.js',
+    './blocks/calendly-booking-details/*.min.js.map'
   ]);
 }
 
@@ -127,8 +136,25 @@ function stylesHighlight() {
     .pipe(gulp.dest(paths.styles.dest));
 }
 
+// CSS optimization task - Calendly Booking
+function stylesCalendlyBooking() {
+  return gulp.src(paths.styles.calendlyBooking)
+    .pipe(sourcemaps.init())
+    .pipe(cleanCSS({
+      compatibility: 'ie8',
+      level: {
+        1: {
+          specialComments: 0
+        }
+      }
+    }))
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest('./blocks/calendly-booking-details/'));
+}
+
 // Combined styles task
-const styles = parallel(stylesTheme, stylesGoogleReviews, stylesBreadcrumbs, stylesHighlight);
+const styles = parallel(stylesTheme, stylesGoogleReviews, stylesBreadcrumbs, stylesHighlight, stylesCalendlyBooking);
 
 // JavaScript optimization task - Theme files
 function scriptsTheme() {
@@ -172,8 +198,22 @@ function scriptsHighlight() {
     .pipe(gulp.dest(paths.scripts.dest));
 }
 
+// JavaScript optimization task - Calendly Booking
+function scriptsCalendlyBooking() {
+  return gulp.src(paths.scripts.calendlyBooking)
+    .pipe(sourcemaps.init())
+    .pipe(terser({
+      compress: {
+        drop_console: true
+      }
+    }))
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest('./blocks/calendly-booking-details/'));
+}
+
 // Combined scripts task
-const scripts = parallel(scriptsTheme, scriptsGoogleReviews, scriptsHighlight);
+const scripts = parallel(scriptsTheme, scriptsGoogleReviews, scriptsHighlight, scriptsCalendlyBooking);
 
 // Watch task for development
 function watchFiles() {
@@ -181,9 +221,11 @@ function watchFiles() {
   watch(paths.styles.googleReviews, stylesGoogleReviews);
   watch(paths.styles.breadcrumbs, stylesBreadcrumbs);
   watch(paths.styles.highlight, stylesHighlight);
+  watch(paths.styles.calendlyBooking, stylesCalendlyBooking);
   watch(paths.scripts.theme, scriptsTheme);
   watch(paths.scripts.googleReviews, scriptsGoogleReviews);
   watch(paths.scripts.highlight, scriptsHighlight);
+  watch(paths.scripts.calendlyBooking, scriptsCalendlyBooking);
 }
 
 // Define complex tasks
