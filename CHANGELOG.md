@@ -18,6 +18,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Added meta query to exclude posts with `_genesis_noindex` meta set to 1
   - Improved code formatting for better readability
 
+## [2.8.2] - 2025-11-02
+### Changed
+- **Search Result Badges** - Improved post type badge styling for better visual consistency (`assets/css/search.css`)
+  - Changed display from `inline-block` to `block` for cleaner layout
+  - Updated padding from `0.25rem 0.5rem` to `.25rem .75rem` for better proportions
+  - Added `max-width: 80px` to ensure consistent badge sizing
+  - Added `text-align: center` for centered text within badges
+  - Changed margin from `margin-right: 0.5rem` to `margin: .5rem 0` for vertical spacing
+  - Badges now display as self-contained blocks rather than inline elements
+
 ## [2.8.1] - 2025-11-02
 ### Fixed
 - **Performance Optimization** - Fixed cache busting to enable proper browser caching (`includes/enqueue.php`)
