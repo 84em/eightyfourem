@@ -30,9 +30,13 @@ function get_filters() {
                     'label'    => 'Financial',
                     'keywords' => [ 'financial', 'fintech', 'banking', 'crypto' ],
             ],
-            'api'         => [
-                    'label'    => 'API',
-                    'keywords' => [ 'api', 'integration' ],
+            'security'   => [
+                    'label'    => 'Security',
+                    'keywords' => [ 'security', 'authentication', 'saml', 'two factor', 'headers' ],
+            ],
+            'automation' => [
+                    'label'    => 'Automation',
+                    'keywords' => [ 'automation', 'klaviyo', 'zapier', 'calendly', 'webhook', 'zapier', 'automatic', 'automatically' ],
             ],
             'ai'         => [
                     'label'    => 'AI',
@@ -42,25 +46,21 @@ function get_filters() {
                     'label'    => 'Affiliates',
                     'keywords' => [ 'affiliate', 'affiliates', 'affiliatewp' ],
             ],
-            'ecommerce' => [
-                    'label'    => 'E-Commerce',
-                    'keywords' => [ 'woocommerce', 'ecommerce' ],
-            ],
             'learning'    => [
                     'label'    => 'Education',
                     'keywords' => [ 'education', 'lms', 'learning' ],
             ],
-            'security'    => [
-                    'label'    => 'Security',
-                    'keywords' => [ 'security', 'authentication', 'saml', 'two factor', 'headers' ],
+            'ecommerce'  => [
+                    'label'    => 'E-Commerce',
+                    'keywords' => [ 'woocommerce', 'ecommerce' ],
             ],
             'reporting'   => [
                     'label'    => 'Reporting',
                     'keywords' => [ 'reporting' ],
             ],
-            'automation'  => [
-                    'label'    => 'Automation',
-                    'keywords' => [ 'automation', 'klaviyo', 'zapier', 'calendly', 'webhook', 'zapier', 'automatic', 'automatically' ],
+            'api'        => [
+                    'label'    => 'API',
+                    'keywords' => [ 'api', 'integration' ],
             ],
     ];
 }
