@@ -28,7 +28,7 @@ function get_filters() {
             ],
             'financial'   => [
                     'label'    => 'Financial',
-                    'keywords' => [ 'financial', 'fintech', 'banking', 'crypto' ],
+                    'keywords' => [ 'financial', 'fintech', 'banking', 'crypto', 'bank', 'lending', 'investment', 'cryptocurrency' ],
             ],
             'security'   => [
                     'label'    => 'Security',
