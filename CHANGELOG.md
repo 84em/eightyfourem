@@ -5,6 +5,13 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.8.6] - 2025-11-02
+### Changed
+- **Case Study Filters** - Expanded Financial filter keywords (`includes/case-study-filters.php`)
+  - Added industry keywords: bank, lending, investment
+  - Added alternative format: cryptocurrency (in addition to crypto)
+  - Improves discoverability of banking, lending, investment, and cryptocurrency case studies
+
 ## [2.8.5] - 2025-11-02
 ### Changed
 - **Case Study Filters** - Enhanced Security filter keywords (`includes/case-study-filters.php`)
