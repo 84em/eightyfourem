@@ -5,6 +5,15 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.8.7] - 2025-11-03
+### Added
+- **Font Loading Performance** - New performance module to eliminate FOUT/FOIT (`includes/performance.php`)
+  - Added font preloading for Instrument Sans and Jost variable fonts
+  - Inlined critical font-face declarations in HTML head for immediate loading
+  - Changed font-display from swap to optional in theme.json to prevent layout shifts
+  - Updated AGENTS.md with performance module documentation and testing guidelines
+  - Fonts now load before other resources, preventing flash of unstyled text
+
 ## [2.8.6] - 2025-11-02
 ### Changed
 - **Case Study Filters** - Expanded Financial filter keywords (`includes/case-study-filters.php`)
