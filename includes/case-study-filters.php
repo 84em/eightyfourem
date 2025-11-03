@@ -32,7 +32,7 @@ function get_filters() {
             ],
             'security'   => [
                     'label'    => 'Security',
-                    'keywords' => [ 'security', 'authentication', 'saml', 'two factor', 'headers' ],
+                    'keywords' => [ 'security', 'authentication', 'saml', 'two factor', 'headers', '2fa', 'two-factor', 'two factor'],
             ],
             'automation' => [
                     'label'    => 'Automation',

@@ -5,6 +5,12 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.8.5] - 2025-11-02
+### Changed
+- **Case Study Filters** - Enhanced Security filter keywords (`includes/case-study-filters.php`)
+  - Added alternative keyword formats: 2fa, two-factor
+  - Improves discoverability of two-factor authentication and 2FA case studies
+
 ## [2.8.4] - 2025-11-02
 ### Changed
 - **Case Study Filters** - Expanded Marketing filter keywords (`includes/case-study-filters.php`)
