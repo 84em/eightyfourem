@@ -10,7 +10,7 @@
 namespace EightyFourEM\CalendlyBookingDetails;
 
 // Get URL parameters
-$invitee_full_name = isset( $_GET['invitee_full_name'] ) ? sanitize_text_field( wp_unslash( $_GET['invitee_full_name'] ) ) : '';
+$invitee_full_name = filter_input( INPUT_GET, 'invitee_full_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS ) ?? '';
 
 // Extract first name (everything before the first space)
 $first_name = '';
