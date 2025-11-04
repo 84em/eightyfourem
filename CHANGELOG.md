@@ -5,6 +5,34 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.9.0] - 2025-11-04
+### Added
+- **Google Reviews Block Migration** - Migrated Google Reviews block to modern WordPress block structure (`blocks/google-reviews/`)
+  - Created `block.json` with all 30+ attributes for modern block registration (API v3)
+  - Created `render.php` for server-side rendering (290 lines extracted from class)
+  - Modified `index.js` from 908 to 763 lines by removing inline attributes
+  - Refactored `includes/google-reviews.php` from 849-line class to ~290 lines functional approach
+  - Updated all gulpfile.js paths from `assets/google-reviews-block/` to `blocks/google-reviews/`
+  - Total code reduction: 1757 lines to 1053 lines (40% reduction)
+
+- **Brand Colors** - Added brand colors to theme palette (`theme.json`)
+  - New Brand Green color: #4f7705
+  - New Brand Orange color: #D45304
+  - Updated color names for clarity (White, Gray, Black, Beige, Brand Blue, Brand Green, Brand Orange)
+  - Maintained all existing slugs to avoid breaking changes
+
+### Changed
+- **Google Reviews Block Namespace** - Breaking change from 'google-reviews/display' to 'eightyfourem/google-reviews'
+  - Old blocks will show as unsupported in editor (intentional)
+  - Clean migration without backward compatibility to avoid technical debt
+  - Modern block.json-based registration following WordPress standards
+
+### Removed
+- **Google Reviews Legacy Code** - Removed class-based implementation
+  - Removed 849-line GoogleReviewsBlock class
+  - Removed inline attribute definitions from JavaScript
+  - Cleaned up deprecated registration methods
+
 ## [2.8.8] - 2025-11-03
 ### Added
 - **Calendly Booking Details Block** - New custom Gutenberg block for Calendly redirects (`blocks/calendly-booking-details/`)

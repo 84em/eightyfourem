@@ -115,28 +115,38 @@
 			"palette": [
 				{
 					"color": "#FFFFFF",
-					"name": "Base",
+					"name": "White",
 					"slug": "base"
 				},
 				{
 					"color": "#999999",
-					"name": "Contrast / 2",
+					"name": "Gray",
 					"slug": "contrast-2"
 				},
 				{
 					"color": "#000",
-					"name": "Contrast",
+					"name": "Black",
 					"slug": "contrast"
 				},
 				{
 					"color": "#f6decd",
-					"name": "Base / Two",
+					"name": "Beige",
 					"slug": "base-2"
 				},
 				{
 					"color": "#004C7E",
-					"name": "Color 1",
+					"name": "Brand Blue",
 					"slug": "custom-color-1"
+				},
+				{
+					"color": "#4f7705",
+					"name": "Brand Green",
+					"slug": "brand-green"
+				},
+				{
+					"color": "#D45304",
+					"name": "Brand Orange",
+					"slug": "brand-orange"
 				}
 			]
 		},
