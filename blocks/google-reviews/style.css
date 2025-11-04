@@ -1,0 +1,234 @@
+/* Frontend Styles for Google Reviews Block */
+.google-reviews-block {
+	background: #f9f9f9;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	padding: 20px;
+	margin: 20px 0;
+	max-width: 400px;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.google-reviews-block.error {
+	border-color: #dc3232;
+	background: #ffeaea;
+	color: #dc3232;
+}
+
+.google-reviews-block.loading {
+	background: #f0f0f0;
+	color: #666;
+	text-align: center;
+	padding: 30px 20px;
+}
+
+.google-reviews-block .review-header h3 {
+	margin: 0 0 15px 0;
+	color: inherit;
+	font-size: 18px;
+	font-weight: 600;
+	line-height: 1.2;
+}
+
+.google-reviews-block .review-rating {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 15px;
+	font-size: 16px;
+	line-height: 1;
+}
+
+.google-reviews-block .rating-number {
+	font-weight: bold;
+	font-size: 18px;
+	color: inherit;
+}
+
+.google-reviews-block .stars {
+	display: inline-flex;
+	gap: 2px;
+	line-height: 1;
+}
+
+.google-reviews-block .star {
+	font-size: inherit;
+	color: inherit;
+	display: inline-block;
+}
+
+.google-reviews-block .star.filled {
+	color: inherit;
+}
+
+.google-reviews-block .star.half {
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+.google-reviews-block .rating-count {
+	/*color: rgba(0,0,0,0.6);*/
+	font-size: 14px;
+}
+
+.google-reviews-block .rating-count-below {
+	color: #666;
+	font-size: 14px;
+	margin-top: 8px;
+	margin-bottom: 15px;
+}
+
+.google-reviews-block .reviews-sort-info {
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #eee;
+	color: #666;
+	font-size: 12px;
+}
+
+.google-reviews-block .review-link {
+	margin-top: 15px;
+}
+
+.google-reviews-block .review-link a {
+	display: inline-block;
+	background: #4285f4;
+	color: white;
+	padding: 8px 16px;
+	text-decoration: none;
+	border-radius: 4px;
+	font-size: 14px;
+	font-weight: 500;
+	transition: background-color 0.3s ease;
+	border: none;
+}
+
+.google-reviews-block .review-link a:hover {
+	background: #3367d6;
+	color: white;
+}
+
+.google-reviews-block .review-link a:focus {
+	outline: 2px solid #4285f4;
+	outline-offset: 2px;
+}
+
+/* Individual Reviews Styles */
+.google-reviews-block .individual-reviews {
+	margin-top: 20px;
+	border-top: 1px solid rgba(0,0,0,0.1);
+	padding-top: 15px;
+}
+
+.google-reviews-block .review-item {
+	margin-bottom: 20px;
+	padding-bottom: 15px;
+	border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.google-reviews-block .review-item:last-child {
+	margin-bottom: 0;
+	padding-bottom: 0;
+	border-bottom: none;
+}
+
+.google-reviews-block .review-header {
+	margin-bottom: 10px;
+}
+
+.google-reviews-block .reviewer-info {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+}
+
+.google-reviews-block .reviewer-photo {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	object-fit: cover;
+	flex-shrink: 0;
+}
+
+.google-reviews-block .reviewer-details {
+	flex: 1;
+	min-width: 0;
+}
+
+.google-reviews-block .reviewer-name {
+	display: block;
+	font-weight: 600;
+	font-size: inherit;
+	color: inherit;
+	margin-bottom: 4px;
+}
+
+.google-reviews-block .review-rating-individual {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.google-reviews-block .review-rating-individual .stars {
+	gap: 1px;
+}
+
+.google-reviews-block .review-rating-individual .star {
+	font-size: 14px;
+}
+
+.google-reviews-block .review-time {
+	font-size: 0.85em;
+	color: rgba(0,0,0,0.5);
+	white-space: nowrap;
+}
+
+.google-reviews-block .review-text {
+	font-size: inherit;
+	line-height: 1.5;
+	color: inherit;
+	margin-top: 8px;
+}
+
+/* Responsive adjustments for individual reviews */
+@media (max-width: 480px) {
+	.google-reviews-block .reviewer-info {
+		gap: 8px;
+	}
+
+	.google-reviews-block .reviewer-photo {
+		width: 32px;
+		height: 32px;
+	}
+
+	.google-reviews-block .review-rating-individual {
+		/*flex-direction: column;*/
+		/*align-items: flex-start;*/
+		/*gap: 4px;*/
+	}
+
+	.google-reviews-block .review-text {
+		font-size: inherit;
+	}
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+	.google-reviews-block {
+		max-width: 100%;
+		margin: 15px 0;
+		padding: 15px;
+	}
+
+	.google-reviews-block .review-rating {
+		/*flex-direction: column;*/
+		/*align-items: flex-start;*/
+		/*gap: 8px;*/
+	}
+
+	.google-reviews-block .stars {
+		margin-bottom: 5px;
+	}
+}
