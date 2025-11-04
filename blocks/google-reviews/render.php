@@ -21,7 +21,7 @@ if ( ! $reviews ) {
 // Extract attributes
 $show_link           = ! isset( $attributes['showLink'] ) || $attributes['showLink'];
 $show_review_content = $attributes['showReviewContent'] ?? false;
-$max_reviews         = ! isset( $attributes['maxReviews'] ) ? 5 : min( 5, intval( $attributes['maxReviews'] ) );
+$max_reviews         = ! isset( $attributes['maxReviews'] ) ? 5 : min( 5, \intval( $attributes['maxReviews'] ) );
 $bg_color            = $attributes['backgroundColor'] ?? '#f9f9f9';
 $text_color          = $attributes['textColor'] ?? '#333333';
 $override_url        = $attributes['overrideUrl'] ?? '';
