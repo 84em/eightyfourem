@@ -15,20 +15,43 @@ defined( 'ABSPATH' ) || exit;
 \add_action(
 	hook_name: 'init',
 	callback: function (): void {
+		// Register new namespaced block
 		\register_block_type(
 			\get_template_directory() . '/blocks/google-reviews'
 		);
 
-		// Register and localize script for AJAX
-		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-		\wp_localize_script(
-			handle: 'eightyfourem-google-reviews-editor-script',
-			object_name: 'googleReviewsAjax',
-			l10n: [
-				'ajax_url' => \admin_url( 'admin-ajax.php' ),
-				'nonce'    => \wp_create_nonce( 'google_reviews_nonce' ),
+		// Also register old namespace for backward compatibility
+		// This allows existing google-reviews/display blocks to continue working
+		$block_json = json_decode( file_get_contents( \get_template_directory() . '/blocks/google-reviews/block.json' ), true );
+
+		\register_block_type(
+			block_type: 'google-reviews/display',
+			args: [
+				'editor_script'   => 'eightyfourem-google-reviews-editor-script',
+				'editor_style'    => 'eightyfourem-google-reviews-editor-style',
+				'style'           => 'eightyfourem-google-reviews-style',
+				'render_callback' => function( $attributes ) {
+					// Delegate to new block's render.php
+					$template = \get_template_directory() . '/blocks/google-reviews/render.php';
+					ob_start();
+					include $template;
+					return ob_get_clean();
+				},
+				'attributes' => $block_json['attributes'], // Use same attributes as new block
 			]
 		);
+
+		// Localize script for AJAX (wait for script to be registered by block.json)
+		\add_action( 'enqueue_block_editor_assets', function() {
+			\wp_localize_script(
+				handle: 'eightyfourem-google-reviews-editor-script',
+				object_name: 'googleReviewsAjax',
+				l10n: [
+					'ajax_url' => \admin_url( 'admin-ajax.php' ),
+					'nonce'    => \wp_create_nonce( 'google_reviews_nonce' ),
+				]
+			);
+		}, 20 );
 	},
 	priority: 10
 );

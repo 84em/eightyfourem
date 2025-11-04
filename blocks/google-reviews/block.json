@@ -17,14 +17,6 @@
 		"html": false,
 		"align": true
 	},
-	"deprecated": [
-		{
-			"name": "google-reviews/display",
-			"attributes": {},
-			"migrate": "eightyfourem/google-reviews",
-			"isEligible": true
-		}
-	],
 	"attributes": {
 		"showLink": {
 			"type": "boolean",
