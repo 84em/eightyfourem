@@ -213,7 +213,7 @@ function get_google_reviews( string $sort_by = 'most_relevant' ): mixed {
  * Handle AJAX request for reviews
  */
 function ajax_get_reviews(): void {
-	if ( ! \wp_verify_nonce( $_POST['nonce'], 'google_reviews_nonce' ) ) {
+	if ( ! isset( $_POST['nonce'] ) || ! \wp_verify_nonce( $_POST['nonce'], 'google_reviews_nonce' ) ) {
 		\wp_die( 'Security check failed' );
 	}
 
