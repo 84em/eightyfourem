@@ -23,8 +23,8 @@ const paths = {
       './assets/css/search.css'
     ],
     googleReviews: [
-      './assets/google-reviews-block/style.css',
-      './assets/google-reviews-block/editor.css'
+      './blocks/google-reviews/style.css',
+      './blocks/google-reviews/editor.css'
     ],
     calendlyBooking: [
       './blocks/calendly-booking-details/style.css',
@@ -39,7 +39,7 @@ const paths = {
       './assets/js/sticky-header.js',
       './assets/js/case-study-filter.js'
     ],
-    googleReviews: './assets/google-reviews-block/block.js',
+    googleReviews: './blocks/google-reviews/index.js',
     calendlyBooking: './blocks/calendly-booking-details/index.js',
     highlight: './assets/js/highlight.js',
     dest: './assets/js/'
@@ -53,10 +53,10 @@ function clean() {
     './assets/css/*.min.css.map',
     './assets/js/*.min.js',
     './assets/js/*.min.js.map',
-    './assets/google-reviews-block/*.min.css',
-    './assets/google-reviews-block/*.min.css.map',
-    './assets/google-reviews-block/*.min.js',
-    './assets/google-reviews-block/*.min.js.map',
+    './blocks/google-reviews/*.min.css',
+    './blocks/google-reviews/*.min.css.map',
+    './blocks/google-reviews/*.min.js',
+    './blocks/google-reviews/*.min.js.map',
     './blocks/calendly-booking-details/*.min.css',
     './blocks/calendly-booking-details/*.min.css.map',
     './blocks/calendly-booking-details/*.min.js',
@@ -99,7 +99,7 @@ function stylesGoogleReviews() {
     }))
     .pipe(rename({ suffix: '.min' }))
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('./assets/google-reviews-block/'));
+    .pipe(gulp.dest('./blocks/google-reviews/'));
 }
 
 // CSS optimization task - Breadcrumbs
@@ -181,7 +181,7 @@ function scriptsGoogleReviews() {
     }))
     .pipe(rename({ suffix: '.min' }))
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('./assets/google-reviews-block/'));
+    .pipe(gulp.dest('./blocks/google-reviews/'));
 }
 
 // JavaScript optimization task - Highlight

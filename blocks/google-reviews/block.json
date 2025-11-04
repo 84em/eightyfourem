@@ -1,0 +1,155 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "eightyfourem/google-reviews",
+	"version": "1.0.0",
+	"title": "Google Reviews",
+	"category": "widgets",
+	"icon": "star-filled",
+	"description": "Display Google Business reviews with customizable styling and layout options",
+	"keywords": ["google", "reviews", "rating", "business", "testimonials"],
+	"textdomain": "eightyfourem",
+	"editorScript": "file:./index.min.js",
+	"editorStyle": "file:./editor.min.css",
+	"style": "file:./style.min.css",
+	"render": "file:./render.php",
+	"supports": {
+		"html": false,
+		"align": true
+	},
+	"attributes": {
+		"showLink": {
+			"type": "boolean",
+			"default": true
+		},
+		"showReviewContent": {
+			"type": "boolean",
+			"default": false
+		},
+		"maxReviews": {
+			"type": "number",
+			"default": 5
+		},
+		"alignment": {
+			"type": "string",
+			"default": "left"
+		},
+		"backgroundColor": {
+			"type": "string",
+			"default": "#f9f9f9"
+		},
+		"textColor": {
+			"type": "string",
+			"default": "#333333"
+		},
+		"titleTextColor": {
+			"type": "string",
+			"default": ""
+		},
+		"titleBackgroundColor": {
+			"type": "string",
+			"default": ""
+		},
+		"ratingTextColor": {
+			"type": "string",
+			"default": ""
+		},
+		"ratingBackgroundColor": {
+			"type": "string",
+			"default": ""
+		},
+		"reviewsTextColor": {
+			"type": "string",
+			"default": ""
+		},
+		"reviewsBackgroundColor": {
+			"type": "string",
+			"default": ""
+		},
+		"reviewsSort": {
+			"type": "string",
+			"default": "most_relevant",
+			"enum": ["most_relevant", "newest"]
+		},
+		"overrideUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"overrideTitle": {
+			"type": "string",
+			"default": ""
+		},
+		"customRatingText": {
+			"type": "string",
+			"default": ""
+		},
+		"showTitle": {
+			"type": "boolean",
+			"default": true
+		},
+		"showRatingText": {
+			"type": "boolean",
+			"default": true
+		},
+		"ratingTextBelow": {
+			"type": "boolean",
+			"default": false
+		},
+		"titleFontSize": {
+			"type": "string",
+			"default": ""
+		},
+		"titleFontSizeCustom": {
+			"type": "number",
+			"default": null
+		},
+		"ratingTextFontSize": {
+			"type": "string",
+			"default": ""
+		},
+		"ratingTextFontSizeCustom": {
+			"type": "number",
+			"default": null
+		},
+		"reviewsFontSize": {
+			"type": "string",
+			"default": ""
+		},
+		"reviewsFontSizeCustom": {
+			"type": "number",
+			"default": null
+		},
+		"reviewTimeFontSize": {
+			"type": "string",
+			"default": ""
+		},
+		"reviewTimeFontSizeCustom": {
+			"type": "number",
+			"default": null
+		},
+		"reviewTimeTextColor": {
+			"type": "string",
+			"default": ""
+		},
+		"reviewTimeBackgroundColor": {
+			"type": "string",
+			"default": ""
+		},
+		"starsFontSize": {
+			"type": "string",
+			"default": ""
+		},
+		"starsFontSizeCustom": {
+			"type": "number",
+			"default": null
+		},
+		"starsTextColor": {
+			"type": "string",
+			"default": ""
+		},
+		"starsBackgroundColor": {
+			"type": "string",
+			"default": ""
+		}
+	}
+}
