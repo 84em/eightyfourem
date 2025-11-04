@@ -34,6 +34,10 @@ function get_filters() {
                     'label'    => 'Security',
                     'keywords' => [ 'security', 'authentication', 'saml', 'two factor', 'headers', '2fa', 'two-factor', 'two factor'],
             ],
+            'healthcare' => [
+                    'label'    => 'Healthcare',
+                    'keywords' => [ 'senior living', 'healthcare', 'medical', 'health', 'medical' ],
+            ],
             'automation' => [
                     'label'    => 'Automation',
                     'keywords' => [ 'scheduler', 'schedule', 'cron', 'automation', 'klaviyo', 'zapier', 'calendly', 'webhook', 'zapier', 'automatic', 'automatically' ],
