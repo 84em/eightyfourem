@@ -261,7 +261,7 @@ $allowed_html = [
 	<?php if ( $show_review_content && ! empty( $reviews['reviews'] ) ) : ?>
 		<div class="individual-reviews<?php echo esc_attr( $reviews_class ); ?>" style="<?php echo esc_attr( $reviews_style ); ?>">
 			<?php
-			$individual_reviews = array_slice( $reviews['reviews'], 0, $max_reviews );
+			$individual_reviews = \array_slice( $reviews['reviews'], 0, $max_reviews );
 			foreach ( $individual_reviews as $review ) :
 				?>
 				<div class="review-item">
