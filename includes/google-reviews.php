@@ -15,27 +15,9 @@ defined( 'ABSPATH' ) || exit;
 \add_action(
 	hook_name: 'init',
 	callback: function (): void {
-		// Register new block from block.json
+		// Register block from block.json
 		\register_block_type(
 			\get_template_directory() . '/blocks/google-reviews'
-		);
-
-		// Also register old namespace for server-side rendering compatibility
-		// The JavaScript in index.js handles editor registration for both namespaces
-		$block_json = json_decode( file_get_contents( \get_template_directory() . '/blocks/google-reviews/block.json' ), true );
-
-		\register_block_type(
-			block_type: 'google-reviews/display',
-			args: [
-				'render_callback' => function( $attributes ) {
-					// Delegate to new block's render.php
-					$template = \get_template_directory() . '/blocks/google-reviews/render.php';
-					ob_start();
-					include $template;
-					return ob_get_clean();
-				},
-				'attributes' => $block_json['attributes'],
-			]
 		);
 
 		// Localize script for AJAX
