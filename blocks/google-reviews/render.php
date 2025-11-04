@@ -195,7 +195,7 @@ if ( ! empty( $rating_background_color ) ) {
 }
 
 // Get block wrapper attributes
-$wrapper_attributes = get_block_wrapper_attributes( [
+$wrapper_attributes = \get_block_wrapper_attributes( [
 	'class' => 'google-reviews-block',
 	'style' => $style,
 ] );
