@@ -753,15 +753,6 @@
 		}
 	});
 
-	// Also register old namespace for backward compatibility
-	registerBlockType('google-reviews/display', {
-		edit: GoogleReviewsEdit,
-		save: function() {
-			// Server-side rendering
-			return null;
-		}
-	});
-
 })(
 	window.wp.blocks,
 	window.wp.element,
