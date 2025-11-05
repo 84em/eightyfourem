@@ -5,6 +5,34 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.10.0] - 2025-11-05
+### Added
+- **Open Graph Images** - Complete Open Graph meta tag implementation for social media sharing (`includes/open-graph-images.php`)
+  - Global default OG image setting via Settings → Open Graph Images admin page
+  - Post-level meta box for overriding OG image on individual posts, pages, and projects
+  - Automatic three-tier fallback system: post override → featured image → global default
+  - Meta tag output includes og:image, og:image:width, og:image:height, og:image:alt, og:image:type, og:image:secure_url
+  - Twitter Card meta tags for proper Twitter/X integration
+  - Image validation with dimension and file size recommendations (1200x630px minimum, 8MB max)
+  - Transient caching for image metadata (1 hour) for improved performance
+  - Media library integration with WordPress media uploader
+  - Proper security implementation: nonces, capability checks, input sanitization, output escaping
+
+- **WP-CLI Testing Suite** - Comprehensive integration tests for Open Graph functionality (`includes/cli.php`)
+  - Command: `wp 84em test-og-images` with multiple test options
+  - Tests global default image setting and retrieval
+  - Tests post-level override functionality
+  - Tests three-tier fallback logic with real WordPress data
+  - Tests meta tag output generation and escaping
+  - Tests image validation (dimensions, MIME types, file existence)
+  - Real image creation using GD library (no mocks)
+  - Automatic cleanup functionality
+  - All tests use actual WordPress core functions and database operations
+
+### Changed
+- **Functions.php** - Added require statement for open-graph-images.php include file
+- **Settings Pages** - Improved admin notice handling to prevent duplicate success messages
+
 ## [2.9.0] - 2025-11-04
 ### Added
 - **Google Reviews Block Migration** - Migrated Google Reviews block to modern WordPress block structure (`blocks/google-reviews/`)
