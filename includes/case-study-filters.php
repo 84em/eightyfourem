@@ -42,6 +42,10 @@ function get_filters() {
                     'label'    => 'Automation',
                     'keywords' => [ 'scheduler', 'schedule', 'cron', 'automation', 'klaviyo', 'zapier', 'calendly', 'webhook', 'zapier', 'automatic', 'automatically' ],
             ],
+            'realestate' => [
+                    'label'    => 'Real Estate',
+                    'keywords' => [ 'commercial' ],
+            ],
             'marketing'         => [
                     'label'    => 'Marketing',
                     'keywords' => [ 'twilio', 'onsignal', 'marketing', 'lead', 'advertising', 'ads', 'leads', 'sms', 'email', 'marketing automation', 'marketing automation software', 'marketing automation software' ],

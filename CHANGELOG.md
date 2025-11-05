@@ -5,6 +5,18 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.11.0] - 2025-11-05
+### Added
+- **Case Study Filters** - Added Real Estate filter category (`includes/case-study-filters.php`)
+  - New filter for commercial real estate projects
+  - Keywords: commercial
+
+### Changed
+- **Case Study Filter Layout** - Improved filter button positioning and constraints (`assets/css/case-study-filter.css`)
+  - Centered filter buttons with `margin: 0 auto`
+  - Added max-width of 768px for better visual layout
+  - Prevents filter buttons from stretching too wide on large screens
+
 ## [2.10.1] - 2025-11-05
 ### Fixed
 - **Open Graph Images** - Fixed OG meta tags to output on all pages, not just singular posts (`includes/open-graph-images.php`)
