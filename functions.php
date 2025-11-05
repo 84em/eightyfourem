@@ -29,6 +29,7 @@ require_once get_template_directory() . '/includes/footer.php';
 require_once get_template_directory() . '/includes/google-reviews.php';
 require_once get_template_directory() . '/includes/gravity-forms.php';
 require_once get_template_directory() . '/includes/meta-tags.php';
+require_once get_template_directory() . '/includes/open-graph-images.php';
 require_once get_template_directory() . '/includes/pattern-categories.php';
 require_once get_template_directory() . '/includes/performance.php';
 require_once get_template_directory() . '/includes/permalinks.php';
