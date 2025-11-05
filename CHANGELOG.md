@@ -5,6 +5,13 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.10.1] - 2025-11-05
+### Fixed
+- **Open Graph Images** - Fixed OG meta tags to output on all pages, not just singular posts (`includes/open-graph-images.php`)
+  - Homepage and archive pages now show global default OG image
+  - Resolves "og:image property should be explicitly provided" validation warning
+  - Ensures consistent social sharing across entire site
+
 ## [2.10.0] - 2025-11-05
 ### Added
 - **Open Graph Images** - Complete Open Graph meta tag implementation for social media sharing (`includes/open-graph-images.php`)
