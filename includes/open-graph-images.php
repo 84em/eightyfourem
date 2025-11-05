@@ -169,13 +169,38 @@ function validate_og_image( $attachment_id ) {
 \add_action(
 	hook_name: 'wp_head',
 	callback: function () {
-		if ( ! \is_singular() ) {
-			return;
+		$image_data = null;
+
+		// For singular posts, pages, projects - try post-specific logic
+		if ( \is_singular() ) {
+			$post_id = \get_the_ID();
+			$image_data = get_og_image_data( $post_id );
 		}
 
-		$post_id = \get_the_ID();
-		$image_data = get_og_image_data( $post_id );
+		// If no image data yet (non-singular or singular with no image), try global default
+		if ( ! $image_data ) {
+			$default_id = \get_option( 'eightyfourem_default_og_image' );
+			if ( $default_id ) {
+				// Build image data from global default
+				$image_url = \wp_get_attachment_url( $default_id );
+				$image_meta = \wp_get_attachment_metadata( $default_id );
+				$image_alt = \get_post_meta( $default_id, '_wp_attachment_image_alt', true );
+				$mime_type = \get_post_mime_type( $default_id );
 
+				if ( $image_url && $image_meta ) {
+					$image_data = [
+						'id'     => $default_id,
+						'url'    => $image_url,
+						'width'  => $image_meta['width'] ?? 0,
+						'height' => $image_meta['height'] ?? 0,
+						'alt'    => $image_alt ?: \get_bloginfo( 'name' ),
+						'type'   => $mime_type ?: 'image/jpeg',
+					];
+				}
+			}
+		}
+
+		// No image available at all
 		if ( ! $image_data ) {
 			return;
 		}
