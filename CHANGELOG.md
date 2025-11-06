@@ -5,6 +5,13 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.11.2] - 2025-11-06
+### Removed
+- **Search Ordering** - Removed custom search result ordering in preparation for Relevanssi (`includes/search.php`)
+  - Removed posts_orderby filter that manually prioritized Services and Case Studies pages
+  - Site will transition to Relevanssi plugin for advanced search functionality
+  - Simplifies search.php by removing 23 lines of custom SQL ordering logic
+
 ## [2.11.1] - 2025-11-06
 ### Changed
 - **Script Enqueuing Refactor** - Consolidated and modernized enqueue logic (`includes/enqueue.php`)
