@@ -69,29 +69,6 @@ function get_post_type_indicator( \WP_Post $post ): string {
     } );
 
 \add_filter(
-	hook_name: 'posts_orderby',
-	callback: function ( string $orderby, \WP_Query $query ) {
-		if ( ! $query->is_search || \is_admin() || ! $query->is_main_query() ) {
-			return $orderby;
-		}
-
-		global $wpdb;
-
-		// Custom ordering: Services (2129) first, then Case Studies (4406), then Pages
-        return "
-            CASE
-                WHEN {$wpdb->posts}.ID = 2129 OR {$wpdb->posts}.post_parent = 2129 THEN 1
-                WHEN {$wpdb->posts}.ID = 4406 OR {$wpdb->posts}.post_parent = 4406 THEN 2
-                ELSE 3
-            END ASC,
-            {$wpdb->posts}.post_date DESC
-        ";
-	},
-	priority: 10,
-	accepted_args: 2
-);
-
-\add_filter(
 	hook_name: 'render_block',
 	callback: function ( string $block_content, array $parsed_block, $block ) {
 		// Only apply to post title blocks in Query Loop
