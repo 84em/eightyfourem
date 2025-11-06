@@ -9,6 +9,8 @@
 namespace EightyFourEM;
 
 use UAGB_Scripts_Utils;
+use function get_theme_file_uri;
+use function wp_enqueue_script;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -23,28 +25,42 @@ defined( 'ABSPATH' ) || exit;
 
 		// Enqueue customizer CSS
 		\wp_enqueue_style(
-			'eightyfourem-customizer',
-			\get_theme_file_uri( "assets/css/customizer{$suffix}.css" ),
-			[],
-			$version
+            handle: 'eightyfourem-customizer',
+            src: get_theme_file_uri( "assets/css/customizer{$suffix}.css" ),
+            deps: [],
+            ver: $version
 		);
 
 		// Enqueue sticky header CSS
 		\wp_enqueue_style(
-			'eightyfourem-sticky-header',
-			\get_theme_file_uri( "assets/css/sticky-header{$suffix}.css" ),
-			[],
-			$version
+            handle: 'eightyfourem-sticky-header',
+            src: get_theme_file_uri( "assets/css/sticky-header{$suffix}.css" ),
+            deps: [],
+            ver: $version
 		);
 
 		// Enqueue sticky header JavaScript
-		\wp_enqueue_script(
-			'eightyfourem-sticky-header',
-			\get_theme_file_uri( "assets/js/sticky-header{$suffix}.js" ),
-			[],
-			$version,
-			true
+        wp_enqueue_script(
+            handle: 'eightyfourem-sticky-header',
+            src: get_theme_file_uri( "assets/js/sticky-header{$suffix}.js" ),
+            deps: [],
+            ver: $version,
+            args: true
 		);
+
+        // Enqueue highlight script
+        wp_enqueue_script(
+            handle: 'eightyfourem-highlight',
+            src: get_theme_file_uri( "assets/js/highlight{$suffix}.js" ),
+            deps: [],
+        );
+
+        // Enqueue highlight CSS
+        wp_enqueue_style(
+            handle: 'eightyfourem-highlighter',
+            src: get_theme_file_uri( "assets/css/highlight{$suffix}.css" ),
+            deps: [],
+        );
 	},
 	priority: 10
 );
@@ -65,7 +81,7 @@ defined( 'ABSPATH' ) || exit;
 
 		\wp_enqueue_style(
 			'eightyfourem-search',
-			\get_theme_file_uri( "assets/css/search{$suffix}.css" ),
+            get_theme_file_uri( "assets/css/search{$suffix}.css" ),
 			[],
 			$version
 		);
@@ -89,14 +105,14 @@ defined( 'ABSPATH' ) || exit;
 
 		\wp_enqueue_style(
 			'eightyfourem-case-study-filter',
-			\get_theme_file_uri( "assets/css/case-study-filter{$suffix}.css" ),
+            get_theme_file_uri( "assets/css/case-study-filter{$suffix}.css" ),
 			[],
 			$version
 		);
 
-		\wp_enqueue_script(
+        wp_enqueue_script(
 			'eightyfourem-case-study-filter',
-			\get_theme_file_uri( "assets/js/case-study-filter{$suffix}.js" ),
+            get_theme_file_uri( "assets/js/case-study-filter{$suffix}.js" ),
 			[],
 			$version,
 			true
