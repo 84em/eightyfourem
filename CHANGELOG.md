@@ -5,6 +5,20 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.11.1] - 2025-11-06
+### Changed
+- **Script Enqueuing Refactor** - Consolidated and modernized enqueue logic (`includes/enqueue.php`)
+  - Moved highlight script/CSS enqueuing from footer.php into main enqueue function
+  - Converted all wp_enqueue_style and wp_enqueue_script calls to use PHP 8.0+ named parameters
+  - Added explicit use statements for get_theme_file_uri and wp_enqueue_script functions
+  - Improved code consistency and readability throughout file
+
+### Removed
+- **Footer Include** - Removed includes/footer.php file (`includes/footer.php`, `functions.php`)
+  - Consolidated highlight script functionality into includes/enqueue.php
+  - Removed require statement from functions.php
+  - Simplifies theme architecture by reducing number of include files
+
 ## [2.11.0] - 2025-11-05
 ### Added
 - **Case Study Filters** - Added Real Estate filter category (`includes/case-study-filters.php`)
