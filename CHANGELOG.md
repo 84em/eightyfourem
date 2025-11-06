@@ -5,6 +5,27 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.12.0] - 2025-11-06
+### Added
+- **Relevanssi Integration** - Complete Relevanssi plugin integration for advanced search (`includes/relevanssi.php`)
+  - Automatic spell correction fallback using Relevanssi_SpellCorrector
+  - Token-based spell correction with str_ireplace for multi-word queries
+  - Displays "Actually searched for:" message when spell correction is applied
+  - Integrates with Relevanssi's search functionality via relevanssi_fallback filter
+
+- **Shortcodes Enhancement** - New Relevanssi "Did You Mean" shortcode (`includes/shortcodes.php`)
+  - Added `[rlv_didyoumean]` shortcode for displaying spelling suggestions
+  - Configurable pre/post HTML wrappers and suggestion count
+  - Safe fallback if Relevanssi plugin not active
+
+### Changed
+- **File Organization** - Renamed shortcode file for clarity (`includes/shortcode-last-updated.php` → `includes/shortcodes.php`)
+  - More accurate filename reflecting multiple shortcodes
+  - Updated require statement in `functions.php`
+  - Added Relevanssi_SpellCorrector use statement
+
+- **Functions.php** - Added require statement for new `includes/relevanssi.php` file
+
 ## [2.11.2] - 2025-11-06
 ### Removed
 - **Search Ordering** - Removed custom search result ordering in preparation for Relevanssi (`includes/search.php`)
