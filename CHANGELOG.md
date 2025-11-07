@@ -5,6 +5,12 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.12.1] - 2025-11-07
+### Fixed
+- **Header Navigation** - Fixed middle dot display in header navigation (`assets/css/customizer.css`)
+  - Changed `.header-mdot` from `display:none` to `display:block`
+  - Middle dot separator now visible in header navigation between items
+
 ## [2.12.0] - 2025-11-06
 ### Added
 - **Relevanssi Integration** - Complete Relevanssi plugin integration for advanced search (`includes/relevanssi.php`)
