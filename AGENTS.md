@@ -50,10 +50,9 @@ Files in `includes/` directory provide modular functionality:
 - `sitemap.php` - XML sitemap with batch processing via Action Scheduler
 - `search.php` - Search result filtering, Challenge heading removal from excerpts
 - `enhanced-search.php` - Advanced search with fuzzy matching (SOUNDEX, Levenshtein, N-grams), multi-factor relevance scoring (title 40%, content 30%, recency 15%, engagement 15%), transient caching (1 hour), progressive enhancement
-- `breadcrumbs.php` - Breadcrumb navigation functionality
 
 **UI & Navigation:**
-- `enqueue.php` - Script/style enqueuing for sticky header, case study filters, Google Reviews, breadcrumbs
+- `enqueue.php` - Script/style enqueuing for sticky header, case study filters, Google Reviews
 - `block-styles.php` - Custom block style registration
 - `block-stylesheets.php` - Block-specific stylesheet loading
 

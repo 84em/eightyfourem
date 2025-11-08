@@ -98,7 +98,7 @@ npm install
 
 The build process handles:
 - **CSS files**:
-  - Theme: `customizer.css`, `sticky-header.css`, `breadcrumbs.css`, `highlight.css`
+  - Theme: `customizer.css`, `sticky-header.css`, `highlight.css`
   - Google Reviews Block: `editor.css`, `style.css` (in `assets/google-reviews-block/`)
   - Autoprefixer (targets last 2 browser versions)
   - Minification
@@ -124,7 +124,6 @@ eightyfourem/
 │   ├── author-pages.php     # Author page customizations
 │   ├── block-styles.php     # Custom block styles
 │   ├── block-stylesheets.php # Block-specific stylesheets
-│   ├── breadcrumbs.php      # Breadcrumb functionality
 │   ├── cli.php              # WP-CLI commands
 │   ├── dequeue.php          # Script/style dequeuing
 │   ├── disable-comments.php # Comments disabling functionality

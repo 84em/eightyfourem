@@ -29,10 +29,7 @@ const paths = {
     calendlyBooking: [
       './blocks/calendly-booking-details/style.css',
       './blocks/calendly-booking-details/editor.css'
-    ],
-    breadcrumbs: './assets/css/breadcrumbs.css',
-    highlight: './assets/css/highlight.css',
-    dest: './assets/css/'
+    ]
   },
   scripts: {
     theme: [
@@ -102,23 +99,6 @@ function stylesGoogleReviews() {
     .pipe(gulp.dest('./blocks/google-reviews/'));
 }
 
-// CSS optimization task - Breadcrumbs
-function stylesBreadcrumbs() {
-  return gulp.src(paths.styles.breadcrumbs)
-    .pipe(sourcemaps.init())
-    .pipe(cleanCSS({
-      compatibility: 'ie8',
-      level: {
-        1: {
-          specialComments: 0
-        }
-      }
-    }))
-    .pipe(rename({ suffix: '.min' }))
-    .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest(paths.styles.dest));
-}
-
 // CSS optimization task - Highlight
 function stylesHighlight() {
   return gulp.src(paths.styles.highlight)
@@ -154,7 +134,7 @@ function stylesCalendlyBooking() {
 }
 
 // Combined styles task
-const styles = parallel(stylesTheme, stylesGoogleReviews, stylesBreadcrumbs, stylesHighlight, stylesCalendlyBooking);
+const styles = parallel(stylesTheme, stylesGoogleReviews, stylesHighlight, stylesCalendlyBooking);
 
 // JavaScript optimization task - Theme files
 function scriptsTheme() {
@@ -219,7 +199,6 @@ const scripts = parallel(scriptsTheme, scriptsGoogleReviews, scriptsHighlight, s
 function watchFiles() {
   watch(paths.styles.theme, stylesTheme);
   watch(paths.styles.googleReviews, stylesGoogleReviews);
-  watch(paths.styles.breadcrumbs, stylesBreadcrumbs);
   watch(paths.styles.highlight, stylesHighlight);
   watch(paths.styles.calendlyBooking, stylesCalendlyBooking);
   watch(paths.scripts.theme, scriptsTheme);
