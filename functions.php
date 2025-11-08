@@ -12,7 +12,6 @@
  * Include files from includes directory
  */
 require_once get_template_directory() . '/includes/404.php';
-require_once get_template_directory() . '/includes/acf.php';
 require_once get_template_directory() . '/includes/author-pages.php';
 require_once get_template_directory() . '/includes/block-styles.php';
 require_once get_template_directory() . '/includes/block-stylesheets.php';
@@ -25,7 +24,6 @@ require_once get_template_directory() . '/includes/document-title.php';
 require_once get_template_directory() . '/includes/enhanced-search.php';
 require_once get_template_directory() . '/includes/enqueue.php';
 require_once get_template_directory() . '/includes/google-reviews.php';
-require_once get_template_directory() . '/includes/gravity-forms.php';
 require_once get_template_directory() . '/includes/meta-tags.php';
 require_once get_template_directory() . '/includes/open-graph-images.php';
 require_once get_template_directory() . '/includes/pattern-categories.php';
