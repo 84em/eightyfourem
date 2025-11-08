@@ -57,8 +57,6 @@ Files in `includes/` directory provide modular functionality:
 - `block-stylesheets.php` - Block-specific stylesheet loading
 
 **Integrations:**
-- `gravity-forms.php` - Gravity Forms customizations
-- `acf.php` - Advanced Custom Fields customizations
 - `cli.php` - WP-CLI commands for schema regeneration
 
 ## Coding Style & Naming Conventions

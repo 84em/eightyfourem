@@ -120,7 +120,6 @@ eightyfourem/
 │   ├── js/                   # JavaScript files
 │   └── google-reviews-block/ # Google Reviews block assets
 ├── includes/                 # Theme functionality modules
-│   ├── acf.php              # ACF customizations
 │   ├── author-pages.php     # Author page customizations
 │   ├── block-styles.php     # Custom block styles
 │   ├── block-stylesheets.php # Block-specific stylesheets
@@ -131,7 +130,6 @@ eightyfourem/
 │   ├── enqueue.php          # Script/style enqueuing
 │   ├── footer.php           # Footer functionality and UAGB scripts
 │   ├── google-reviews.php   # Google Reviews block
-│   ├── gravity-forms.php    # Gravity Forms integration
 │   ├── meta-tags.php        # SEO meta tags
 │   ├── pattern-categories.php # Pattern categories
 │   ├── permalinks.php       # Permalink customizations
