@@ -16,7 +16,6 @@ require_once get_template_directory() . '/includes/acf.php';
 require_once get_template_directory() . '/includes/author-pages.php';
 require_once get_template_directory() . '/includes/block-styles.php';
 require_once get_template_directory() . '/includes/block-stylesheets.php';
-require_once get_template_directory() . '/includes/breadcrumbs.php';
 require_once get_template_directory() . '/includes/calendly-booking-details.php';
 require_once get_template_directory() . '/includes/case-study-filters.php';
 require_once get_template_directory() . '/includes/cli.php';
