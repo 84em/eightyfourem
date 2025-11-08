@@ -29,7 +29,9 @@ const paths = {
     calendlyBooking: [
       './blocks/calendly-booking-details/style.css',
       './blocks/calendly-booking-details/editor.css'
-    ]
+    ],
+    highlight: './assets/css/highlight.css',
+    dest: './assets/css/',
   },
   scripts: {
     theme: [
