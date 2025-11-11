@@ -112,3 +112,55 @@ main a:hover:not(.wp-element-button,.wp-block-button__link) {
 header .wp-block-navigation .wp-block-navigation-item__label {
     font-size: 1.5rem !important;
 }
+
+@media screen and (max-width: 768px) {
+    .wp-block-navigation ul, .wp-block-navigation ul li {
+        padding-bottom: 1rem !important;
+    }
+
+    .wp-block-navigation .wp-block-navigation-item__label {
+        font-size: 1rem !important;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .wp-block-navigation .wp-block-navigation-item__label {
+        font-size: 1.5rem !important;
+    }
+}
+
+body.page-template-wp-custom-template-local-pages-2 main .wp-block-uagb-separator {
+    display: none !important
+}
+
+body.search-results .wp-block-post-excerpt__more-text {
+    margin-top: 0;
+    padding-top: 0;
+    font-size: 80%;
+    margin-bottom: 1rem;
+}
+
+body.search-results .wp-block-query h2 a {
+    text-decoration: underline;
+}
+
+body.page-template-wp-custom-template-case-studies main h2 {
+    font-size: 40px !important;
+}
+
+@media screen and (max-width: 767px) {
+    body.page-template-wp-custom-template-case-studies main h2 {
+        font-size: 30px !important;
+    }
+
+}
+
+@media (max-width: 767px) {
+    .search-box {
+        max-width: 100px !important;
+    }
+
+    .search-contact-menu {
+        column-gap: 4px !important;
+    }
+}
