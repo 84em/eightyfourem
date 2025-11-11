@@ -5,6 +5,35 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.12.2] - 2025-11-11
+### Changed
+- **Navigation Responsive Design** - Improved mobile navigation spacing and font sizes (`assets/css/customizer.css`)
+  - Added mobile-specific media query (max-width: 768px) with 1rem bottom padding for navigation items
+  - Reduced mobile navigation font size from 1.5rem to 1rem for better mobile UX
+  - Desktop navigation (min-width: 768px) maintains 1.5rem font size
+  - Improved touch target spacing on mobile devices
+
+- **Search Results Styling** - Enhanced search results page layout (`assets/css/customizer.css`)
+  - Reduced "Read more" link font size to 80% with bottom margin for better visual hierarchy
+  - Added underline to search result post titles for improved scannability
+  - Adjusted spacing with consistent top/bottom margins
+
+- **Case Studies Page** - Optimized heading sizes for responsive display (`assets/css/customizer.css`)
+  - Desktop H2 headings set to 40px for better visual impact
+  - Mobile H2 headings (max-width: 767px) reduced to 30px for smaller screens
+  - Ensures optimal readability across all devices
+
+- **Search Box Mobile Optimization** - Improved header search functionality on mobile (`assets/css/customizer.css`)
+  - Search box max-width reduced to 100px on mobile (max-width: 767px)
+  - Search/contact menu column gap reduced to 4px for tighter mobile layout
+  - Prevents search box from overwhelming mobile header space
+
+### Fixed
+- **Local Pages Template** - Hidden separator blocks from local pages template (`assets/css/customizer.css`)
+  - Added display:none for UAGB separator blocks on local pages template (wp-custom-template-local-pages-2)
+  - Removes unnecessary visual separators that cluttered local location pages
+  - Cleaner, more focused local page presentation
+
 ## [2.12.1] - 2025-11-07
 ### Fixed
 - **Header Navigation** - Fixed middle dot display in header navigation (`assets/css/customizer.css`)
