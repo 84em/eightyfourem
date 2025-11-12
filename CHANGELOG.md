@@ -5,6 +5,18 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.14.0] - 2025-11-12
+### Added
+- **Modal Search Accessibility Improvements** - Enhanced modal search with comprehensive WCAG 2.1 Level AA compliance
+  - Added ARIA modal attributes (`role="dialog"`, `aria-modal="true"`, `aria-labelledby`) in `assets/js/modal-search.js`
+  - Added visible H2 title "Search" to modal dialog for screen reader context
+  - Implemented focus trap to constrain keyboard navigation within modal
+  - Added focus restoration to return focus to trigger button on modal close
+  - Added ARIA attributes to search trigger button (`aria-label`, `aria-haspopup`, `aria-expanded`) in `assets/js/modal-search.js`
+  - Implemented ARIA live region announcements for screen readers in `assets/js/modal-search.js`
+  - Live announcements for modal open ("Search dialog opened") and close ("Search dialog closed")
+  - Styled modal title with accessible white color and proper spacing in `assets/css/modal-search.css`
+
 ## [2.13.1] - 2025-11-11
 ### Removed
 - **Mobile Search Box Styles** - Removed mobile-specific search box styling (`assets/css/customizer.css`)
