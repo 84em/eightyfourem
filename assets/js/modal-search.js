@@ -30,6 +30,7 @@
             const modalHTML = `
                 <div class="search-modal-overlay"></div>
                 <div class="search-modal-content" role="dialog" aria-modal="true" aria-labelledby="searchModalTitle">
+                    <div class="search-modal-announcer" role="status" aria-live="polite" aria-atomic="true"></div>
                     <button class="search-modal-close" aria-label="Close search">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -54,8 +55,13 @@
             modal.innerHTML = modalHTML;
             document.body.appendChild(modal);
 
-            // Focus input after animation starts
+            // Announce modal opening and focus input after animation starts
             setTimeout(function() {
+                const announcer = modal.querySelector('.search-modal-announcer');
+                if (announcer) {
+                    announcer.textContent = 'Search dialog opened. Type your search query and press enter to search.';
+                }
+
                 const input = modal.querySelector('.search-modal-input');
                 if (input) {
                     input.focus();
