@@ -5,6 +5,13 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.13.1] - 2025-11-11
+### Removed
+- **Mobile Search Box Styles** - Removed mobile-specific search box styling (`assets/css/customizer.css`)
+  - Removed `.search-box` max-width constraint on mobile (previously 100px)
+  - Removed `.search-contact-menu` column gap styling (previously 4px)
+  - Cleanup after implementing modal search feature
+
 ## [2.13.0] - 2025-11-11
 ### Added
 - **Modal Search Feature** - Implemented modal overlay search functionality

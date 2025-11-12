@@ -154,13 +154,3 @@ body.page-template-wp-custom-template-case-studies main h2 {
     }
 
 }
-
-@media (max-width: 767px) {
-    .search-box {
-        max-width: 100px !important;
-    }
-
-    .search-contact-menu {
-        column-gap: 4px !important;
-    }
-}
