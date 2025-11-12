@@ -41,6 +41,14 @@
   animation: slideDown 0.3s ease-out;
 }
 
+/* Modal Title */
+.search-modal-title {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
 /* Close Button */
 .search-modal-close {
   position: absolute;
@@ -67,7 +75,20 @@
 
 /* Search Form */
 .search-modal-form {
-  margin-top: 2.5rem;
+  margin-top: 0;
+}
+
+/* Search Label - Visually Hidden but accessible to screen readers */
+.search-modal-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
 
 .search-modal-form-wrapper {
