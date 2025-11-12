@@ -20,7 +20,8 @@ const paths = {
       './assets/css/customizer.css',
       './assets/css/sticky-header.css',
       './assets/css/case-study-filter.css',
-      './assets/css/search.css'
+      './assets/css/search.css',
+      './assets/css/modal-search.css'
     ],
     googleReviews: [
       './blocks/google-reviews/style.css',
@@ -36,7 +37,8 @@ const paths = {
   scripts: {
     theme: [
       './assets/js/sticky-header.js',
-      './assets/js/case-study-filter.js'
+      './assets/js/case-study-filter.js',
+      './assets/js/modal-search.js'
     ],
     googleReviews: './blocks/google-reviews/index.js',
     calendlyBooking: './blocks/calendly-booking-details/index.js',
