@@ -61,6 +61,23 @@ defined( 'ABSPATH' ) || exit;
             src: get_theme_file_uri( "assets/css/highlight{$suffix}.css" ),
             deps: [],
         );
+
+		// Enqueue modal search CSS
+		\wp_enqueue_style(
+			handle: 'eightyfourem-modal-search',
+			src: get_theme_file_uri( "assets/css/modal-search{$suffix}.css" ),
+			deps: [],
+			ver: $version
+		);
+
+		// Enqueue modal search JavaScript
+		wp_enqueue_script(
+			handle: 'eightyfourem-modal-search',
+			src: get_theme_file_uri( "assets/js/modal-search{$suffix}.js" ),
+			deps: [],
+			ver: $version,
+			args: true
+		);
 	},
 	priority: 10
 );
