@@ -12,12 +12,19 @@
             return;
         }
 
+        // Add ARIA attributes to search trigger
+        searchTrigger.setAttribute('aria-haspopup', 'dialog');
+        searchTrigger.setAttribute('aria-expanded', 'false');
+
         searchTrigger.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
 
             // Store reference to trigger element for focus restoration
             const triggerElement = e.currentTarget;
+
+            // Update ARIA expanded state
+            searchTrigger.setAttribute('aria-expanded', 'true');
 
             // Create modal HTML
             const modalHTML = `
@@ -65,6 +72,10 @@
             // Close modal function
             function closeModal() {
                 modal.classList.add('closing');
+
+                // Update ARIA expanded state
+                searchTrigger.setAttribute('aria-expanded', 'false');
+
                 setTimeout(function() {
                     if (modal.parentNode) {
                         modal.remove();
