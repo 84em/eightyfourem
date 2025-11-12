@@ -5,6 +5,22 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.13.0] - 2025-11-11
+### Added
+- **Modal Search Feature** - Implemented modal overlay search functionality
+  - Created `assets/js/modal-search.js` - JavaScript for modal search interaction
+  - Created `assets/css/modal-search.css` - Styles for modal overlay and search form
+  - Added modal search assets to gulpfile build pipeline
+  - Enqueued modal search CSS and JS in `includes/enqueue.php`
+  - Click on `.search-icon a` opens search form in modal overlay
+  - Modal includes fade-in/slide-down animations (0.3s)
+  - Four close methods: overlay click, X button, Escape key, form submit
+  - Auto-focuses search input after modal opens
+  - Responsive design with mobile-optimized layout
+  - GPU-accelerated animations for smooth performance
+  - Zero dependencies (vanilla JavaScript)
+  - Full accessibility support with keyboard navigation
+
 ## [2.12.2] - 2025-11-11
 ### Changed
 - **Navigation Responsive Design** - Improved mobile navigation spacing and font sizes (`assets/css/customizer.css`)
