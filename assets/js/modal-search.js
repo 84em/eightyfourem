@@ -16,6 +16,9 @@
             e.preventDefault();
             e.stopPropagation();
 
+            // Store reference to trigger element for focus restoration
+            const triggerElement = e.currentTarget;
+
             // Create modal HTML
             const modalHTML = `
                 <div class="search-modal-overlay"></div>
@@ -52,6 +55,13 @@
                 }
             }, 100);
 
+            // Get all focusable elements in modal for focus trap
+            const focusableElements = modal.querySelectorAll(
+                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+            const firstFocusable = focusableElements[0];
+            const lastFocusable = focusableElements[focusableElements.length - 1];
+
             // Close modal function
             function closeModal() {
                 modal.classList.add('closing');
@@ -60,6 +70,12 @@
                         modal.remove();
                     }
                     document.removeEventListener('keydown', handleEscape);
+                    document.removeEventListener('keydown', trapFocus);
+
+                    // Restore focus to trigger element
+                    if (triggerElement) {
+                        triggerElement.focus();
+                    }
                 }, 300);
             }
 
@@ -70,10 +86,32 @@
                 }
             }
 
+            // Focus trap - keep focus within modal
+            function trapFocus(e) {
+                if (e.key !== 'Tab') {
+                    return;
+                }
+
+                // Shift + Tab (backwards)
+                if (e.shiftKey) {
+                    if (document.activeElement === firstFocusable) {
+                        e.preventDefault();
+                        lastFocusable.focus();
+                    }
+                // Tab (forwards)
+                } else {
+                    if (document.activeElement === lastFocusable) {
+                        e.preventDefault();
+                        firstFocusable.focus();
+                    }
+                }
+            }
+
             // Add event listeners
             modal.querySelector('.search-modal-overlay').addEventListener('click', closeModal);
             modal.querySelector('.search-modal-close').addEventListener('click', closeModal);
             document.addEventListener('keydown', handleEscape);
+            document.addEventListener('keydown', trapFocus);
 
             // Close on form submit (let it navigate)
             modal.querySelector('.search-modal-form').addEventListener('submit', function() {
