@@ -5,6 +5,31 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.14.1] - 2025-11-13
+### Fixed
+- **Footer Navigation Font Size** - Fixed footer navigation font size styling (`assets/css/customizer.css`)
+  - Scoped desktop navigation font size (1.5rem) to exclude footer-secondary navigation
+  - Footer navigation now maintains proper font size instead of inheriting oversized header styles
+
+## [2.14.0] - 2025-11-12
+### Added
+- **Modal Search Accessibility Improvements** - Enhanced modal search with comprehensive WCAG 2.1 Level AA compliance
+  - Added ARIA modal attributes (`role="dialog"`, `aria-modal="true"`, `aria-labelledby`) in `assets/js/modal-search.js`
+  - Added visible H2 title "Search 84EM" to modal dialog for screen reader context
+  - Implemented focus trap to constrain keyboard navigation within modal
+  - Added focus restoration to return focus to trigger button on modal close
+  - Added ARIA attributes to search trigger button (`aria-haspopup`, `aria-expanded`) in `assets/js/modal-search.js`
+  - Implemented ARIA live region announcement for screen readers in `assets/js/modal-search.js`
+  - Live announcement for modal open ("Search dialog opened. Type your search query and press enter to search.")
+  - Styled modal title with accessible styling in `assets/css/modal-search.css`
+
+## [2.13.1] - 2025-11-11
+### Removed
+- **Mobile Search Box Styles** - Removed mobile-specific search box styling (`assets/css/customizer.css`)
+  - Removed `.search-box` max-width constraint on mobile (previously 100px)
+  - Removed `.search-contact-menu` column gap styling (previously 4px)
+  - Cleanup after implementing modal search feature
+
 ## [2.13.0] - 2025-11-11
 ### Added
 - **Modal Search Feature** - Implemented modal overlay search functionality
