@@ -5,6 +5,12 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.14.1] - 2025-11-13
+### Fixed
+- **Footer Navigation Font Size** - Fixed footer navigation font size styling (`assets/css/customizer.css`)
+  - Scoped desktop navigation font size (1.5rem) to exclude footer-secondary navigation
+  - Footer navigation now maintains proper font size instead of inheriting oversized header styles
+
 ## [2.14.0] - 2025-11-12
 ### Added
 - **Modal Search Accessibility Improvements** - Enhanced modal search with comprehensive WCAG 2.1 Level AA compliance
