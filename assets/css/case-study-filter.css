@@ -5,15 +5,54 @@
  * @package EightyFourEM
  */
 
-/* Filter button container */
+/* Filter button and counter container (sticky wrapper) */
 .case-study-filters {
+  display: block;
+  margin: 0 0 var(--wp--preset--spacing--40, 2rem); /* Removed left/right auto margins */
+  position: sticky;
+  top: 105px; /* Below header (reduced from 130px) */
+  z-index: 998;
+  background: var(--wp--preset--color--base, #fff);
+  transition: all 0.3s ease;
+}
+
+/* Filter button wrapper */
+.case-study-filter-buttons {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: 0.5rem; /* Reduced from 0.75rem */
   justify-content: center;
-  margin: 0 auto var(--wp--preset--spacing--40, 2rem);
-  max-width: 768px;
   padding: 0;
+}
+
+/* Mobile: Adjust sticky positioning and spacing */
+@media (max-width: 768px) {
+  .case-study-filters {
+    top: 135px; /* Below header on mobile (reduced from 160px) */
+    padding: 0.75rem 0 0.625rem; /* Removed left/right padding */
+    margin-bottom: var(--wp--preset--spacing--40, 2rem);
+  }
+
+  .case-study-filter-buttons {
+    gap: 0.375rem;
+  }
+
+  /* Admin bar adjustment for mobile */
+  .admin-bar .case-study-filters {
+    top: 181px; /* 135px header + 46px admin bar */
+  }
+}
+
+/* Desktop: Sticky filters below header */
+@media (min-width: 769px) {
+  .case-study-filters {
+    padding: 1rem 0; /* Removed left/right padding */
+  }
+
+  /* Admin bar adjustment for desktop */
+  .admin-bar .case-study-filters {
+    top: 137px; /* 105px header + 32px admin bar */
+  }
 }
 
 /* Filter buttons */
@@ -24,9 +63,9 @@
   color: var(--wp--preset--color--contrast, #111);
   cursor: pointer;
   font-family: var(--wp--preset--font-family--heading, inherit);
-  font-size: var(--wp--preset--font-size--medium, 1rem);
+  font-size: 0.875rem; /* Reduced from 1rem */
   font-weight: 600;
-  padding: 0.75rem;
+  padding: 0.5rem 0.875rem; /* Reduced from 0.75rem */
   text-decoration: none;
   transition: all 0.2s ease;
 }
@@ -44,13 +83,10 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .case-study-filters {
-    gap: 0.5rem;
-  }
-
   .case-study-filter-btn {
-    font-size: var(--wp--preset--font-size--small, 0.875rem);
-    padding: 0.5rem 1rem;
+    font-size: 0.8125rem; /* 13px - slightly smaller for mobile */
+    padding: 0.625rem 0.75rem; /* 10px top/bottom, 12px left/right - maintains touch target ~40px */
+    line-height: 1.2;
   }
 }
 
@@ -60,7 +96,7 @@
   font-family: var(--wp--preset--font-family--heading, inherit);
   font-size: var(--wp--preset--font-size--medium, 1rem);
   font-weight: 600;
-  margin-top: 1.5rem;
+  margin-top: 0.5rem;
   opacity: 0;
   text-align: center;
   transform: translateY(-10px);
@@ -100,3 +136,4 @@
   color: var(--wp--preset--color--base, #fff);
   transform: scale(1.05);
 }
+
