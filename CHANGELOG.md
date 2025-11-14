@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Result counter stays visible when filters are sticky (moved inside sticky container)
   - Auto-scroll to results when filter clicked with smooth animation (`assets/js/case-study-filter.js`)
   - Responsive positioning: 105px top offset (desktop), 135px (mobile)
-  - Tightened spacing to fit all filters on one row on desktop (reduced gap from 1rem to 0.375rem)
+  - Tightened spacing to fit all filters on one row on desktop (reduced gap from 0.75rem to 0.5rem; mobile gap is now 0.375rem)
   - Header-2 content can now wrap on pages without TOC (`assets/css/sticky-header.css`)
   - Removed filter shadow and width constraints for cleaner look
 
@@ -20,18 +20,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Case Study Filter Organization** - Reorganized filters to focus on business solutions and industries
   - Reduced from 13 to 10 filters for better clarity and usability (`includes/case-study-filters.php`)
   - Updated filter labels to business-focused categories:
-    - "Financial" → Financial services, fintech, banking, crypto
-    - "Marketing & CRM" → Marketing, CRM, lead generation, SMS/email
-    - "Security & Identity" → Authentication, SAML, 2FA
-    - "Data & Integrations" → API integrations, data processing
-    - "AI & Automation" → AI-powered features, automation, scheduling
+    - "Financial Services" (covers: financial services, fintech, banking, crypto)
+    - "Marketing & CRM" (covers: marketing, CRM, lead generation, SMS/email)
+    - "Security & Identity" (covers: authentication, SAML, 2FA)
+    - "Data & Integrations" (covers: API integrations, data processing)
+    - "AI & Automation" (covers: AI-powered features, automation, scheduling)
   - Removed narrow-focus filters: Affiliates, Reporting, API (consolidated into broader categories)
   - Added "Education" filter for LearnDash and LMS implementations
   - Updated keyword mappings to match industry and solution focus
 
 ### Fixed
 - **Namespace Usage Pattern** - Fixed WordPress callback namespace concatenation pattern across theme
-  - Replaced `__NAMESPACE__ . '\function'` with full namespace path strings in callbacks
+  - Replaced `__NAMESPACE__ . '\\function'` with full namespace path strings in callbacks
   - Updated `includes/google-reviews.php` - 3 callback declarations
   - Updated `includes/open-graph-images.php` - 2 callback declarations
   - Updated `includes/case-study-filters.php` - 1 shortcode registration
