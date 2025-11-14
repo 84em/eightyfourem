@@ -52,6 +52,11 @@ header .header-2 {
     overflow: visible;
 }
 
+/* Allow header-2 content to wrap on pages without TOC (like case studies) */
+body.disable-sticky-toc header .header-2 .wp-block-group {
+    flex-wrap: wrap !important;
+}
+
 /* Hide original content when TOC is active */
 header .header-2 > .wp-block-group {
     display: block;

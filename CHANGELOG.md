@@ -5,6 +5,41 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.14.2] - 2025-11-14
+### Added
+- **Sticky Case Study Filters** - Filters now remain visible while scrolling on case studies page
+  - Filters stick below header on both mobile and desktop (`assets/css/case-study-filter.css`)
+  - Result counter stays visible when filters are sticky (moved inside sticky container)
+  - Auto-scroll to results when filter clicked with smooth animation (`assets/js/case-study-filter.js`)
+  - Responsive positioning: 105px top offset (desktop), 135px (mobile)
+  - Tightened spacing to fit all filters on one row on desktop (reduced gap from 0.75rem to 0.5rem; mobile gap is now 0.375rem)
+  - Header-2 content can now wrap on pages without TOC (`assets/css/sticky-header.css`)
+  - Removed filter shadow and width constraints for cleaner look
+
+### Changed
+- **Case Study Filter Organization** - Reorganized filters to focus on business solutions and industries
+  - Reduced from 13 to 10 filters for better clarity and usability (`includes/case-study-filters.php`)
+  - Updated filter labels to business-focused categories:
+    - "Financial Services" (covers: financial services, fintech, banking, crypto)
+    - "Marketing & CRM" (covers: marketing, CRM, lead generation, SMS/email)
+    - "Security & Identity" (covers: authentication, SAML, 2FA)
+    - "Data & Integrations" (covers: API integrations, data processing)
+    - "AI & Automation" (covers: AI-powered features, automation, scheduling)
+  - Removed narrow-focus filters: Affiliates, Reporting, API (consolidated into broader categories)
+  - Added "Education" filter for LearnDash and LMS implementations
+  - Updated keyword mappings to match industry and solution focus
+
+### Fixed
+- **Namespace Usage Pattern** - Fixed WordPress callback namespace concatenation pattern across theme
+  - Replaced `__NAMESPACE__ . '\\function'` with full namespace path strings in callbacks
+  - Updated `includes/google-reviews.php` - 3 callback declarations
+  - Updated `includes/open-graph-images.php` - 2 callback declarations
+  - Updated `includes/case-study-filters.php` - 1 shortcode registration
+  - Updated `AGENTS.md` documentation with correct namespace pattern
+  - Improves code consistency and follows WordPress best practices for namespaced callbacks
+- **Filter Auto-Scroll** - Fixed filters scrolling on initial page load when hash filter present
+- **CHANGELOG Accuracy** - Fixed inaccurate descriptions in previous changelog entries
+
 ## [2.14.1] - 2025-11-13
 ### Fixed
 - **Footer Navigation Font Size** - Fixed footer navigation font size styling (`assets/css/customizer.css`)

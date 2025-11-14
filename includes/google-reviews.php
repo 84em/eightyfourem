@@ -46,7 +46,7 @@ defined( 'ABSPATH' ) || exit;
 			menu_title: 'Google Reviews',
 			capability: 'manage_options',
 			menu_slug: 'google-reviews-block',
-			callback: __NAMESPACE__ . '\\render_options_page'
+			callback: 'EightyFourEM\GoogleReviews\render_options_page'
 		);
 	},
 	priority: 10
@@ -122,13 +122,13 @@ defined( 'ABSPATH' ) || exit;
  */
 \add_action(
 	hook_name: 'wp_ajax_get_google_reviews',
-	callback: __NAMESPACE__ . '\\ajax_get_reviews',
+	callback: 'EightyFourEM\GoogleReviews\ajax_get_reviews',
 	priority: 10
 );
 
 \add_action(
 	hook_name: 'wp_ajax_nopriv_get_google_reviews',
-	callback: __NAMESPACE__ . '\\ajax_get_reviews',
+	callback: 'EightyFourEM\GoogleReviews\ajax_get_reviews',
 	priority: 10
 );
 

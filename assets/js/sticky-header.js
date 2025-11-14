@@ -15,7 +15,7 @@
 
         // Check if sticky TOC is disabled for this page
         if (document.body.classList.contains('disable-sticky-toc')) {
-            // Still handle scrolled header class, but skip TOC entirely
+            // Still handle scrolled header class
             let ticking = false;
 
             function updateHeaderOnly() {
@@ -39,7 +39,6 @@
 
             window.addEventListener('scroll', requestTick);
             window.addEventListener('resize', requestTick);
-            updateHeaderOnly();
 
             return;
         }
@@ -293,6 +292,6 @@
             }
         }, true); // Use capture phase to handle the event before default behavior
 
-        updateHeader();
+        // Don't call updateHeader() on page load - only on scroll
     });
 })();

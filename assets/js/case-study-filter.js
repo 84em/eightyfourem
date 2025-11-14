@@ -32,8 +32,13 @@
 		}
 
 		// Function to apply filter
-		function applyFilter(filter) {
+		function applyFilter(filter, shouldScroll) {
 			let visibleCount = 0;
+
+			// Default to scrolling if not specified
+			if (shouldScroll === undefined) {
+				shouldScroll = true;
+			}
 
 			// Update active button state
 			filterButtons.forEach(function (btn) {
@@ -89,6 +94,31 @@
 				if (resultCounter) {
 					resultCounter.classList.remove('is-filtering');
 				}
+
+				// Scroll to first visible case study after filtering completes (only if shouldScroll is true)
+				if (shouldScroll) {
+					const firstVisibleCaseStudy = Array.from(caseStudyItems).find(function(item) {
+						return item.style.display !== 'none';
+					});
+
+					if (firstVisibleCaseStudy) {
+						// Wait for DOM to update, then scroll
+						setTimeout(function() {
+							const header = document.querySelector('header');
+							const headerHeight = header ? header.offsetHeight : 0;
+							const filtersContainer = document.querySelector('.case-study-filters');
+							const filtersHeight = filtersContainer ? filtersContainer.offsetHeight : 0;
+							const offset = headerHeight + filtersHeight + 20; // 20px padding
+
+							const targetPosition = firstVisibleCaseStudy.getBoundingClientRect().top + window.pageYOffset - offset;
+
+							window.scrollTo({
+								top: targetPosition,
+								behavior: 'smooth'
+							});
+						}, 100);
+					}
+				}
 			}, 50);
 		}
 
@@ -122,12 +152,12 @@
 					return btn.dataset.filter === filter;
 				});
 				if (filterExists) {
-					applyFilter(filter);
+					applyFilter(filter, false); // Don't scroll on page load
 					return;
 				}
 			}
 			// Default: show all
-			applyFilter('all');
+			applyFilter('all', false); // Don't scroll on page load
 		}
 
 		// Initialize

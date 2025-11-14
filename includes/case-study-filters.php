@@ -27,52 +27,40 @@ function get_filters() {
                     'keywords' => [],
             ],
             'financial'   => [
-                    'label'    => 'Financial',
-                    'keywords' => [ 'financial', 'fintech', 'banking', 'crypto', 'bank', 'lending', 'investment', 'cryptocurrency' ],
-            ],
-            'security'   => [
-                    'label'    => 'Security',
-                    'keywords' => [ 'security', 'authentication', 'saml', 'two factor', 'headers', '2fa', 'two-factor', 'two factor'],
-            ],
-            'healthcare' => [
-                    'label'    => 'Healthcare',
-                    'keywords' => [ 'senior living', 'healthcare', 'medical', 'health', 'medical' ],
-            ],
-            'automation' => [
-                    'label'    => 'Automation',
-                    'keywords' => [ 'scheduler', 'schedule', 'cron', 'automation', 'klaviyo', 'zapier', 'calendly', 'webhook', 'zapier', 'automatic', 'automatically' ],
-            ],
-            'realestate' => [
-                    'label'    => 'Real Estate',
-                    'keywords' => [ 'commercial' ],
-            ],
-            'marketing'         => [
-                    'label'    => 'Marketing',
-                    'keywords' => [ 'twilio', 'onsignal', 'marketing', 'lead', 'advertising', 'ads', 'leads', 'sms', 'email', 'marketing automation', 'marketing automation software', 'marketing automation software' ],
-            ],
-            'ai'         => [
-                    'label'    => 'AI',
-                    'keywords' => [ 'ai-powered', 'ai analysis', 'claude', 'openai', 'chatgpt', 'codex', 'copilot', 'machine learning', 'artificial intelligence' ],
-            ],
-            'affiliate'   => [
-                    'label'    => 'Affiliates',
-                    'keywords' => [ 'affiliate', 'affiliates', 'affiliatewp' ],
-            ],
-            'learning'    => [
-                    'label'    => 'Education',
-                    'keywords' => [ 'education', 'lms', 'learning' ],
+                    'label'    => 'Financial Services',
+                    'keywords' => [ 'financial', 'fintech', 'banking', 'crypto', 'bank', 'lending', 'investment', 'cryptocurrency', 'ibor', 'asset management', 'asset manager', 'fund management', 'conversions api' ],
             ],
             'ecommerce'  => [
                     'label'    => 'E-Commerce',
-                    'keywords' => [ 'woocommerce', 'ecommerce' ],
+                    'keywords' => [ 'woocommerce', 'ecommerce', 'e-commerce', 'shipstation', 'subscription', 'order', 'store credit', 'loyalty', 'wellness brand' ],
             ],
-            'reporting'   => [
-                    'label'    => 'Reporting',
-                    'keywords' => [ 'reporting' ],
+            'healthcare' => [
+                    'label'    => 'Healthcare',
+                    'keywords' => [ 'healthcare', 'medical', 'health', 'senior living', 'wellness', 'assessment' ],
             ],
-            'api'        => [
-                    'label'    => 'API',
-                    'keywords' => [ 'api', 'integration' ],
+            'marketing'  => [
+                    'label'    => 'Marketing & CRM',
+                    'keywords' => [ 'marketing', 'crm', 'lead', 'leads', 'email', 'klaviyo', 'conversions', 'reporting', 'analytics', 'gravity forms', 'twilio', 'sms', 'advertising', 'ads', 'hubspot' ],
+            ],
+            'realestate' => [
+                    'label'    => 'Real Estate',
+                    'keywords' => [ 'real estate', 'mls', 'commercial', 'property' ],
+            ],
+            'security'   => [
+                    'label'    => 'Security & Identity',
+                    'keywords' => [ 'security', 'authentication', 'identity', 'verification', 'saml', 'two factor', '2fa', 'two-factor', 'headers', 'persona', 'idology', 'integrity checker' ],
+            ],
+            'integrations' => [
+                    'label'    => 'Data & Integrations',
+                    'keywords' => [ 'api', 'integration', 'zapier', 'calendly', 'webhook', 'data sync', 'pdf import', 'youtube', 'spektrix', 'fasttrack', 's3', 'zoom', 'typeform' ],
+            ],
+            'education'  => [
+                    'label'    => 'Education',
+                    'keywords' => [ 'education', 'learndash', 'lms', 'learning', 'course', 'training', 'e-learning', 'student' ],
+            ],
+            'ai'         => [
+                    'label'    => 'AI & Automation',
+                    'keywords' => [ 'ai', 'ai-powered', 'ai analysis', 'claude', 'openai', 'chatgpt', 'machine learning', 'artificial intelligence', 'automation', 'automated', 'automatic', 'automatically', 'intelligent' ],
             ],
     ];
 }
@@ -88,19 +76,21 @@ function render_filters() {
     ob_start();
     ?>
     <div class="case-study-filters">
-        <?php foreach ( $filters as $key => $filter ) : ?>
-            <button class="case-study-filter-btn <?php echo $key === 'all' ? 'is-active' : ''; ?>" data-filter="<?php echo esc_attr( $key ); ?>">
-                <?php echo esc_html( $filter['label'] ); ?>
-            </button>
-        <?php endforeach; ?>
+        <div class="case-study-filter-buttons">
+            <?php foreach ( $filters as $key => $filter ) : ?>
+                <button class="case-study-filter-btn <?php echo $key === 'all' ? 'is-active' : ''; ?>" data-filter="<?php echo esc_attr( $key ); ?>">
+                    <?php echo esc_html( $filter['label'] ); ?>
+                </button>
+            <?php endforeach; ?>
+        </div>
+        <div class="case-study-result-count"></div>
     </div>
-    <div class="case-study-result-count"></div>
     <?php
     return ob_get_clean();
 }
 
 // Register shortcode
-add_shortcode( 'case_study_filters', __NAMESPACE__ . '\render_filters' );
+add_shortcode( 'case_study_filters', 'EightyFourEM\CaseStudyFilters\render_filters' );
 
 /**
  * Localize filter keywords to JavaScript
