@@ -5,6 +5,17 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.14.2] - 2025-11-14
+### Fixed
+- **Namespace Usage Pattern** - Fixed WordPress callback namespace concatenation pattern across theme
+  - Replaced `__NAMESPACE__ . '\function'` with full namespace path strings in callbacks
+  - Updated `includes/google-reviews.php` - 3 callback declarations
+  - Updated `includes/open-graph-images.php` - 2 callback declarations
+  - Updated `includes/case-study-filters.php` - 1 shortcode registration
+  - Updated `AGENTS.md` documentation with correct namespace pattern
+  - Improves code consistency and follows WordPress best practices for namespaced callbacks
+- **CHANGELOG Accuracy** - Fixed inaccurate descriptions in previous changelog entries
+
 ## [2.14.1] - 2025-11-13
 ### Fixed
 - **Footer Navigation Font Size** - Fixed footer navigation font size styling (`assets/css/customizer.css`)

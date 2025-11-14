@@ -238,7 +238,7 @@ function validate_og_image( $attachment_id ) {
 			menu_title: 'Open Graph Images',
 			capability: 'manage_options',
 			menu_slug: 'eightyfourem-og-images',
-			callback: __NAMESPACE__ . '\\render_settings_page'
+			callback: 'EightyFourEM\OpenGraph\render_settings_page'
 		);
 	}
 );
@@ -412,7 +412,7 @@ function render_settings_page() {
 		\add_meta_box(
 			id: 'eightyfourem_og_image',
 			title: 'Open Graph Image',
-			callback: __NAMESPACE__ . '\\render_meta_box',
+			callback: 'EightyFourEM\OpenGraph\render_meta_box',
 			screen: [ 'post', 'page', 'project' ],
 			context: 'side',
 			priority: 'default'

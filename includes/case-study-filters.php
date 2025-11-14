@@ -100,7 +100,7 @@ function render_filters() {
 }
 
 // Register shortcode
-add_shortcode( 'case_study_filters', __NAMESPACE__ . '\render_filters' );
+add_shortcode( 'case_study_filters', 'EightyFourEM\CaseStudyFilters\render_filters' );
 
 /**
  * Localize filter keywords to JavaScript
