@@ -5,6 +5,22 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.16.0] - 2025-11-15
+### Added
+- **Related Case Studies Feature** - Automatic related content recommendations on individual case study pages
+  - Created `includes/related-case-studies.php` - Server-rendered related case studies with transient caching
+  - Created `assets/css/related-case-studies.css` - Responsive grid styling (3 columns desktop, 1 column mobile)
+  - Added `get_case_study_categories()` function to `includes/case-study-filters.php` for keyword-based matching
+  - Displays up to 6 related case studies ranked by shared filter categories and recency
+  - Features category badges, featured images, auto-generated excerpts with Challenge heading removal
+  - 1-hour transient caching with automatic invalidation on case study updates
+  - Responsive design: 3-column grid (≥769px), 1-column grid (≤768px) matching theme breakpoints
+  - Compact spacing optimized for content density
+  - Updated `gulpfile.js` to compile new CSS in build pipeline
+  - Updated `includes/enqueue.php` to conditionally load CSS only on case study pages (children of page 4406)
+  - Updated `functions.php` to require new include file
+  - Zero manual configuration - fully automatic using existing filter keyword system
+
 ## [2.15.1] - 2025-11-15
 ### Fixed
 - **Code Quality Improvements** - Comprehensive code smell analysis and fixes
