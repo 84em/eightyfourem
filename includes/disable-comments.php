@@ -50,7 +50,6 @@ defined( 'ABSPATH' ) || exit;
 \add_filter(
     hook_name: 'comments_array',
     callback: '__return_empty_array',
-    priority: 10,
     accepted_args: 2 );
 
 // removes comments menu from the admin

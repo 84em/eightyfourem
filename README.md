@@ -98,13 +98,13 @@ npm install
 
 The build process handles:
 - **CSS files**:
-  - Theme: `customizer.css`, `sticky-header.css`, `highlight.css`
+  - Theme: `navigation.css`, `page-specific.css`, `utilities.css`, `sticky-header.css`, `highlight.css`, `modal-search.css`, `case-study-filter.css`, `search.css`
   - Google Reviews Block: `editor.css`, `style.css` (in `assets/google-reviews-block/`)
   - Autoprefixer (targets last 2 browser versions)
   - Minification
   - Sourcemaps
 - **JavaScript files**:
-  - Theme: `sticky-header.js`, `highlight.js`
+  - Theme: `sticky-header.js`, `highlight.js`, `modal-search.js`, `case-study-filter.js`
   - Google Reviews Block: `block.js` (in `assets/google-reviews-block/`)
   - Minification with terser
   - Sourcemaps
@@ -120,22 +120,27 @@ eightyfourem/
 │   ├── js/                   # JavaScript files
 │   └── google-reviews-block/ # Google Reviews block assets
 ├── includes/                 # Theme functionality modules
+│   ├── 404.php              # Custom 404 redirect handler
 │   ├── author-pages.php     # Author page customizations
 │   ├── block-styles.php     # Custom block styles
 │   ├── block-stylesheets.php # Block-specific stylesheets
+│   ├── calendly-booking-details.php # Calendly block integration
+│   ├── case-study-filters.php # Case study filtering system
 │   ├── cli.php              # WP-CLI commands
 │   ├── dequeue.php          # Script/style dequeuing
 │   ├── disable-comments.php # Comments disabling functionality
 │   ├── document-title.php   # Document title filters
 │   ├── enqueue.php          # Script/style enqueuing
-│   ├── footer.php           # Footer functionality and UAGB scripts
 │   ├── google-reviews.php   # Google Reviews block
 │   ├── meta-tags.php        # SEO meta tags
+│   ├── open-graph-images.php # Open Graph image handling
 │   ├── pattern-categories.php # Pattern categories
+│   ├── performance.php      # Performance optimizations
 │   ├── permalinks.php       # Permalink customizations
+│   ├── relevanssi.php       # Relevanssi search integration
 │   ├── schema.php           # Schema.org structured data
 │   ├── search.php           # Search customizations
-│   ├── shortcode-last-updated.php # Last updated shortcode
+│   ├── shortcodes.php       # Custom shortcodes
 │   ├── shortlinks.php       # Shortlink functionality
 │   └── sitemap.php          # XML sitemap generation
 ├── parts/            # Template parts

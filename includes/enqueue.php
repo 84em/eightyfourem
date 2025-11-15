@@ -27,21 +27,18 @@ defined( 'ABSPATH' ) || exit;
 		\wp_enqueue_style(
             handle: 'eightyfourem-navigation',
             src: get_theme_file_uri( "assets/css/navigation{$suffix}.css" ),
-            deps: [],
             ver: $version
 		);
 
 		\wp_enqueue_style(
             handle: 'eightyfourem-page-specific',
             src: get_theme_file_uri( "assets/css/page-specific{$suffix}.css" ),
-            deps: [],
             ver: $version
 		);
 
 		\wp_enqueue_style(
             handle: 'eightyfourem-utilities',
             src: get_theme_file_uri( "assets/css/utilities{$suffix}.css" ),
-            deps: [],
             ver: $version
 		);
 
@@ -49,7 +46,6 @@ defined( 'ABSPATH' ) || exit;
 		\wp_enqueue_style(
             handle: 'eightyfourem-sticky-header',
             src: get_theme_file_uri( "assets/css/sticky-header{$suffix}.css" ),
-            deps: [],
             ver: $version
 		);
 
@@ -57,30 +53,25 @@ defined( 'ABSPATH' ) || exit;
         wp_enqueue_script(
             handle: 'eightyfourem-sticky-header',
             src: get_theme_file_uri( "assets/js/sticky-header{$suffix}.js" ),
-            deps: [],
-            ver: $version,
-            args: true
+            ver: $version
 		);
 
         // Enqueue highlight script
         wp_enqueue_script(
             handle: 'eightyfourem-highlight',
-            src: get_theme_file_uri( "assets/js/highlight{$suffix}.js" ),
-            deps: [],
+            src: get_theme_file_uri( "assets/js/highlight{$suffix}.js" )
         );
 
         // Enqueue highlight CSS
         wp_enqueue_style(
             handle: 'eightyfourem-highlighter',
-            src: get_theme_file_uri( "assets/css/highlight{$suffix}.css" ),
-            deps: [],
+            src: get_theme_file_uri( "assets/css/highlight{$suffix}.css" )
         );
 
 		// Enqueue modal search CSS
 		\wp_enqueue_style(
 			handle: 'eightyfourem-modal-search',
 			src: get_theme_file_uri( "assets/css/modal-search{$suffix}.css" ),
-			deps: [],
 			ver: $version
 		);
 
@@ -88,12 +79,9 @@ defined( 'ABSPATH' ) || exit;
 		wp_enqueue_script(
 			handle: 'eightyfourem-modal-search',
 			src: get_theme_file_uri( "assets/js/modal-search{$suffix}.js" ),
-			deps: [],
-			ver: $version,
-			args: true
+			ver: $version
 		);
-	},
-	priority: 10
+	}
 );
 
 /**
@@ -113,11 +101,9 @@ defined( 'ABSPATH' ) || exit;
 		\wp_enqueue_style(
 			'eightyfourem-search',
             get_theme_file_uri( "assets/css/search{$suffix}.css" ),
-			[],
 			$version
 		);
-	},
-	priority: 10
+	}
 );
 
 /**
@@ -137,19 +123,16 @@ defined( 'ABSPATH' ) || exit;
 		\wp_enqueue_style(
 			'eightyfourem-case-study-filter',
             get_theme_file_uri( "assets/css/case-study-filter{$suffix}.css" ),
-			[],
 			$version
 		);
 
         wp_enqueue_script(
 			'eightyfourem-case-study-filter',
             get_theme_file_uri( "assets/js/case-study-filter{$suffix}.js" ),
-			[],
 			$version,
 			true
 		);
-	},
-	priority: 10
+	}
 );
 
 /**
@@ -172,8 +155,7 @@ defined( 'ABSPATH' ) || exit;
 		}
 
 		UAGB_Scripts_Utils::enqueue_blocks_styles();
-	},
-	priority: 10
+	}
 );
 
 /**
@@ -193,6 +175,5 @@ defined( 'ABSPATH' ) || exit;
 		}
 
 		return $classes;
-	},
-	priority: 10
+	}
 );

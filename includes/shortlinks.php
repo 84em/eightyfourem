@@ -22,8 +22,7 @@ defined( 'ABSPATH' ) || exit;
     callback: function () {
         \remove_action(
             hook_name: 'wp_head',
-            callback: 'wp_shortlink_wp_head',
-            priority: 10 );
+            callback: 'wp_shortlink_wp_head' );
 
         \remove_action(
             hook_name: 'template_redirect',

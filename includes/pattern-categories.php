@@ -23,6 +23,5 @@ defined( 'ABSPATH' ) || exit;
 				'description' => \__( 'A collection of full page layouts.' ),
 			]
 		);
-	},
-	priority: 10
+	}
 );

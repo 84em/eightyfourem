@@ -18,6 +18,5 @@ defined( 'ABSPATH' ) || exit;
 		\register_block_type(
 			\get_template_directory() . '/blocks/calendly-booking-details'
 		);
-	},
-	priority: 10
+	}
 );

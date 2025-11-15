@@ -32,6 +32,5 @@ defined( 'ABSPATH' ) || exit;
 				'path'   => \get_parent_theme_file_path( 'assets/css/button-outline.css' ),
 			]
 		);
-	},
-	priority: 10
+	}
 );

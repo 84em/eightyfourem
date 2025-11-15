@@ -31,8 +31,7 @@ defined( 'ABSPATH' ) || exit;
 				]
 			);
 		}, 20 );
-	},
-	priority: 10
+	}
 );
 
 /**
@@ -48,8 +47,7 @@ defined( 'ABSPATH' ) || exit;
 			menu_slug: 'google-reviews-block',
 			callback: 'EightyFourEM\GoogleReviews\render_options_page'
 		);
-	},
-	priority: 10
+	}
 );
 
 /**
@@ -113,8 +111,7 @@ defined( 'ABSPATH' ) || exit;
 			page: 'google_reviews_block',
 			section: 'google_reviews_block_section'
 		);
-	},
-	priority: 10
+	}
 );
 
 /**
@@ -122,14 +119,12 @@ defined( 'ABSPATH' ) || exit;
  */
 \add_action(
 	hook_name: 'wp_ajax_get_google_reviews',
-	callback: 'EightyFourEM\GoogleReviews\ajax_get_reviews',
-	priority: 10
+	callback: 'EightyFourEM\GoogleReviews\ajax_get_reviews'
 );
 
 \add_action(
 	hook_name: 'wp_ajax_nopriv_get_google_reviews',
-	callback: 'EightyFourEM\GoogleReviews\ajax_get_reviews',
-	priority: 10
+	callback: 'EightyFourEM\GoogleReviews\ajax_get_reviews'
 );
 
 /**

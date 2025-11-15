@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Dequeue Unused Scripts and Styles
+ *
+ * Removes unused Spectra Pro and UAGB scripts/styles to improve performance:
+ * - Dequeues UAGB loop builder script on front page (not used)
+ * - Dequeues Spectra Pro block CSS globally (not used)
+ *
+ * @package EightyFourEM
+ */
+
 namespace EightyFourEM;
 
 defined( 'ABSPATH' ) || exit;

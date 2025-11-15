@@ -7,9 +7,9 @@ The 84EM Block Theme is a custom WordPress FSE theme optimized for business webs
 - **Case Study Filters** - Interactive filtering system with shareable URLs (`includes/case-study-filters.php`)
 - **Sticky Header TOC** - Dynamic table of contents navigation in header (`assets/js/sticky-header.js`)
 - **Google Reviews Block** - Custom Gutenberg block for displaying reviews
-- **Enhanced Search** - Fuzzy matching with relevance scoring, SOUNDEX, Levenshtein distance, N-grams (`includes/enhanced-search.php`)
 - **SEO Suite** - Meta tags, schema.org structured data, XML sitemap with batch processing
 - **Custom 404 Handling** - Automatic redirects for legacy URLs (`includes/404.php`)
+- **Modal Search** - Accessible modal search with keyboard navigation and ARIA support
 
 ## Project Structure & Module Organization
 - `assets/css|js|fonts/` hold front-end sources; compiled files inherit the same path with `.min.(css|js)` suffixes. Keep Google Reviews block assets inside `assets/google-reviews-block/`.
@@ -49,15 +49,24 @@ Files in `includes/` directory provide modular functionality:
 - `schema.php` - Schema.org structured data generation for pages, posts, projects
 - `sitemap.php` - XML sitemap with batch processing via Action Scheduler
 - `search.php` - Search result filtering, Challenge heading removal from excerpts
-- `enhanced-search.php` - Advanced search with fuzzy matching (SOUNDEX, Levenshtein, N-grams), multi-factor relevance scoring (title 40%, content 30%, recency 15%, engagement 15%), transient caching (1 hour), progressive enhancement
+- `relevanssi.php` - Relevanssi search plugin integration with spell correction
+- `open-graph-images.php` - Open Graph image management with fallback logic
 
 **UI & Navigation:**
-- `enqueue.php` - Script/style enqueuing for sticky header, case study filters, Google Reviews
+- `enqueue.php` - Script/style enqueuing for sticky header, modal search, case study filters
 - `block-styles.php` - Custom block style registration
 - `block-stylesheets.php` - Block-specific stylesheet loading
 
 **Integrations:**
 - `cli.php` - WP-CLI commands for schema regeneration
+- `calendly-booking-details.php` - Calendly booking details block
+- `shortcodes.php` - Custom WordPress shortcodes
+
+**Code Quality:**
+- All functions include proper type hints (PHP 8.0+)
+- Intentionally unused parameters marked with underscore prefix
+- Safe $_POST access with wp_unslash() and sanitize_text_field()
+- Default parameter values omitted from named parameters (priority: 10, deps: [], accepted_args: 1)
 
 ## Coding Style & Naming Conventions
 
@@ -135,15 +144,10 @@ add_shortcode( 'case_study_filters', 'EightyFourEM\CaseStudyFilters\render_filte
   - Verify case studies page (parent 4406) strips Challenge headings from excerpts
   - Confirm excerpts start with actual content, not section headings
 
-- **Enhanced Search** (`includes/enhanced-search.php`)
-  - Test exact matches return expected results
-  - Test fuzzy matching with typos (e.g., "wordpres" finds "wordpress")
-  - Test phonetic matching with SOUNDEX (e.g., "nite" finds "night")
-  - Test partial word matches with N-grams (e.g., "develop" finds "development")
-  - Verify relevance scoring ranks most relevant results first
-  - Test cache behavior - second identical search should be faster (check debug HTML comment when logged in as admin with WP_DEBUG)
-  - Test multiple search terms (space-separated)
-  - Verify special characters are properly sanitized
+- **Relevanssi Search Integration** (`includes/relevanssi.php`)
+  - Test spell correction suggestions appear for misspelled searches
+  - Verify fallback search with corrected query when no results found
+  - Test "Did You Mean" functionality
 
 - **Font Loading Performance** (`includes/performance.php`)
   - Check for FOUT (Flash of Unstyled Text) or FOIT (Flash of Invisible Text) on page load
