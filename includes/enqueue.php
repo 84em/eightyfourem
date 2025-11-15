@@ -23,10 +23,24 @@ defined( 'ABSPATH' ) || exit;
 		$suffix  = ( ! \defined( 'WP_DEBUG' ) || ! WP_DEBUG ) ? '.min' : '';
 		$version = \wp_get_theme()->get( 'Version' );
 
-		// Enqueue customizer CSS
+		// Enqueue modular CSS files (replaces old customizer.css)
 		\wp_enqueue_style(
-            handle: 'eightyfourem-customizer',
-            src: get_theme_file_uri( "assets/css/customizer{$suffix}.css" ),
+            handle: 'eightyfourem-navigation',
+            src: get_theme_file_uri( "assets/css/navigation{$suffix}.css" ),
+            deps: [],
+            ver: $version
+		);
+
+		\wp_enqueue_style(
+            handle: 'eightyfourem-page-specific',
+            src: get_theme_file_uri( "assets/css/page-specific{$suffix}.css" ),
+            deps: [],
+            ver: $version
+		);
+
+		\wp_enqueue_style(
+            handle: 'eightyfourem-utilities',
+            src: get_theme_file_uri( "assets/css/utilities{$suffix}.css" ),
             deps: [],
             ver: $version
 		);

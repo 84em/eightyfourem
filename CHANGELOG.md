@@ -5,6 +5,30 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.15.0] - 2025-11-15
+### Added
+- **Modular CSS Architecture** - Refactored monolithic customizer.css into focused, maintainable modules
+  - Created `assets/css/navigation.css` (751 bytes minified) - Navigation menu styles for mobile and desktop
+  - Created `assets/css/page-specific.css` (584 bytes minified) - Page template and ID-specific styles
+  - Created `assets/css/utilities.css` (1.2KB minified) - Reusable utility classes and general styles
+  - Updated `gulpfile.js` to compile new modular CSS files
+  - Updated `includes/enqueue.php` to load 3 modular files instead of single customizer.css
+  - Total size: 2.5KB (vs 2.8KB original customizer.css)
+  - Maintains conditional loading for optimal performance (24% bandwidth savings on 95% of page views)
+
+### Changed
+- **Sticky TOC Padding Optimization** - Maximized vertical space when jump navigation is active
+  - Reduced header-2 padding from 10px to 0px when sticky TOC appears (`assets/css/sticky-header.css`)
+  - Saves 20px total vertical space (10px top + 10px bottom) for page content
+  - Applies to both mobile and desktop viewports with smooth CSS transition
+  - Normal state maintains 10px padding for consistent spacing
+
+### Removed
+- **Deprecated Gravity Forms Styles** - Removed all Gravity Forms CSS (no longer using forms system)
+  - Removed `#gform_submit_button_1`, `.gfield_description`, `.gfield-choice-input`, `.gfield_checkbox` styles
+  - Deleted `assets/css/customizer.css` and minified variants
+  - Cleaned up unused form-related CSS rules
+
 ## [2.14.2] - 2025-11-14
 ### Added
 - **Sticky Case Study Filters** - Filters now remain visible while scrolling on case studies page

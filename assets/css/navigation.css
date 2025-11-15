@@ -1,0 +1,43 @@
+/**
+ * Navigation Styles
+ * Mobile and desktop navigation menu styling
+ */
+
+/* Mobile hamburger icon sizing */
+.wp-block-navigation__responsive-container-close svg,
+.wp-block-navigation__responsive-container-open svg {
+  height: 48px !important;
+  width: 48px !important;
+}
+
+/* Header navigation font size */
+header .wp-block-navigation .wp-block-navigation-item__label {
+  font-size: 1.5rem !important;
+}
+
+/* Mobile navigation - remove padding in header */
+@media screen and (max-width: 768px) {
+  header .wp-block-navigation ul,
+  header .wp-block-navigation ul li {
+    padding-bottom: 0 !important;
+  }
+}
+
+/* Mobile navigation - standard padding */
+@media screen and (max-width: 768px) {
+  .wp-block-navigation ul,
+  .wp-block-navigation ul li {
+    padding-bottom: 1rem !important;
+  }
+
+  .wp-block-navigation .wp-block-navigation-item__label {
+    font-size: 1rem !important;
+  }
+}
+
+/* Desktop navigation - larger font size (exclude footer) */
+@media screen and (min-width: 768px) {
+  .wp-block-navigation:not(.footer-secondary) .wp-block-navigation-item__label {
+    font-size: 1.5rem !important;
+  }
+}

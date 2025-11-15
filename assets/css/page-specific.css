@@ -1,0 +1,37 @@
+/**
+ * Page-Specific Styles
+ * Styles that apply to specific page templates or page IDs
+ */
+
+/* Hide global CTA on page ID 357 */
+body.page-id-357 .global-cta {
+  display: none;
+}
+
+/* Hide separators on local pages template */
+body.page-template-wp-custom-template-local-pages-2 main .wp-block-uagb-separator {
+  display: none !important;
+}
+
+/* Search results page */
+body.search-results .wp-block-post-excerpt__more-text {
+  margin-top: 0;
+  padding-top: 0;
+  font-size: 80%;
+  margin-bottom: 1rem;
+}
+
+body.search-results .wp-block-query h2 a {
+  text-decoration: underline;
+}
+
+/* Case studies template - heading sizes */
+body.page-template-wp-custom-template-case-studies main h2 {
+  font-size: 40px !important;
+}
+
+@media screen and (max-width: 767px) {
+  body.page-template-wp-custom-template-case-studies main h2 {
+    font-size: 30px !important;
+  }
+}

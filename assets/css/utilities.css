@@ -1,0 +1,94 @@
+/**
+ * Utility Styles
+ * Reusable utility classes, layout adjustments, and general styles
+ */
+
+/* Mobile hero heading padding */
+@media (max-width: 781px) {
+  .is-hero-block h1,
+  .is-hero-block h2 {
+    padding: 0 1rem;
+  }
+
+  .header-mdot {
+    display: block;
+  }
+
+  .header-break {
+    display: block;
+  }
+}
+
+/* Header z-index */
+header .header-2 {
+  z-index: 100;
+}
+
+/* Main content margin */
+main {
+  margin-top: 0 !important;
+}
+
+/* Footer margin */
+footer {
+  margin-top: 0;
+}
+
+/* Huron logo sizing */
+.huron-logo {
+  max-width: 100px;
+}
+
+/* Utility: Drop shadow */
+.drop-shadow {
+  filter: drop-shadow(rgb(0, 0, 0) 1px 1px 2px);
+}
+
+/* Utility: Text glow effect */
+.is-glow {
+  text-shadow: 2px 2px 2px #000000, 2px 2px 2px #000000, 2px 2px 2px #000000,
+    2px 2px 2px #000000, 2px 2px 2px #000000, 2px 2px 2px #000000, 2px 2px 2px #000000;
+}
+
+/* Utility: 84EM background positioning */
+.has-84em-background {
+  background-position: 0 0;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+/* Utility: Rounded corners */
+.is-rounded {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 0px;
+  border: 0px solid #333;
+}
+
+/* Checkmark list spacing */
+.is-style-checkmark-list li {
+  padding-bottom: 1rem;
+}
+
+/* Main content link colors */
+main a:not(.wp-element-button, .wp-block-button__link) {
+  color: var(--wp--preset--color--custom-color-1) !important;
+}
+
+main a:hover:not(.wp-element-button, .wp-block-button__link) {
+  color: var(--wp--preset--color--contrast-2) !important;
+}
+
+/* Standard list indentation */
+.wp-block-list:not(.is-style-checkmark-list) {
+  padding-left: 2em;
+}
+
+/* Hide elements on mobile (Spectra/UAG blocks) */
+@media (max-width: 781px) {
+  body .uag-hide-mob.uagb-google-map__wrap,
+  body .uag-hide-mob {
+    display: none !important;
+  }
+}
