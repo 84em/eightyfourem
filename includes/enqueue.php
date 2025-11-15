@@ -136,6 +136,33 @@ defined( 'ABSPATH' ) || exit;
 );
 
 /**
+ * Enqueue related case studies styles
+ * Only loads on single case study pages
+ */
+\add_action(
+	hook_name: 'wp_enqueue_scripts',
+	callback: function () {
+		if ( ! \is_page() || ! \is_singular() ) {
+			return;
+		}
+
+		$post = \get_post();
+		if ( ! $post || 4406 !== $post->post_parent ) {
+			return;
+		}
+
+		$suffix  = ( ! \defined( 'WP_DEBUG' ) || ! WP_DEBUG ) ? '.min' : '';
+		$version = \wp_get_theme()->get( 'Version' );
+
+		\wp_enqueue_style(
+			handle: 'eightyfourem-related-case-studies',
+			src: get_theme_file_uri( "assets/css/related-case-studies{$suffix}.css" ),
+			ver: $version
+		);
+	}
+);
+
+/**
  * Enqueue UAGB scripts for specific pages
  * Loads on local pages and USA services page
  */

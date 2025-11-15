@@ -10,7 +10,9 @@ namespace EightyFourEM\CaseStudyFilters;
 
 use function add_action;
 use function add_shortcode;
+use function get_post;
 use function is_page;
+use function strtolower;
 use function wp_localize_script;
 
 defined( 'ABSPATH' ) || exit;
@@ -20,8 +22,8 @@ defined( 'ABSPATH' ) || exit;
  *
  * @return array Filter configuration with labels and keywords
  */
-function get_filters() {
-    return [
+function get_filters(): array {
+	return [
             'all'         => [
                     'label'    => 'All',
                     'keywords' => [],
@@ -62,7 +64,39 @@ function get_filters() {
                     'label'    => 'AI & Automation',
                     'keywords' => [ 'ai', 'ai-powered', 'ai analysis', 'claude', 'openai', 'chatgpt', 'machine learning', 'artificial intelligence', 'automation', 'automated', 'automatic', 'automatically', 'intelligent' ],
             ],
-    ];
+	];
+}
+
+/**
+ * Get filter categories for a case study based on keyword matching
+ *
+ * @param int $post_id Post ID
+ * @return array Filter category keys that match this case study
+ */
+function get_case_study_categories( int $post_id ): array {
+	$post = get_post( $post_id );
+	if ( ! $post ) {
+		return [];
+	}
+
+	$search_text        = strtolower( $post->post_title . ' ' . $post->post_content );
+	$filters            = get_filters();
+	$matched_categories = [];
+
+	foreach ( $filters as $key => $filter ) {
+		if ( 'all' === $key || empty( $filter['keywords'] ) ) {
+			continue;
+		}
+
+		foreach ( $filter['keywords'] as $keyword ) {
+			if ( false !== \strpos( $search_text, strtolower( $keyword ) ) ) {
+				$matched_categories[] = $key;
+				break;
+			}
+		}
+	}
+
+	return $matched_categories;
 }
 
 /**
@@ -70,7 +104,7 @@ function get_filters() {
  *
  * @return string HTML output
  */
-function render_filters() {
+function render_filters(): string {
     $filters = get_filters();
 
     ob_start();
