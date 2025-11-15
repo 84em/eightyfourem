@@ -14,12 +14,13 @@ namespace EightyFourEM;
 
 defined( 'ABSPATH' ) || exit;
 
-// remove unused script on home page
+// remove unused scripts on home page
 \add_action(
     hook_name: 'wp_enqueue_scripts',
     callback: function () {
         if ( is_front_page() ) {
             wp_dequeue_script( 'uagb-loop-builder' );
+            wp_dequeue_style( 'uagb-block-css' );
         }
     },
     priority: 1000 );
