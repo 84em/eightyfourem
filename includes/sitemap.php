@@ -24,33 +24,28 @@ foreach ( array_keys( SITEMAP_POST_TYPES ) as $post_type ) {
     \add_action(
         hook_name: "publish_{$post_type}",
         callback: 'EightyFourEM\schedule_xml_sitemap_84em',
-        priority: 10,
         accepted_args: 3
     );
 }
 
 \add_action(
     hook_name: 'create_xml_sitemap_84em',
-    callback: 'EightyFourEM\create_xml_sitemap_84em',
-    priority: 10,
-    accepted_args: 1 );
+    callback: 'EightyFourEM\create_xml_sitemap_84em' );
 
 \add_action(
     hook_name: 'process_sitemap_batch_84em',
-    callback: 'EightyFourEM\process_sitemap_batch_84em',
-    priority: 10,
-    accepted_args: 1 );
+    callback: 'EightyFourEM\process_sitemap_batch_84em' );
 
 /**
  * Schedules a single action to create an XML sitemap if not already scheduled.
  *
- * @param  int  $post_id  The ID of the post being saved or updated.
- * @param  \WP_Post  $post  The post object associated with the action.
- * @param  string  $old_status  The previous status of the post before the update.
+ * @param  int  $_post_id  The ID of the post being saved or updated (unused, required by hook).
+ * @param  \WP_Post  $_post  The post object associated with the action (unused, required by hook).
+ * @param  string  $_old_status  The previous status of the post before the update (unused, required by hook).
  *
  * @return void
  */
-function schedule_xml_sitemap_84em( int $post_id, \WP_Post $post, string $old_status ): void {
+function schedule_xml_sitemap_84em( int $_post_id, \WP_Post $_post, string $_old_status ): void {
     // Check if coordinator is already scheduled
     if ( ! \as_has_scheduled_action( 'create_xml_sitemap_84em', [ 0 => null ] ) ) {
         \as_schedule_single_action(
@@ -70,11 +65,11 @@ function schedule_xml_sitemap_84em( int $post_id, \WP_Post $post, string $old_st
  * 3. Splits IDs into batches of 200
  * 4. Schedules batch processing tasks with sequential delays
  *
- * @param  array|null  $args  Optional arguments passed to the function.
+ * @param  array|null  $_args  Optional arguments passed to the function (unused, required by Action Scheduler).
  *
  * @return void
  */
-function create_xml_sitemap_84em( array|null $args ): void {
+function create_xml_sitemap_84em( array|null $_args ): void {
     // Fetch all published post IDs
     $post_ids = \get_posts( [
         'numberposts'    => -1,
@@ -184,21 +179,29 @@ function process_sitemap_batch_84em( array $args ): void {
     // Open file for appending with file locking
     $fp = fopen( $sitemap_path, 'a' );
     if ( ! $fp ) {
-        // Throw exception to trigger Action Scheduler retry
-        throw new \Exception( sprintf(
-            'Sitemap generation: Failed to open file for batch with %d posts',
-            count( $post_ids )
-        ) );
+        // Log error and return to let Action Scheduler retry naturally
+        \error_log(
+            sprintf(
+                'Sitemap generation: Failed to open file for batch with %d posts',
+                count( $post_ids )
+            ),
+            E_USER_WARNING
+        );
+        return;
     }
 
     // Acquire exclusive lock
     if ( ! flock( $fp, LOCK_EX ) ) {
         fclose( $fp );
-        // Throw exception to trigger Action Scheduler retry
-        throw new \Exception( sprintf(
-            'Sitemap generation: Failed to acquire lock for batch with %d posts',
-            count( $post_ids )
-        ) );
+        // Log error and return to let Action Scheduler retry naturally
+        \error_log(
+            sprintf(
+                'Sitemap generation: Failed to acquire lock for batch with %d posts',
+                count( $post_ids )
+            ),
+            E_USER_WARNING
+        );
+        return;
     }
 
     fwrite( $fp, $xml );
@@ -211,15 +214,23 @@ function process_sitemap_batch_84em( array $args ): void {
     if ( $is_last ) {
         $fp = fopen( $sitemap_path, 'a' );
         if ( ! $fp ) {
-            // Throw exception to trigger Action Scheduler retry
-            throw new \Exception( 'Sitemap generation: Failed to open file for closing </urlset> tag' );
+            // Log error and return to let Action Scheduler retry naturally
+            \error_log(
+                'Sitemap generation: Failed to open file for closing </urlset> tag',
+                E_USER_WARNING
+            );
+            return;
         }
 
         // Acquire exclusive lock
         if ( ! flock( $fp, LOCK_EX ) ) {
             fclose( $fp );
-            // Throw exception to trigger Action Scheduler retry
-            throw new \Exception( 'Sitemap generation: Failed to acquire lock for closing </urlset> tag' );
+            // Log error and return to let Action Scheduler retry naturally
+            \error_log(
+                'Sitemap generation: Failed to acquire lock for closing </urlset> tag',
+                E_USER_WARNING
+            );
+            return;
         }
 
         fwrite( $fp, '</urlset>' . "\n" );

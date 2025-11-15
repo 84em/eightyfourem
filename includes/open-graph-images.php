@@ -24,7 +24,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @return array|null Array with 'id', 'url', 'width', 'height', 'alt', 'type' or null if no image
  */
-function get_og_image_data( $post_id ) {
+function get_og_image_data( int $post_id ): ?array {
 	$image_id = null;
 
 	// Check post override first
@@ -99,7 +99,7 @@ function get_og_image_data( $post_id ) {
  *
  * @return array Array with 'valid' boolean and 'message' string
  */
-function validate_og_image( $attachment_id ) {
+function validate_og_image( int $attachment_id ): array {
 	$attachment = \get_post( $attachment_id );
 
 	if ( ! $attachment || $attachment->post_type !== 'attachment' ) {
@@ -246,7 +246,7 @@ function validate_og_image( $attachment_id ) {
 /**
  * Render settings page
  */
-function render_settings_page() {
+function render_settings_page(): void {
 	if ( ! \current_user_can( 'manage_options' ) ) {
 		return;
 	}
@@ -359,11 +359,13 @@ function render_settings_page() {
 \add_action(
 	hook_name: 'admin_init',
 	callback: function () {
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce checked below
 		if ( ! isset( $_POST['eightyfourem_og_nonce'] ) ) {
 			return;
 		}
 
-		if ( ! \wp_verify_nonce( $_POST['eightyfourem_og_nonce'], 'eightyfourem_og_settings' ) ) {
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Checked here
+		if ( ! \wp_verify_nonce( \sanitize_text_field( \wp_unslash( $_POST['eightyfourem_og_nonce'] ) ), 'eightyfourem_og_settings' ) ) {
 			return;
 		}
 
@@ -371,7 +373,8 @@ function render_settings_page() {
 			return;
 		}
 
-		$image_id = isset( $_POST['eightyfourem_default_og_image'] ) ? \absint( $_POST['eightyfourem_default_og_image'] ) : 0;
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified above
+		$image_id = isset( $_POST['eightyfourem_default_og_image'] ) ? \absint( \wp_unslash( $_POST['eightyfourem_default_og_image'] ) ) : 0;
 
 		if ( $image_id ) {
 			// Validate it's an actual image attachment
@@ -425,7 +428,7 @@ function render_settings_page() {
  *
  * @param \WP_Post $post Post object
  */
-function render_meta_box( $post ) {
+function render_meta_box( \WP_Post $post ): void {
 	\wp_nonce_field( 'eightyfourem_og_meta_box', 'eightyfourem_og_meta_nonce' );
 
 	$image_id = \get_post_meta( $post->ID, '_eightyfourem_og_image', true );
@@ -539,11 +542,13 @@ function render_meta_box( $post ) {
 	hook_name: 'save_post',
 	callback: function ( $post_id ) {
 		// Check nonce
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce checked below
 		if ( ! isset( $_POST['eightyfourem_og_meta_nonce'] ) ) {
 			return;
 		}
 
-		if ( ! \wp_verify_nonce( $_POST['eightyfourem_og_meta_nonce'], 'eightyfourem_og_meta_box' ) ) {
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Checked here
+		if ( ! \wp_verify_nonce( \sanitize_text_field( \wp_unslash( $_POST['eightyfourem_og_meta_nonce'] ) ), 'eightyfourem_og_meta_box' ) ) {
 			return;
 		}
 
@@ -558,8 +563,10 @@ function render_meta_box( $post ) {
 		}
 
 		// Save or delete meta
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified above
 		if ( isset( $_POST['eightyfourem_og_image_id'] ) && ! empty( $_POST['eightyfourem_og_image_id'] ) ) {
-			$image_id = \absint( $_POST['eightyfourem_og_image_id'] );
+			// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified above
+			$image_id = \absint( \wp_unslash( $_POST['eightyfourem_og_image_id'] ) );
 
 			// Validate it's an actual image attachment
 			$attachment = \get_post( $image_id );
@@ -572,6 +579,5 @@ function render_meta_box( $post ) {
 		} else {
 			\delete_post_meta( $post_id, '_eightyfourem_og_image' );
 		}
-	},
-	priority: 10
+	}
 );

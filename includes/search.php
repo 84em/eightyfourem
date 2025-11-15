@@ -109,7 +109,6 @@ function get_post_type_indicator( \WP_Post $post ): string {
 
 		return $block_content;
 	},
-	priority: 10,
 	accepted_args: 3
 );
 
@@ -160,6 +159,5 @@ function get_post_type_indicator( \WP_Post $post ): string {
 
         return $excerpt;
     },
-    priority: 10,
     accepted_args: 2
 );

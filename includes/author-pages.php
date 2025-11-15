@@ -2,7 +2,11 @@
 
 /**
  * Disables the Author archive pages, redirecting the user to the home page instead.
+ *
+ * @package EightyFourEM
  */
+
+namespace EightyFourEM;
 
 defined( 'ABSPATH' ) || exit;
 
