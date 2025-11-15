@@ -12,6 +12,7 @@ use function add_action;
 use function add_shortcode;
 use function get_post;
 use function is_page;
+use function strpos;
 use function strtolower;
 use function wp_localize_script;
 
@@ -89,7 +90,7 @@ function get_case_study_categories( int $post_id ): array {
 		}
 
 		foreach ( $filter['keywords'] as $keyword ) {
-			if ( false !== \strpos( $search_text, strtolower( $keyword ) ) ) {
+			if ( false !== strpos( $search_text, strtolower( $keyword ) ) ) {
 				$matched_categories[] = $key;
 				break;
 			}
