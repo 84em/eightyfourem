@@ -88,7 +88,7 @@ function get_related_case_studies( int $post_id, int $limit = 6 ): array {
 function render_related_case_studies( int $post_id ): string {
 	$related = get_related_case_studies(
 		post_id: $post_id,
-		limit: 6
+		limit: 3
 	);
 
 	if ( empty( $related ) ) {
