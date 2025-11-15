@@ -138,8 +138,13 @@ function render_related_case_studies( int $post_id ): string {
 						post: $study->ID,
 						size: 'medium'
 					);
-					$excerpt          = wp_trim_words(
-						text: wp_strip_all_tags( $study->post_content ),
+
+					// Generate excerpt, removing Challenge heading if present
+					$content = wp_strip_all_tags( $study->post_content );
+					// Remove "Challenge" from the start if it appears
+					$content = \preg_replace( '/^\s*Challenge\s*/i', '', $content );
+					$excerpt = wp_trim_words(
+						text: $content,
 						num_words: 20
 					);
 				?>
