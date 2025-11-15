@@ -48,6 +48,13 @@ header .header-2.wp-block-group {
     padding-bottom: 10px !important;
 }
 
+/* Header-2: reduce padding when TOC is active to save space */
+header .header-2.ef-sticky-toc-active,
+header .header-2.ef-sticky-toc-active.wp-block-group {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
 header .header-2 {
     overflow: visible;
 }
