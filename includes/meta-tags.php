@@ -1,10 +1,19 @@
 <?php
 
+/**
+ * SEO Meta Tags
+ *
+ * Integrates legacy Genesis theme meta tags for SEO:
+ * - Custom meta descriptions from _genesis_description field
+ * - Custom robots meta tags from _genesis_noindex field
+ * - Enhanced robots directives for better search engine indexing
+ *
+ * @package EightyFourEM
+ */
+
 namespace EightyFourEM;
 
 defined( 'ABSPATH' ) || exit;
-
-// integrates meta tags from legacy Genesis theme that we originally built the site on.
 \add_action(
     hook_name: 'wp_head',
     callback: function () {

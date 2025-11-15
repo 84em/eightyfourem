@@ -878,7 +878,11 @@ defined( 'ABSPATH' ) || exit;
         if ( \is_singular() ) {
             $schema_json = \get_post_meta( \get_the_ID(), 'schema', true );
             if ( ! empty( $schema_json ) ) {
-                echo '<script type="application/ld+json">' . $schema_json . '</script>' . "\n";
+                // Escape potential </script> tags in JSON to prevent script injection
+                echo sprintf(
+                    '<script type="application/ld+json">%s</script>',
+                    str_replace( '</script>', '<\/script>', $schema_json )
+                ) . "\n";
             }
         }
     } );

@@ -130,6 +130,5 @@ defined( 'ABSPATH' ) || exit;
 				}",
 			]
 		);
-	},
-	priority: 10
+	}
 );

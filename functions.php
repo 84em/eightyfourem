@@ -21,7 +21,6 @@ require_once get_template_directory() . '/includes/cli.php';
 require_once get_template_directory() . '/includes/dequeue.php';
 require_once get_template_directory() . '/includes/disable-comments.php';
 require_once get_template_directory() . '/includes/document-title.php';
-require_once get_template_directory() . '/includes/enhanced-search.php';
 require_once get_template_directory() . '/includes/enqueue.php';
 require_once get_template_directory() . '/includes/google-reviews.php';
 require_once get_template_directory() . '/includes/meta-tags.php';

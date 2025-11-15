@@ -5,6 +5,18 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.15.1] - 2025-11-15
+### Fixed
+- **Code Quality Improvements** - Comprehensive code smell analysis and fixes
+  - Added type hints to all functions in `includes/open-graph-images.php` (int, array, void return types)
+  - Marked intentionally unused parameters with underscore prefix in `includes/sitemap.php`
+  - Added proper sanitization with `wp_unslash()` and `sanitize_text_field()` for $_POST nonce verification
+  - Standardized `error_log()` calls with E_USER_WARNING constant in `includes/sitemap.php`
+  - Added phpcs ignore comments with explanations for nonce-verified $_POST access
+  - Updated PHPDocs in `includes/relevanssi.php`, `includes/dequeue.php`, `includes/meta-tags.php`, `includes/author-pages.php`
+  - Removed default parameter values from named parameters (priority: 10, deps: [], accepted_args: 1, args: true)
+  - All 23 includes files pass comprehensive testing with zero breaking changes
+
 ## [2.15.0] - 2025-11-15
 ### Added
 - **Modular CSS Architecture** - Refactored monolithic customizer.css into focused, maintainable modules
