@@ -8,14 +8,6 @@
 
 namespace EightyFourEM\CaseStudyFilters;
 
-use function add_action;
-use function add_shortcode;
-use function get_post;
-use function is_page;
-use function strpos;
-use function strtolower;
-use function wp_localize_script;
-
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -75,12 +67,12 @@ function get_filters(): array {
  * @return array Filter category keys that match this case study
  */
 function get_case_study_categories( int $post_id ): array {
-	$post = get_post( $post_id );
+	$post = \get_post( $post_id );
 	if ( ! $post ) {
 		return [];
 	}
 
-	$search_text        = strtolower( $post->post_title . ' ' . $post->post_content );
+	$search_text        = \strtolower( $post->post_title . ' ' . $post->post_content );
 	$filters            = get_filters();
 	$matched_categories = [];
 
@@ -90,7 +82,7 @@ function get_case_study_categories( int $post_id ): array {
 		}
 
 		foreach ( $filter['keywords'] as $keyword ) {
-			if ( false !== strpos( $search_text, strtolower( $keyword ) ) ) {
+			if ( false !== \strpos( $search_text, \strtolower( $keyword ) ) ) {
 				$matched_categories[] = $key;
 				break;
 			}
@@ -108,30 +100,30 @@ function get_case_study_categories( int $post_id ): array {
 function render_filters(): string {
     $filters = get_filters();
 
-    ob_start();
+    \ob_start();
     ?>
     <div class="case-study-filters">
         <div class="case-study-filter-buttons">
             <?php foreach ( $filters as $key => $filter ) : ?>
-                <button class="case-study-filter-btn <?php echo $key === 'all' ? 'is-active' : ''; ?>" data-filter="<?php echo esc_attr( $key ); ?>">
-                    <?php echo esc_html( $filter['label'] ); ?>
+                <button class="case-study-filter-btn <?php echo $key === 'all' ? 'is-active' : ''; ?>" data-filter="<?php echo \esc_attr( $key ); ?>">
+                    <?php echo \esc_html( $filter['label'] ); ?>
                 </button>
             <?php endforeach; ?>
         </div>
         <div class="case-study-result-count"></div>
     </div>
     <?php
-    return ob_get_clean();
+    return \ob_get_clean();
 }
 
 // Register shortcode
-add_shortcode( 'case_study_filters', 'EightyFourEM\CaseStudyFilters\render_filters' );
+\add_shortcode( 'case_study_filters', 'EightyFourEM\CaseStudyFilters\render_filters' );
 
 /**
  * Localize filter keywords to JavaScript
  */
-add_action( 'wp_enqueue_scripts', function () {
-    if ( is_page( 4406 ) ) {
+\add_action( 'wp_enqueue_scripts', function () {
+    if ( \is_page( 4406 ) ) {
         $filters  = get_filters();
         $keywords = [];
 
@@ -141,7 +133,7 @@ add_action( 'wp_enqueue_scripts', function () {
             }
         }
 
-        wp_localize_script(
+        \wp_localize_script(
                 'eightyfourem-case-study-filter',
                 'caseStudyFilters',
                 $keywords

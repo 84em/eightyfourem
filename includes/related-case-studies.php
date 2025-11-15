@@ -8,33 +8,6 @@
 
 namespace EightyFourEM\RelatedCaseStudies;
 
-use function add_action;
-use function add_filter;
-use function array_column;
-use function array_intersect;
-use function array_slice;
-use function count;
-use function delete_transient;
-use function esc_attr;
-use function esc_html;
-use function esc_url;
-use function get_permalink;
-use function get_post;
-use function get_posts;
-use function get_template_directory_uri;
-use function get_the_post_thumbnail_url;
-use function get_transient;
-use function is_page;
-use function is_singular;
-use function ob_get_clean;
-use function ob_start;
-use function set_transient;
-use function strtotime;
-use function usort;
-use function wp_get_theme;
-use function wp_strip_all_tags;
-use function wp_trim_words;
-
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -46,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
  */
 function get_related_case_studies( int $post_id, int $limit = 6 ): array {
 	$cache_key = 'related_cs_' . $post_id;
-	$cached    = get_transient( $cache_key );
+	$cached    = \get_transient( $cache_key );
 
 	if ( false !== $cached ) {
 		return $cached;
@@ -58,7 +31,7 @@ function get_related_case_studies( int $post_id, int $limit = 6 ): array {
 		return [];
 	}
 
-	$all_case_studies = get_posts(
+	$all_case_studies = \get_posts(
 		args: [
 			'post_type'    => 'page',
 			'post_parent'  => 4406,
@@ -73,8 +46,8 @@ function get_related_case_studies( int $post_id, int $limit = 6 ): array {
 
 	foreach ( $all_case_studies as $study ) {
 		$study_categories  = \EightyFourEM\CaseStudyFilters\get_case_study_categories( $study->ID );
-		$shared_categories = array_intersect( $current_categories, $study_categories );
-		$score             = count( $shared_categories );
+		$shared_categories = \array_intersect( $current_categories, $study_categories );
+		$score             = \count( $shared_categories );
 
 		if ( $score > 0 ) {
 			$scored_studies[] = [
@@ -85,19 +58,19 @@ function get_related_case_studies( int $post_id, int $limit = 6 ): array {
 		}
 	}
 
-	usort(
+	\usort(
 		array: $scored_studies,
 		callback: function ( array $a, array $b ): int {
 			if ( $a['score'] !== $b['score'] ) {
 				return $b['score'] - $a['score'];
 			}
-			return strtotime( $b['post']->post_date ) - strtotime( $a['post']->post_date );
+			return \strtotime( $b['post']->post_date ) - \strtotime( $a['post']->post_date );
 		}
 	);
 
-	$related = array_slice( array_column( $scored_studies, 'post' ), 0, $limit );
+	$related = \array_slice( \array_column( $scored_studies, 'post' ), 0, $limit );
 
-	set_transient(
+	\set_transient(
 		transient: $cache_key,
 		value: $related,
 		expiration: HOUR_IN_SECONDS
@@ -124,7 +97,7 @@ function render_related_case_studies( int $post_id ): string {
 
 	$filters = \EightyFourEM\CaseStudyFilters\get_filters();
 
-	ob_start();
+	\ob_start();
 	?>
 	<section class="related-case-studies">
 		<div class="related-case-studies-container">
@@ -133,38 +106,38 @@ function render_related_case_studies( int $post_id ): string {
 			<div class="related-case-studies-grid">
 				<?php foreach ( $related as $study ) :
 					$study_categories = \EightyFourEM\CaseStudyFilters\get_case_study_categories( $study->ID );
-					$permalink        = get_permalink( $study->ID );
-					$thumbnail        = get_the_post_thumbnail_url(
+					$permalink        = \get_permalink( $study->ID );
+					$thumbnail        = \get_the_post_thumbnail_url(
 						post: $study->ID,
 						size: 'medium'
 					);
 
 					// Generate excerpt, removing Challenge heading if present
-					$content = wp_strip_all_tags( $study->post_content );
+					$content = \wp_strip_all_tags( $study->post_content );
 					// Remove "Challenge" from the start if it appears
 					$content = \preg_replace( '/^\s*Challenge\s*/i', '', $content );
-					$excerpt = wp_trim_words(
+					$excerpt = \wp_trim_words(
 						text: $content,
 						num_words: 20
 					);
 				?>
 					<article class="related-case-study-card">
-						<a href="<?php echo esc_url( $permalink ); ?>" class="related-case-study-link">
+						<a href="<?php echo \esc_url( $permalink ); ?>" class="related-case-study-link">
 							<?php if ( $thumbnail ) : ?>
 								<div class="related-case-study-image">
-									<img src="<?php echo esc_url( $thumbnail ); ?>"
-									     alt="<?php echo esc_attr( $study->post_title ); ?>"
+									<img src="<?php echo \esc_url( $thumbnail ); ?>"
+									     alt="<?php echo \esc_attr( $study->post_title ); ?>"
 									     loading="lazy">
 								</div>
 							<?php endif; ?>
 
 							<div class="related-case-study-content">
 								<h3 class="related-case-study-title">
-									<?php echo esc_html( $study->post_title ); ?>
+									<?php echo \esc_html( $study->post_title ); ?>
 								</h3>
 
 								<p class="related-case-study-excerpt">
-									<?php echo esc_html( $excerpt ); ?>
+									<?php echo \esc_html( $excerpt ); ?>
 								</p>
 
 								<?php if ( ! empty( $study_categories ) ) : ?>
@@ -173,7 +146,7 @@ function render_related_case_studies( int $post_id ): string {
 											if ( isset( $filters[ $cat_key ] ) ) :
 										?>
 											<span class="related-case-study-badge">
-												<?php echo esc_html( $filters[ $cat_key ]['label'] ); ?>
+												<?php echo \esc_html( $filters[ $cat_key ]['label'] ); ?>
 											</span>
 										<?php
 											endif;
@@ -189,20 +162,20 @@ function render_related_case_studies( int $post_id ): string {
 		</div>
 	</section>
 	<?php
-	return ob_get_clean();
+	return \ob_get_clean();
 }
 
 /**
  * Inject related case studies into post content
  */
-add_filter(
+\add_filter(
 	hook_name: 'the_content',
 	callback: function ( string $content ): string {
-		if ( ! is_page() || ! is_singular() ) {
+		if ( ! \is_page() || ! \is_singular() ) {
 			return $content;
 		}
 
-		$post = get_post();
+		$post = \get_post();
 		if ( ! $post || 4406 !== $post->post_parent ) {
 			return $content;
 		}
@@ -221,18 +194,18 @@ add_filter(
 /**
  * Clear related case studies cache when a case study is updated
  */
-add_action(
+\add_action(
 	hook_name: 'save_post_page',
 	callback: function ( int $post_id ): void {
-		$post = get_post( $post_id );
+		$post = \get_post( $post_id );
 
 		if ( ! $post || 4406 !== $post->post_parent ) {
 			return;
 		}
 
-		delete_transient( 'related_cs_' . $post_id );
+		\delete_transient( 'related_cs_' . $post_id );
 
-		$all_case_studies = get_posts(
+		$all_case_studies = \get_posts(
 			args: [
 				'post_type'   => 'page',
 				'post_parent' => 4406,
@@ -242,7 +215,7 @@ add_action(
 		);
 
 		foreach ( $all_case_studies as $study_id ) {
-			delete_transient( 'related_cs_' . $study_id );
+			\delete_transient( 'related_cs_' . $study_id );
 		}
 	}
 );
