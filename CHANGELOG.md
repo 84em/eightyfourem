@@ -5,6 +5,13 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.16.1] - 2025-11-15
+### Changed
+- **Brand Orange Color Update** - Updated brand orange color from lighter shade to darker shade for improved contrast and brand alignment (`theme.json`)
+- **Related Case Studies Display** - Reduced default limit from 6 to 3 case studies for more focused recommendations (`includes/related-case-studies.php`)
+- **Cache Performance** - Increased related case studies cache expiration from 1 hour to 1 month for better performance and reduced API calls (`includes/related-case-studies.php`)
+- **Home Page Performance** - Removed unused UAGB (Ultimate Addons for Gutenberg) assets from homepage to reduce page weight (`includes/dequeue.php`)
+
 ## [2.16.0] - 2025-11-15
 ### Added
 - **Related Case Studies Feature** - Automatic related content recommendations on individual case study pages
