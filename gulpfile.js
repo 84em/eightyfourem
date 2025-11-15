@@ -22,6 +22,7 @@ const paths = {
       './assets/css/utilities.css',
       './assets/css/sticky-header.css',
       './assets/css/case-study-filter.css',
+      './assets/css/related-case-studies.css',
       './assets/css/search.css',
       './assets/css/modal-search.css'
     ],
