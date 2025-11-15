@@ -17,7 +17,9 @@ const { deleteAsync } = require('del');
 const paths = {
   styles: {
     theme: [
-      './assets/css/customizer.css',
+      './assets/css/navigation.css',
+      './assets/css/page-specific.css',
+      './assets/css/utilities.css',
       './assets/css/sticky-header.css',
       './assets/css/case-study-filter.css',
       './assets/css/search.css',
