@@ -73,7 +73,7 @@ function get_related_case_studies( int $post_id, int $limit = 6 ): array {
 	\set_transient(
 		transient: $cache_key,
 		value: $related,
-		expiration: HOUR_IN_SECONDS
+		expiration: MONTH_IN_SECONDS
 	);
 
 	return $related;
