@@ -14,6 +14,7 @@ defined( 'ABSPATH' ) || exit;
  * Preload critical fonts
  * Loads fonts as early as possible to prevent FOUT/FOIT
  * Uses highest priority to execute before other wp_head actions
+ * fetchpriority="high" ensures fonts load before other resources
  */
 \add_action(
 	hook_name: 'wp_head',
@@ -22,13 +23,13 @@ defined( 'ABSPATH' ) || exit;
 
 		// Preload Instrument Sans (body font) - regular weight
 		echo sprintf(
-			'<link rel="preload" href="%s/assets/fonts/instrument-sans/InstrumentSans-VariableFont_wdth,wght.woff2" as="font" type="font/woff2" crossorigin="anonymous">',
+			'<link rel="preload" href="%s/assets/fonts/instrument-sans/InstrumentSans-VariableFont_wdth,wght.woff2" as="font" type="font/woff2" crossorigin="anonymous" fetchpriority="high">',
 			\esc_url( $theme_uri )
 		) . PHP_EOL;
 
 		// Preload Jost (heading font) - regular weight
 		echo sprintf(
-			'<link rel="preload" href="%s/assets/fonts/jost/Jost-VariableFont_wght.woff2" as="font" type="font/woff2" crossorigin="anonymous">',
+			'<link rel="preload" href="%s/assets/fonts/jost/Jost-VariableFont_wght.woff2" as="font" type="font/woff2" crossorigin="anonymous" fetchpriority="high">',
 			\esc_url( $theme_uri )
 		) . PHP_EOL;
 	},
@@ -76,4 +77,27 @@ defined( 'ABSPATH' ) || exit;
 		<?php
 	},
 	priority: 2
+);
+
+/**
+ * Async CSS loader
+ * Converts media="print" stylesheets to media="all" after page load
+ * This prevents CSS from blocking initial render
+ */
+\add_action(
+	hook_name: 'wp_footer',
+	callback: function () {
+		?>
+		<script>
+		// Convert async-loaded stylesheets from print to all media
+		window.addEventListener('load', function() {
+			var asyncStyles = document.querySelectorAll('link[rel="stylesheet"][media="print"]');
+			asyncStyles.forEach(function(link) {
+				link.media = 'all';
+			});
+		});
+		</script>
+		<?php
+	},
+	priority: 999
 );

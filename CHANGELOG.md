@@ -5,6 +5,24 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.17.0] - 2025-11-16
+### Added
+- **Performance Optimizations** - Major improvements to reduce render-blocking resources
+  - Added deferred JavaScript loading using WordPress 6.3+ `strategy: 'defer'` for all theme scripts (`includes/enqueue.php`)
+  - Implemented async CSS loading for non-critical stylesheets (highlight, modal-search) using `media: 'print'` technique (`includes/enqueue.php`)
+  - Added async CSS loader script in footer to convert print media stylesheets to all media after page load (`includes/performance.php`)
+  - Enhanced font preloading with `fetchpriority="high"` attribute for faster font loading (`includes/performance.php`)
+  - All JavaScript now loads in footer with defer strategy for optimal performance
+  - Non-critical CSS loads asynchronously to prevent render blocking
+  - Expected PageSpeed improvements: Eliminate render-blocking JavaScript, reduce render-blocking CSS, better LCP and FID scores
+
+### Changed
+- **Script Loading Strategy** - Updated all `wp_enqueue_script` calls to use modern WordPress 6.3+ approach
+  - Sticky header script: Added `strategy: 'defer'` and `in_footer: true` (`includes/enqueue.php:50-59`)
+  - Highlight script: Added `strategy: 'defer'` and `in_footer: true` (`includes/enqueue.php:61-69`)
+  - Modal search script: Added `strategy: 'defer'` and `in_footer: true` (`includes/enqueue.php:86-95`)
+  - Case study filter script: Updated to use named parameters with `strategy: 'defer'` (`includes/enqueue.php:141-149`)
+
 ## [2.16.1] - 2025-11-15
 ### Changed
 - **Brand Orange Color Update** - Updated brand orange color from lighter shade to darker shade for improved contrast and brand alignment (`theme.json`)
