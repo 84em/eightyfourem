@@ -16,6 +16,7 @@ assets/js/*.min.js.map
 
 # Planning documents
 planning/
+docs/
 
 # Root directory images (allow only screenshot.png)
 /*.png
