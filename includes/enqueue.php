@@ -47,37 +47,51 @@ defined( 'ABSPATH' ) || exit;
             ver: $version
 		);
 
-		// Enqueue sticky header JavaScript
+		// Enqueue sticky header JavaScript (defer for better performance)
         \wp_enqueue_script(
             handle: 'eightyfourem-sticky-header',
             src: \get_theme_file_uri( "assets/js/sticky-header{$suffix}.js" ),
-            ver: $version
+            ver: $version,
+            args: [
+                'strategy' => 'defer',
+                'in_footer' => true,
+            ]
 		);
 
-        // Enqueue highlight script
+        // Enqueue highlight script (defer for better performance)
         \wp_enqueue_script(
             handle: 'eightyfourem-highlight',
-            src: \get_theme_file_uri( "assets/js/highlight{$suffix}.js" )
+            src: \get_theme_file_uri( "assets/js/highlight{$suffix}.js" ),
+            args: [
+                'strategy' => 'defer',
+                'in_footer' => true,
+            ]
         );
 
-        // Enqueue highlight CSS
+        // Enqueue highlight CSS (non-critical, load async via media print)
         \wp_enqueue_style(
             handle: 'eightyfourem-highlighter',
-            src: \get_theme_file_uri( "assets/css/highlight{$suffix}.css" )
+            src: \get_theme_file_uri( "assets/css/highlight{$suffix}.css" ),
+            media: 'print'
         );
 
-		// Enqueue modal search CSS
+		// Enqueue modal search CSS (non-critical, load async via media print)
 		\wp_enqueue_style(
 			handle: 'eightyfourem-modal-search',
 			src: \get_theme_file_uri( "assets/css/modal-search{$suffix}.css" ),
-			ver: $version
+			ver: $version,
+			media: 'print'
 		);
 
-		// Enqueue modal search JavaScript
+		// Enqueue modal search JavaScript (defer for better performance)
 		\wp_enqueue_script(
 			handle: 'eightyfourem-modal-search',
 			src: \get_theme_file_uri( "assets/js/modal-search{$suffix}.js" ),
-			ver: $version
+			ver: $version,
+			args: [
+				'strategy' => 'defer',
+				'in_footer' => true,
+			]
 		);
 	}
 );
@@ -125,10 +139,13 @@ defined( 'ABSPATH' ) || exit;
 		);
 
         \wp_enqueue_script(
-			'eightyfourem-case-study-filter',
-            \get_theme_file_uri( "assets/js/case-study-filter{$suffix}.js" ),
-			$version,
-			true
+			handle: 'eightyfourem-case-study-filter',
+            src: \get_theme_file_uri( "assets/js/case-study-filter{$suffix}.js" ),
+			ver: $version,
+			args: [
+				'strategy' => 'defer',
+				'in_footer' => true,
+			]
 		);
 	}
 );
