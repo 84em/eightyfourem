@@ -5,6 +5,13 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.17.1] - 2025-11-16
+### Added
+- **Sitemap Enhancement** - Added llms.txt to XML sitemap for improved LLM discoverability (`includes/sitemap.php`)
+  - llms.txt now included in main sitemap with daily changefreq and 1.0 priority
+  - Last modification time automatically tracked using file modification timestamp
+  - Supports enhanced AI search engine optimization for Claude, ChatGPT, Gemini, and Perplexity
+
 ## [2.17.0] - 2025-11-16
 ### Added
 - **Performance Optimizations** - Major improvements to reduce render-blocking resources

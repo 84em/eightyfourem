@@ -233,6 +233,13 @@ function process_sitemap_batch_84em( array $args ): void {
             return;
         }
 
+        fwrite( $fp, "\t" . '<url>' . "\n" );
+        fwrite( $fp, "\t\t" . '<loc>' . site_url( '/llms.txt' ) . '</loc>' . "\n" );
+        fwrite( $fp, "\t\t" . '<lastmod>' . date( "Y-m-d", filemtime( $_SERVER['DOCUMENT_ROOT'] ) . '</lastmod>' . "\n" ) );
+        fwrite( $fp, "\t\t" . '<changefreq>daily</changefreq>' . "\n" );
+        fwrite( $fp, "\t\t" . '<priority>1.0</priority>' . "\n" );
+        fwrite( $fp, "\t" . '</url>' . "\n" );
+
         fwrite( $fp, '</urlset>' . "\n" );
         fflush( $fp );
         // Release lock
