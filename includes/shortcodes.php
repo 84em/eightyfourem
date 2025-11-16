@@ -14,7 +14,8 @@
 
 namespace EightyFourEM;
 
-use Relevanssi_SpellCorrector;
+use WP_Post;
+use function add_action;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -41,3 +42,72 @@ add_shortcode(
         }
         return $didyoumean;
     } );
+
+add_shortcode(
+    tag: 'html_sitemap',
+    callback: function () {
+
+        $pages = get_transient( 'html_sitemap' );
+
+        if ( false === $pages ) {
+
+            global $wpdb;
+            $no_index_post_ids    = $wpdb->get_col( "SELECT distinct post_id FROM {$wpdb->postmeta} WHERE meta_key = '_genesis_noindex' AND meta_value != '0'" );
+            $local_pages_post_ids = $wpdb->get_col( "SELECT distinct post_id FROM {$wpdb->postmeta} WHERE meta_key IN('_local_page_state', '_local_page_city')" );
+            ob_start();
+
+            // get pages (not local pages, not sitemap)
+            $args = [
+                'depth'        => 0,
+                'show_date'    => '',
+                'date_format'  => get_option( 'date_format' ),
+                'child_of'     => 0,
+                'exclude'      => implode( ',', array_merge( $no_index_post_ids, $local_pages_post_ids, [ 6964 ] ) ),
+                'title_li'     => __( 'Pages' ),
+                'echo'         => 1,
+                'authors'      => '',
+                'sort_column'  => 'post_title',
+                'link_before'  => '',
+                'link_after'   => '',
+                'item_spacing' => 'preserve',
+                'walker'       => '',
+            ];
+            wp_list_pages( $args );
+            $pages = ob_get_clean();
+
+            // get local pages (not sitemap)
+            ob_start();
+            $args = [
+                'depth'        => 0,
+                'show_date'    => '',
+                'date_format'  => get_option( 'date_format' ),
+                'child_of'     => 2507,
+                'exclude'      => 6964,
+                'title_li'     => __( 'Local Pages' ),
+                'echo'         => 1,
+                'authors'      => '',
+                'sort_column'  => 'post_title',
+                'link_before'  => '',
+                'link_after'   => '',
+                'item_spacing' => 'preserve',
+                'walker'       => '',
+            ];
+            wp_list_pages( $args );
+            $pages .= '<hr/>' . ob_get_clean();
+
+            $pages = str_replace( 'AI-Enhanced WordPress Development, White-Label Services, Plugins, Consulting in ', '', $pages );
+            $pages = str_replace( ' | 84EM', '', $pages );
+            set_transient( 'html_sitemap', $pages, WEEK_IN_SECONDS );
+        }
+
+        return $pages;
+    }
+);
+
+add_action(
+    hook_name: "publish_page",
+    callback: function ( int $_post_id, WP_Post $_post, string $_old_status ) {
+        delete_transient( 'html_sitemap' );
+    },
+    accepted_args: 3
+);
