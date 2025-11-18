@@ -24,7 +24,8 @@ const paths = {
       './assets/css/case-study-filter.css',
       './assets/css/related-case-studies.css',
       './assets/css/search.css',
-      './assets/css/modal-search.css'
+      './assets/css/modal-search.css',
+      './assets/css/faq-search.css'
     ],
     googleReviews: [
       './blocks/google-reviews/style.css',
@@ -41,7 +42,8 @@ const paths = {
     theme: [
       './assets/js/sticky-header.js',
       './assets/js/case-study-filter.js',
-      './assets/js/modal-search.js'
+      './assets/js/modal-search.js',
+      './assets/js/faq-search.js'
     ],
     googleReviews: './blocks/google-reviews/index.js',
     calendlyBooking: './blocks/calendly-booking-details/index.js',

@@ -1,0 +1,185 @@
+/**
+ * FAQ Search Styles
+ * Accessible search interface for FAQ filtering
+ */
+
+.faq-search-wrapper {
+  margin-bottom: 2rem;
+}
+
+.faq-search-container {
+  max-width: 600px;
+}
+
+.faq-search-label {
+  display: block;
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--wp--preset--color--contrast);
+}
+
+.faq-search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.faq-search-icon {
+  position: absolute;
+  left: 1rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: var(--wp--preset--color--contrast-2);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.faq-search-input {
+  width: 100%;
+  padding: 0.75rem 3rem 0.75rem 3rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border: 2px solid var(--wp--preset--color--contrast-2);
+  border-radius: 0.5rem;
+  background-color: var(--wp--preset--color--base);
+  color: var(--wp--preset--color--contrast);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.faq-search-input:focus {
+  outline: none;
+  border-color: var(--wp--preset--color--contrast);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+.faq-search-input::placeholder {
+  color: var(--wp--preset--color--contrast-2);
+  opacity: 0.7;
+}
+
+.faq-search-clear {
+  position: absolute;
+  right: 0.75rem;
+  width: 2rem;
+  height: 2rem;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 0.25rem;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.faq-search-clear svg {
+  width: 1rem;
+  height: 1rem;
+  fill: var(--wp--preset--color--contrast-2);
+  transition: fill 0.2s ease;
+}
+
+.faq-search-clear:hover {
+  background-color: var(--wp--preset--color--contrast-2);
+}
+
+.faq-search-clear:hover svg {
+  fill: var(--wp--preset--color--base);
+}
+
+.faq-search-clear:focus {
+  outline: 2px solid var(--wp--preset--color--contrast);
+  outline-offset: 2px;
+}
+
+.faq-search-clear[hidden] {
+  display: none;
+}
+
+.faq-search-results-summary {
+  margin-top: 0.75rem;
+  font-size: 0.9375rem;
+  color: var(--wp--preset--color--contrast-2);
+  min-height: 1.5rem;
+}
+
+
+/* FAQ item transition when filtering */
+.uagb-faq-item {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.uagb-faq-item[aria-hidden="true"] {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+/* Ensure proper spacing between search and FAQ blocks */
+.faq-search-wrapper + .wp-block-uagb-faq {
+  margin-top: 0;
+}
+
+/* Screen reader only text */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .faq-search-label {
+    font-size: 1rem;
+  }
+
+  .faq-search-input {
+    font-size: 0.9375rem;
+    padding: 0.625rem 2.5rem 0.625rem 2.75rem;
+  }
+
+  .faq-search-icon {
+    width: 1rem;
+    height: 1rem;
+    left: 0.875rem;
+  }
+
+  .faq-search-clear {
+    width: 1.75rem;
+    height: 1.75rem;
+    right: 0.5rem;
+  }
+
+  .faq-search-clear svg {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .faq-search-input {
+    border-width: 3px;
+  }
+
+  .faq-search-highlight {
+    outline: 2px solid currentColor;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .faq-search-input,
+  .faq-search-clear,
+  .faq-search-clear svg,
+  .uagb-faq-item {
+    transition: none;
+  }
+}
