@@ -5,6 +5,20 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.18.0] - 2025-11-18
+### Added
+- **FAQ Search** - Accessible on-page search functionality for FAQ page (`assets/js/faq-search.js`, `assets/css/faq-search.css`)
+  - Pure JavaScript filtering (no AJAX calls)
+  - WCAG 2.1 Level AA compliant with keyboard navigation and screen reader support
+  - Live filtering with 300ms debounce for optimal performance
+  - Automatically hides section headings and separator blocks when no matching FAQs exist in that section
+  - Clear button with keyboard support (Escape key)
+  - Result count announcements via ARIA live regions
+  - Responsive design with reduced motion support
+  - Only loads on FAQ page (ID: 6908) for optimal performance
+- **Build Process** - Added FAQ search assets to gulpfile.js build pipeline
+- **Asset Enqueuing** - Added FAQ search CSS and JS enqueuing in `includes/enqueue.php`
+
 ## [2.17.3] - 2025-11-16
 ### Added
 - **HTML Sitemap Shortcode** - Added `[html_sitemap]` shortcode for generating HTML sitemaps (`includes/shortcodes.php`)

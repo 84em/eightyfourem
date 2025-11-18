@@ -151,6 +151,38 @@ defined( 'ABSPATH' ) || exit;
 );
 
 /**
+ * Enqueue FAQ search assets
+ * Only loads on FAQ page (ID: 6908)
+ */
+\add_action(
+	hook_name: 'wp_enqueue_scripts',
+	callback: function () {
+		if ( ! \is_page( 6908 ) ) {
+			return;
+		}
+
+		$suffix  = ( ! \defined( 'WP_DEBUG' ) || ! WP_DEBUG ) ? '.min' : '';
+		$version = \wp_get_theme()->get( 'Version' );
+
+		\wp_enqueue_style(
+			handle: 'eightyfourem-faq-search',
+			src: \get_theme_file_uri( "assets/css/faq-search{$suffix}.css" ),
+			ver: $version
+		);
+
+		\wp_enqueue_script(
+			handle: 'eightyfourem-faq-search',
+			src: \get_theme_file_uri( "assets/js/faq-search{$suffix}.js" ),
+			ver: $version,
+			args: [
+				'strategy' => 'defer',
+				'in_footer' => true,
+			]
+		);
+	}
+);
+
+/**
  * Enqueue related case studies styles
  * Only loads on single case study pages
  */
