@@ -93,6 +93,17 @@ defined( 'ABSPATH' ) || exit;
 				'in_footer' => true,
 			]
 		);
+
+		// Enqueue Simple Analytics lazy loading script (defer for better performance)
+		\wp_enqueue_script(
+			handle: 'eightyfourem-simple-analytics',
+			src: \get_theme_file_uri( "assets/js/simple-analytics{$suffix}.js" ),
+			ver: $version,
+			args: [
+				'strategy' => 'defer',
+				'in_footer' => true,
+			]
+		);
 	}
 );
 

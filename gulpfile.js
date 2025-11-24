@@ -43,7 +43,8 @@ const paths = {
       './assets/js/sticky-header.js',
       './assets/js/case-study-filter.js',
       './assets/js/modal-search.js',
-      './assets/js/faq-search.js'
+      './assets/js/faq-search.js',
+      './assets/js/simple-analytics.js'
     ],
     googleReviews: './blocks/google-reviews/index.js',
     calendlyBooking: './blocks/calendly-booking-details/index.js',
