@@ -9,6 +9,8 @@
 namespace EightyFourEM;
 
 use UAGB_Scripts_Utils;
+use function EightyFourEM\IPUtils\is_ip_excluded;
+use function EightyFourEM\IPUtils\is_session_excluded;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -94,16 +96,18 @@ defined( 'ABSPATH' ) || exit;
 			]
 		);
 
-		// Enqueue Simple Analytics lazy loading script (defer for better performance)
-		\wp_enqueue_script(
-			handle: 'eightyfourem-simple-analytics',
-			src: \get_theme_file_uri( "assets/js/simple-analytics{$suffix}.js" ),
-			ver: $version,
-			args: [
-				'strategy' => 'defer',
-				'in_footer' => true,
-			]
-		);
+		// Only enqueue analytics if not excluded by IP, login status, or session opt-out
+		if ( ! is_ip_excluded() && ! is_session_excluded() && ! \is_user_logged_in() ) {
+			\wp_enqueue_script(
+				handle: 'eightyfourem-simple-analytics',
+				src: \get_theme_file_uri( "assets/js/simple-analytics{$suffix}.js" ),
+				ver: $version,
+				args: [
+					'strategy'  => 'defer',
+					'in_footer' => true,
+				]
+			);
+		}
 	}
 );
 

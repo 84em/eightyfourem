@@ -5,6 +5,20 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.18.2] - 2025-11-25
+### Added
+- **IP Utilities Module** - Centralized IP detection and analytics exclusion logic (`includes/ip-utils.php`)
+  - Reusable `get_visitor_ip()` function detecting real IP from proxy headers (HTTP_CLIENT_IP, HTTP_X_REAL_IP, HTTP_X_FORWARDED_FOR, HTTP_CF_CONNECTING_IP)
+  - `is_ip_excluded()` function checking against configurable IP list
+  - `is_session_excluded()` function for `?notrack` query parameter opt-out (session cookie)
+  - IP exclusion list externally configurable for privacy
+
+### Changed
+- **Analytics Exclusion** - Simple Analytics now skips tracking when any condition is met (`includes/enqueue.php`)
+  - IP is in excluded list
+  - User is logged into WordPress
+  - Session opt-out via `?notrack` parameter (persists until browser closes)
+
 ## [2.18.1] - 2025-11-24
 ### Added
 - **Simple Analytics Auto-Events** - Added auto-events.js script to Simple Analytics loader for automatic tracking of outbound links, downloads, and email clicks (`assets/js/simple-analytics.js`)
