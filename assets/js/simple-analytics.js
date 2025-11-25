@@ -15,8 +15,8 @@
 	let simpleAnalyticsLoaded = false;
 
 	/**
-	 * Load Simple Analytics script
-	 * Creates and appends the analytics script element to the document
+	 * Load Simple Analytics scripts
+	 * Creates and appends the analytics and auto-events script elements to the document
 	 */
 	function loadSimpleAnalytics() {
 		if (simpleAnalyticsLoaded) {
@@ -26,11 +26,17 @@
 		// Mark as loaded
 		simpleAnalyticsLoaded = true;
 
-		// Create and append script element
-		const script = document.createElement('script');
-		script.async = true;
-		script.src = 'https://scripts.simpleanalyticscdn.com/latest.js';
-		document.body.appendChild(script);
+		// Create and append main analytics script
+		const analyticsScript = document.createElement('script');
+		analyticsScript.async = true;
+		analyticsScript.src = 'https://scripts.simpleanalyticscdn.com/latest.js';
+		document.body.appendChild(analyticsScript);
+
+		// Create and append auto-events script
+		const autoEventsScript = document.createElement('script');
+		autoEventsScript.async = true;
+		autoEventsScript.src = 'https://scripts.simpleanalyticscdn.com/auto-events.js';
+		document.body.appendChild(autoEventsScript);
 
 		// Remove all event listeners after loading
 		removeEventListeners();
