@@ -5,6 +5,10 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.18.1] - 2025-11-24
+### Added
+- **Simple Analytics Auto-Events** - Added auto-events.js script to Simple Analytics loader for automatic tracking of outbound links, downloads, and email clicks (`assets/js/simple-analytics.js`)
+
 ## [2.18.0] - 2025-11-18
 ### Added
 - **FAQ Search** - Accessible on-page search functionality for FAQ page (`assets/js/faq-search.js`, `assets/css/faq-search.css`)
