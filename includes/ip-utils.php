@@ -22,15 +22,16 @@ function get_excluded_ips(): array {
 
 /**
  * Get visitor's real IP address from various proxy headers.
+ * Cloudflare header is checked first as 84em.com uses Cloudflare CDN.
  *
  * @return string Validated IP address or empty string.
  */
 function get_visitor_ip(): string {
 	$visitor_ip = match ( true ) {
+		! empty( $_SERVER['HTTP_CF_CONNECTING_IP'] ) => $_SERVER['HTTP_CF_CONNECTING_IP'],
 		! empty( $_SERVER['HTTP_CLIENT_IP'] )        => $_SERVER['HTTP_CLIENT_IP'],
 		! empty( $_SERVER['HTTP_X_REAL_IP'] )        => $_SERVER['HTTP_X_REAL_IP'],
 		! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] )  => trim( explode( ',', $_SERVER['HTTP_X_FORWARDED_FOR'] )[0] ),
-		! empty( $_SERVER['HTTP_CF_CONNECTING_IP'] ) => $_SERVER['HTTP_CF_CONNECTING_IP'],
 		default                                      => $_SERVER['REMOTE_ADDR'] ?? '',
 	};
 

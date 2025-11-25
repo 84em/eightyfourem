@@ -5,6 +5,12 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.18.3] - 2025-11-25
+### Fixed
+- **Analytics IP Detection** - Cloudflare `HTTP_CF_CONNECTING_IP` header now checked first in `get_visitor_ip()` (`includes/ip-utils.php`)
+  - Fixes IP exclusion not working for sites behind Cloudflare CDN
+  - Real visitor IP was incorrectly detected from proxy headers
+
 ## [2.18.2] - 2025-11-25
 ### Added
 - **IP Utilities Module** - Centralized IP detection and analytics exclusion logic (`includes/ip-utils.php`)
