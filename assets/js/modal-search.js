@@ -5,6 +5,13 @@
 (function() {
     'use strict';
 
+    // Type filter configuration matching search.php
+    const typeFilters = [
+        { value: 'service', label: 'Service', color: 'service' },
+        { value: 'case study', label: 'Case Study', color: 'case-study' },
+        { value: 'page', label: 'Page', color: 'page' }
+    ];
+
     document.addEventListener('DOMContentLoaded', function() {
         const searchTrigger = document.querySelector('.search-icon a');
 
@@ -26,6 +33,17 @@
             // Update ARIA expanded state
             searchTrigger.setAttribute('aria-expanded', 'true');
 
+            // Build type filter checkboxes HTML
+            const typeFiltersHTML = typeFilters.map(function(filter) {
+                return `
+                    <label class="search-type-filter search-type-filter--${filter.color}">
+                        <input type="checkbox" name="search_type" value="${filter.value}" checked />
+                        <span class="search-type-filter__checkbox" aria-hidden="true"></span>
+                        <span class="search-type-filter__label">${filter.label}</span>
+                    </label>
+                `;
+            }).join('');
+
             // Create modal HTML
             const modalHTML = `
                 <div class="search-modal-overlay"></div>
@@ -39,9 +57,16 @@
                     </button>
                     <h2 id="searchModalTitle" class="search-modal-title">Search 84EM</h2>
                     <form class="search-modal-form" role="search" method="get" action="${window.location.origin}/">
+                        <fieldset class="search-type-filters" role="group" aria-labelledby="typeFiltersLegend">
+                            <legend id="typeFiltersLegend" class="search-type-filters__legend">Filter by type</legend>
+                            <div class="search-type-filters__options">
+                                ${typeFiltersHTML}
+                            </div>
+                        </fieldset>
                         <div class="search-modal-form-wrapper">
                             <label for="searchModalInput" class="search-modal-label">Search for:</label>
                             <input type="search" id="searchModalInput" name="s" class="search-modal-input" placeholder="Search..." required />
+                            <input type="hidden" name="type" id="searchTypeHidden" value="" />
                             <button type="submit" class="search-modal-submit">Search</button>
                         </div>
                     </form>
@@ -130,8 +155,38 @@
             document.addEventListener('keydown', handleEscape);
             document.addEventListener('keydown', trapFocus);
 
+            // Update hidden type field based on checkbox states
+            function updateTypeField() {
+                const checkboxes = modal.querySelectorAll('input[name="search_type"]:checked');
+                const hiddenField = modal.querySelector('#searchTypeHidden');
+                const values = Array.from(checkboxes).map(function(cb) { return cb.value; });
+
+                // If all checked or none checked, don't filter (search all)
+                if (values.length === typeFilters.length || values.length === 0) {
+                    hiddenField.value = '';
+                } else {
+                    hiddenField.value = values.join(',');
+                }
+            }
+
+            // Listen for checkbox changes
+            modal.querySelectorAll('input[name="search_type"]').forEach(function(checkbox) {
+                checkbox.addEventListener('change', updateTypeField);
+            });
+
+            // Initialize hidden field
+            updateTypeField();
+
             // Close on form submit (let it navigate)
-            modal.querySelector('.search-modal-form').addEventListener('submit', function() {
+            modal.querySelector('.search-modal-form').addEventListener('submit', function(submitEvent) {
+                updateTypeField();
+
+                // Remove hidden field from URL if empty (cleaner URLs)
+                const hiddenField = modal.querySelector('#searchTypeHidden');
+                if (hiddenField.value === '') {
+                    hiddenField.disabled = true;
+                }
+
                 closeModal();
             });
         });

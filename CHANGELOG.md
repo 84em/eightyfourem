@@ -5,6 +5,18 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.19.0] - 2025-11-26
+### Added
+- **Search Type Filters** - Filter search results by content type with visual checkboxes in modal search
+  - New `type` query parameter filters results by Service, Case Study, or Page (`includes/search.php`)
+  - Interactive checkbox filters in Search 84EM modal with WCAG 2.1 accessible colors (`assets/js/modal-search.js`, `assets/css/modal-search.css`)
+  - Checkboxes match post type badge colors (blue for Service, green for Case Study, gray for Page)
+  - All types checked by default for inclusive search
+  - Supports URL-encoded values (e.g., `?s=query&type=case%20study`)
+  - Backend supports filtering by parent page relationships (Services parent 2129, Case Studies parent 4406)
+  - Added constants `SERVICES_PAGE_ID` and `CASE_STUDIES_PAGE_ID` for maintainability
+  - New helper functions: `get_search_type_filters()`, `get_posts_by_type_filter()`
+
 ## [2.18.3] - 2025-11-25
 ### Fixed
 - **Analytics IP Detection** - Cloudflare `HTTP_CF_CONNECTING_IP` header now checked first in `get_visitor_ip()` (`includes/ip-utils.php`)
