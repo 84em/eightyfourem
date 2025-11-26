@@ -123,16 +123,29 @@ function get_posts_by_type_filter( string $type ): ?array {
 		// Base exclusions - always exclude these pages
 		$excluded_posts = [ 2507, 4507 ];
 
-		// Check for type filter parameter (supports multiple comma-separated types)
+		// Check for type filter parameter (supports array from checkboxes or single string)
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only filter parameter
-		$type_filter = isset( $_GET['type'] )
-			? \sanitize_text_field( \wp_unslash( $_GET['type'] ) )
-			: '';
+		$type_param = $_GET['type'] ?? null;
 
-		if ( $type_filter !== '' ) {
-			$filters     = get_search_type_filters();
-			$type_values = array_map( 'trim', explode( ',', strtolower( $type_filter ) ) );
-			$type_values = array_filter( $type_values );
+		// Normalize to array of sanitized values
+		$type_values = [];
+		if ( $type_param !== null ) {
+			if ( \is_array( $type_param ) ) {
+				// Handle array from type[] checkboxes
+				$type_values = \array_map(
+					fn( $val ) => strtolower( trim( \sanitize_text_field( \wp_unslash( $val ) ) ) ),
+					$type_param
+				);
+			} else {
+				// Handle single string value (backward compatibility)
+				$sanitized   = strtolower( trim( \sanitize_text_field( \wp_unslash( $type_param ) ) ) );
+				$type_values = $sanitized !== '' ? [ $sanitized ] : [];
+			}
+			$type_values = \array_filter( $type_values );
+		}
+
+		if ( ! empty( $type_values ) ) {
+			$filters = get_search_type_filters();
 
 			// Filter to only valid types
 			$valid_types = array_filter( $type_values, fn( $t ) => isset( $filters[ $t ] ) );

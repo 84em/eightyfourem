@@ -7,10 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.19.1] - 2025-11-26
 ### Fixed
-- **Search Type Filters** - Fixed duplicate `search_type` parameter appearing in search URLs (`assets/js/modal-search.js`)
-  - Changed checkbox inputs from `name="search_type"` to `data-type` attribute
-  - Only the hidden `type` field is now submitted with the form
-  - Search URLs now clean: `?s=query&type=case+study` instead of `?search_type=case+study&s=query&type=case+study`
+- **Search Type Filters** - Simplified implementation using direct checkbox submission (`assets/js/modal-search.js`, `includes/search.php`)
+  - Checkboxes now use `name="type[]"` directly instead of hidden field
+  - Removed complex `updateTypeField()` JavaScript function
+  - PHP updated to handle `type` as array or string for backward compatibility
+  - Clean URLs: `?s=query&type[]=service&type[]=case+study`
 
 ## [2.19.0] - 2025-11-26
 ### Added
