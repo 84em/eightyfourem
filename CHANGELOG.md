@@ -5,6 +5,14 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.19.1] - 2025-11-26
+### Fixed
+- **Search Type Filters** - Simplified implementation using direct checkbox submission (`assets/js/modal-search.js`, `includes/search.php`)
+  - Checkboxes now use `name="type[]"` directly instead of hidden field
+  - Removed complex `updateTypeField()` JavaScript function
+  - PHP updated to handle `type` as array or string for backward compatibility
+  - Clean URLs: `?s=query&type[]=service&type[]=case+study`
+
 ## [2.19.0] - 2025-11-26
 ### Added
 - **Search Type Filters** - Filter search results by content type with visual checkboxes in modal search

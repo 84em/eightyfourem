@@ -37,7 +37,7 @@
             const typeFiltersHTML = typeFilters.map(function(filter) {
                 return `
                     <label class="search-type-filter search-type-filter--${filter.color}">
-                        <input type="checkbox" name="search_type" value="${filter.value}" checked />
+                        <input type="checkbox" name="type[]" value="${filter.value}" checked />
                         <span class="search-type-filter__checkbox" aria-hidden="true"></span>
                         <span class="search-type-filter__label">${filter.label}</span>
                     </label>
@@ -66,7 +66,6 @@
                         <div class="search-modal-form-wrapper">
                             <label for="searchModalInput" class="search-modal-label">Search for:</label>
                             <input type="search" id="searchModalInput" name="s" class="search-modal-input" placeholder="Search..." required />
-                            <input type="hidden" name="type" id="searchTypeHidden" value="" />
                             <button type="submit" class="search-modal-submit">Search</button>
                         </div>
                     </form>
@@ -155,36 +154,17 @@
             document.addEventListener('keydown', handleEscape);
             document.addEventListener('keydown', trapFocus);
 
-            // Update hidden type field based on checkbox states
-            function updateTypeField() {
-                const checkboxes = modal.querySelectorAll('input[name="search_type"]:checked');
-                const hiddenField = modal.querySelector('#searchTypeHidden');
-                const values = Array.from(checkboxes).map(function(cb) { return cb.value; });
-
-                // If all checked or none checked, don't filter (search all)
-                if (values.length === typeFilters.length || values.length === 0) {
-                    hiddenField.value = '';
-                } else {
-                    hiddenField.value = values.join(',');
-                }
-            }
-
-            // Listen for checkbox changes
-            modal.querySelectorAll('input[name="search_type"]').forEach(function(checkbox) {
-                checkbox.addEventListener('change', updateTypeField);
-            });
-
-            // Initialize hidden field
-            updateTypeField();
-
             // Close on form submit (let it navigate)
             modal.querySelector('.search-modal-form').addEventListener('submit', function(submitEvent) {
-                updateTypeField();
+                // If all checkboxes are checked, uncheck them all to avoid adding type[] params
+                // This results in cleaner URLs when no filtering is desired
+                const checkboxes = modal.querySelectorAll('input[name="type[]"]');
+                const checkedBoxes = modal.querySelectorAll('input[name="type[]"]:checked');
 
-                // Remove hidden field from URL if empty (cleaner URLs)
-                const hiddenField = modal.querySelector('#searchTypeHidden');
-                if (hiddenField.value === '') {
-                    hiddenField.disabled = true;
+                if (checkedBoxes.length === typeFilters.length) {
+                    checkboxes.forEach(function(cb) {
+                        cb.checked = false;
+                    });
                 }
 
                 closeModal();
