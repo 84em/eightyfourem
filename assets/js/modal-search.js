@@ -37,7 +37,7 @@
             const typeFiltersHTML = typeFilters.map(function(filter) {
                 return `
                     <label class="search-type-filter search-type-filter--${filter.color}">
-                        <input type="checkbox" name="search_type" value="${filter.value}" checked />
+                        <input type="checkbox" data-type="${filter.value}" checked />
                         <span class="search-type-filter__checkbox" aria-hidden="true"></span>
                         <span class="search-type-filter__label">${filter.label}</span>
                     </label>
@@ -157,9 +157,9 @@
 
             // Update hidden type field based on checkbox states
             function updateTypeField() {
-                const checkboxes = modal.querySelectorAll('input[name="search_type"]:checked');
+                const checkboxes = modal.querySelectorAll('input[data-type]:checked');
                 const hiddenField = modal.querySelector('#searchTypeHidden');
-                const values = Array.from(checkboxes).map(function(cb) { return cb.value; });
+                const values = Array.from(checkboxes).map(function(cb) { return cb.dataset.type; });
 
                 // If all checked or none checked, don't filter (search all)
                 if (values.length === typeFilters.length || values.length === 0) {
@@ -170,7 +170,7 @@
             }
 
             // Listen for checkbox changes
-            modal.querySelectorAll('input[name="search_type"]').forEach(function(checkbox) {
+            modal.querySelectorAll('input[data-type]').forEach(function(checkbox) {
                 checkbox.addEventListener('change', updateTypeField);
             });
 
