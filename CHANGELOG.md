@@ -5,6 +5,12 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.19.2] - 2025-11-26
+### Fixed
+- **Search Modal Firefox** - Fixed checkbox rendering issue in Firefox (`assets/css/modal-search.css`)
+  - Changed hidden checkbox technique from `clip: rect()` to `opacity: 0` for cross-browser compatibility
+  - Eliminates visual artifacts showing in Firefox
+
 ## [2.19.1] - 2025-11-26
 ### Fixed
 - **Search Type Filters** - Simplified implementation using direct checkbox submission (`assets/js/modal-search.js`, `includes/search.php`)
