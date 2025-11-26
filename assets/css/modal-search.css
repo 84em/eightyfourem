@@ -251,14 +251,10 @@
 /* Hide native checkbox visually but keep accessible */
 .search-type-filter input[type="checkbox"] {
   position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
 }
 
 /* Custom checkbox indicator */
