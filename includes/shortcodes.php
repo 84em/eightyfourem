@@ -14,7 +14,6 @@
 
 namespace EightyFourEM;
 
-use WP_Post;
 use function add_action;
 
 defined( 'ABSPATH' ) || exit;
@@ -74,6 +73,8 @@ add_shortcode(
             ];
             wp_list_pages( $args );
             $pages = ob_get_clean();
+            $pages = str_replace( 'Custom WordPress Plugin Development, Consulting, and White-Label services in the ', '', $pages );
+            $pages = str_replace( 'Custom WordPress Plugin Development, Consulting, and White-Label services in ', '', $pages );
 
             // get local pages (not sitemap)
             ob_start();
@@ -95,8 +96,12 @@ add_shortcode(
             wp_list_pages( $args );
             $pages .= '<hr/>' . ob_get_clean();
 
+            $pages = str_replace( 'WordPress Development, Plugins, Consulting, White-Label in ', '', $pages );
             $pages = str_replace( 'AI-Enhanced WordPress Development, White-Label Services, Plugins, Consulting in ', '', $pages );
             $pages = str_replace( ' | 84EM', '', $pages );
+            $pages = str_replace( 'WordPress Development, Plugins, Consulting, Agency Services in ', '', $pages );
+            $pages = str_replace( 'WordPress Development, Plugins, Consulting, White-Label services in the ', '', $pages );
+            $pages = str_replace( 'Custom WordPress Plugin Development, Consulting, and White-Label services in the ', '', $pages );
             set_transient( 'html_sitemap', $pages, WEEK_IN_SECONDS );
         }
 
@@ -106,7 +111,7 @@ add_shortcode(
 
 add_action(
     hook_name: "publish_page",
-    callback: function ( int $_post_id, WP_Post $_post, string $_old_status ) {
+    callback: function ( int $_post_id, \WP_Post $_post, string $_old_status ) {
         delete_transient( 'html_sitemap' );
     },
     accepted_args: 3

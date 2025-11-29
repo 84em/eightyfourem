@@ -5,6 +5,24 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.20.0] - 2025-11-29
+### Added
+- **Bot User Agent Detection** - Exclude bots and crawlers from analytics tracking by user agent (`includes/ip-utils.php`)
+  - New `is_ua_excluded()` function with 75+ bot patterns
+  - Search engines: Googlebot, Bingbot, Yandex, Baidu, DuckDuckBot
+  - AI crawlers (2025): GPTBot, ChatGPT-User, ClaudeBot, PerplexityBot, Meta-ExternalAgent, Amazonbot
+  - Social media: Facebook, Twitter, LinkedIn, Pinterest, Discord, Slack
+  - SEO tools: Ahrefs, SEMrush, Screaming Frog, Moz
+  - HTTP libraries: curl, wget, Python requests, Go http-client, Node.js fetch
+  - WordPress internal requests (`WordPress/` user agent)
+  - Empty user agents treated as bots
+  - Integrated into analytics exclusion check in `includes/enqueue.php`
+
+### Changed
+- **HTML Sitemap** - Improved title display by stripping verbose location prefixes (`includes/shortcodes.php`)
+  - Removes redundant service description prefixes from local page titles
+  - Cleaner sitemap output with just city/state names
+
 ## [2.19.2] - 2025-11-26
 ### Fixed
 - **Search Modal Firefox** - Fixed checkbox rendering issue in Firefox (`assets/css/modal-search.css`)
