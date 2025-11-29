@@ -66,3 +66,130 @@ function is_session_excluded(): bool {
 
 	return isset( $_COOKIE[ $cookie_name ] );
 }
+
+/**
+ * Get list of known bot user agent patterns for analytics exclusion.
+ * Patterns are case-insensitive substrings matched against User-Agent header.
+ *
+ * @return array<string> Array of bot user agent patterns.
+ */
+function get_bot_ua_patterns(): array {
+	return [
+		// Search engine crawlers
+		'googlebot',
+		'google-inspectiontool',
+		'adsbot-google',
+		'mediapartners-google',
+		'feedfetcher-google',
+		'bingbot',
+		'bingpreview',
+		'slurp',
+		'duckduckbot',
+		'yandexbot',
+		'baiduspider',
+		'sogou',
+		'exabot',
+		'qwantify',
+
+		// AI crawlers (2025)
+		'gptbot',
+		'chatgpt-user',
+		'oai-searchbot',
+		'claudebot',
+		'claude-web',
+		'anthropic-ai',
+		'google-extended',
+		'perplexitybot',
+		'meta-externalagent',
+		'meta-externalfetcher',
+		'amazonbot',
+		'cohere-ai',
+		'bytespider',
+		'ccbot',
+		'omgili',
+		'diffbot',
+
+		// Social media crawlers
+		'facebookexternalhit',
+		'facebot',
+		'twitterbot',
+		'linkedinbot',
+		'pinterestbot',
+		'slackbot',
+		'telegrambot',
+		'discordbot',
+		'whatsapp',
+		'snapchat',
+
+		// SEO and analytics tools
+		'ahrefsbot',
+		'semrushbot',
+		'mj12bot',
+		'dotbot',
+		'rogerbot',
+		'screaming frog',
+		'sistrix',
+		'seokicks',
+		'blexbot',
+		'petalbot',
+
+		// Monitoring and performance tools
+		'pingdom',
+		'uptimerobot',
+		'gtmetrix',
+		'pagespeed',
+		'site24x7',
+		'statuscake',
+
+		// Generic bot patterns
+		'bot/',
+		'crawler',
+		'spider',
+		'scraper',
+		'headless',
+		'phantom',
+		'selenium',
+		'puppeteer',
+		'playwright',
+
+		// WordPress internal requests (wp_remote_get, wp_remote_post, pingbacks)
+		'wordpress/',
+
+		// HTTP libraries and CLI tools
+		'curl/',
+		'wget/',
+		'libwww-perl',
+		'python-requests',
+		'python-urllib',
+		'go-http-client',
+		'java/',
+		'apache-httpclient',
+		'okhttp',
+		'axios/',
+		'node-fetch',
+		'undici',
+	];
+}
+
+/**
+ * Check if current request is from a known bot based on user agent.
+ *
+ * @return bool True if user agent matches a known bot pattern, false otherwise.
+ */
+function is_ua_excluded(): bool {
+	$user_agent = $_SERVER['HTTP_USER_AGENT'] ?? '';
+
+	if ( '' === $user_agent ) {
+		return true; // Empty UA is likely a bot
+	}
+
+	$user_agent_lower = strtolower( $user_agent );
+
+	foreach ( get_bot_ua_patterns() as $pattern ) {
+		if ( str_contains( $user_agent_lower, $pattern ) ) {
+			return true;
+		}
+	}
+
+	return false;
+}
