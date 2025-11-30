@@ -72,7 +72,6 @@ wp 84em regenerate-schema --all
 # Regenerate schema for specific content types
 wp 84em regenerate-schema --pages
 wp 84em regenerate-schema --posts
-wp 84em regenerate-schema --projects
 wp 84em regenerate-schema --service-pages
 
 # Regenerate schema for specific content by slug

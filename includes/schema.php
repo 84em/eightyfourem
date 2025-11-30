@@ -1,23 +1,19 @@
 <?php
 
 /**
- * Automatically generate and save schema.org structured data for posts, pages, and projects.
+ * Automatically generate and save schema.org structured data for posts and pages.
  *
  * The `save_post` action is used to hook into post save/update events, ensuring that structured data
  * is generated and saved only for a given set of post types. The schema data follows the guidelines
- * of schema.org and is tailored to specific WordPress post types (post, page, and custom post types like "project").
+ * of schema.org
  *
  * The following high-level operations are performed:
  * - Preventing execution during autosave or post revision updates.
  * - Verifying user permissions to edit the current post.
- * - Checking the post type to determine if schema generation applies (post, page, project).
+ * - Checking the post type to determine if schema generation applies (post, page).
  * - Generating structured data for supported post types based on schema.org guidelines with specific attributes.
  * - Adding breadcrumb trail information for enhanced schema context.
  * - Providing additional attributes or keywords relevant to the content type, such as author, categories, and tags.
- *
- * For `project` post types:
- * - Keywords are extracted from the content based on predefined technical terms.
- * - The schema includes additional properties such as creator information and genres.
  *
  * For `post` post types:
  * - Adds author and publisher information.
@@ -170,20 +166,7 @@ function extract_testimonials_from_page( int $page_id ): array {
         ];
 
         // Add post type specific breadcrumb
-        if ( $post_type === 'project' ) {
-            $breadcrumbs[] = [
-                '@type'    => 'ListItem',
-                'position' => 2,
-                'name'     => 'Projects',
-                'item'     => $site_url . '/project/',
-            ];
-            $breadcrumbs[] = [
-                '@type'    => 'ListItem',
-                'position' => 3,
-                'name'     => \get_the_title( $post_id ),
-                'item'     => $post_url,
-            ];
-        } elseif ( $post_type === 'post' ) {
+        if ( $post_type === 'post' ) {
             $breadcrumbs[] = [
                 '@type'    => 'ListItem',
                 'position' => 2,
@@ -209,85 +192,6 @@ function extract_testimonials_from_page( int $page_id ): array {
 
         // Post type specific schema enhancements
         switch ( $post_type ) {
-            case 'project':
-                // Use array of types to properly support both WebPage (for breadcrumbs) and CreativeWork
-                $schema['@type']   = ['WebPage', 'CreativeWork'];
-                $schema['creator'] = [
-                    '@type' => 'Organization',
-                    '@id'   => $site_url . '/#organization',
-                    'name'  => '84EM',
-                ];
-                $schema['genre']   = 'WordPress Development';
-
-                // Extract keywords from content
-                $content  = \strip_tags( $post->post_content );
-                $keywords = [];
-
-                // Try to get keywords from 84em-local-pages plugin first
-                $tech_keywords = [];
-                if ( \class_exists( 'EightyFourEM\LocalPages\Plugin' ) ) {
-                    try {
-                        $plugin = \EightyFourEM\LocalPages\Plugin::getInstance();
-                        $container = $plugin->getContainer();
-                        if ( $container->has( 'EightyFourEM\LocalPages\Data\KeywordsProvider' ) ) {
-                            $keywordsProvider = $container->get( 'EightyFourEM\LocalPages\Data\KeywordsProvider' );
-                            $tech_keywords = $keywordsProvider->getKeys();
-                        }
-                    } catch ( \Exception $e ) {
-                        // Silently fall back to hardcoded list if container fails
-                    }
-                }
-
-                // Fallback to hardcoded keywords if plugin not available
-                if ( empty( $tech_keywords ) ) {
-                    $tech_keywords = [
-                        'WordPress',
-                        'plugin',
-                        'API',
-                        'WooCommerce',
-                        'custom',
-                        'integration',
-                        'security',
-                        'database',
-                        'PHP',
-                        'JavaScript',
-                        'migration',
-                        'multisite',
-                        'theme',
-                        'Gravity Forms',
-                        'LearnDash',
-                        'financial',
-                        'healthcare',
-                        'banking',
-                        'enterprise',
-                        'white label',
-                        'API integration',
-                        'data migration',
-                        'platform migration',
-                        'platform transfer',
-                        'security audit',
-                        'AI',
-                        'artificial intelligence',
-                        'automation',
-                        'maintenance',
-                        'support',
-                        'consulting',
-                        'troubleshooting',
-                    ];
-                }
-
-                foreach ( $tech_keywords as $keyword ) {
-                    if ( \stripos( $content, $keyword ) !== false ) {
-                        $keywords[] = $keyword;
-                    }
-                }
-
-                if ( ! empty( $keywords ) ) {
-                    $schema['keywords'] = \implode( ', ', \array_unique( $keywords ) );
-                }
-
-                break;
-
             case 'post':
                 $schema['@type']     = 'BlogPosting';
                 $schema['author']    = [
@@ -454,14 +358,6 @@ function extract_testimonials_from_page( int $page_id ): array {
                                 'WordPress Consulting',
                                 'Custom WordPress Development',
                             ],
-                        ];
-                        break;
-
-                    case 'now':
-                        $schema['mainEntity'] = [
-                            '@type'       => 'ItemList',
-                            'name'        => 'Current Development Projects',
-                            'description' => 'Projects we\'re actively involved with, updated frequently',
                         ];
                         break;
 
