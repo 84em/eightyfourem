@@ -38,6 +38,80 @@ namespace EightyFourEM;
 
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * Extract testimonials from a page's reusable blocks.
+ *
+ * Parses page content to find reusable block references, fetches each block,
+ * and extracts quote/attribution data from testimonial blocks.
+ *
+ * @param int $page_id The page ID containing testimonial blocks.
+ *
+ * @return array Array of testimonial data with keys: quote, attribution, date, rating.
+ */
+function extract_testimonials_from_page( int $page_id ): array {
+	$page = \get_post( $page_id );
+	if ( ! $page || empty( $page->post_content ) ) {
+		return [];
+	}
+
+	// Find all reusable block references.
+	$pattern = '/<!-- wp:block \{"ref":(\d+)\}/';
+	\preg_match_all( $pattern, $page->post_content, $matches );
+
+	if ( empty( $matches[1] ) ) {
+		return [];
+	}
+
+	$testimonials = [];
+	$block_ids    = \array_map( 'intval', $matches[1] );
+
+	// Fetch all blocks in one query.
+	$blocks = \get_posts( [
+		'post_type'      => 'wp_block',
+		'post__in'       => $block_ids,
+		'posts_per_page' => -1,
+		'orderby'        => 'post__in',
+	] );
+
+	foreach ( $blocks as $block ) {
+		// Skip non-testimonial blocks (check title contains "Testimonial").
+		if ( \stripos( $block->post_title, 'testimonial' ) === false ) {
+			continue;
+		}
+
+		$content = $block->post_content;
+
+		// Extract quote: look for text inside <em> tags.
+		$quote = '';
+		if ( \preg_match( '/<em[^>]*>(.+?)<\/em>/is', $content, $quote_match ) ) {
+			// Clean up the quote - remove HTML and surrounding quotes.
+			$quote = \wp_strip_all_tags( $quote_match[1] );
+			// Remove all types of quotation marks from start and end.
+			$quote = \preg_replace( '/^[\s\x{0022}\x{0027}\x{2018}\x{2019}\x{201C}\x{201D}]+/u', '', $quote );
+			$quote = \preg_replace( '/[\s\x{0022}\x{0027}\x{2018}\x{2019}\x{201C}\x{201D}]+$/u', '', $quote );
+		}
+
+		// Extract attribution: look for text in small font paragraph.
+		$attribution = '';
+		if ( \preg_match( '/has-small-font-size[^>]*>([^<]+)</is', $content, $attr_match ) ) {
+			$attribution = \wp_strip_all_tags( $attr_match[1] );
+			$attribution = \trim( $attribution );
+		}
+
+		// Only add if we have both quote and attribution.
+		if ( ! empty( $quote ) && ! empty( $attribution ) ) {
+			$testimonials[] = [
+				'quote'       => $quote,
+				'attribution' => $attribution,
+				'date'        => \get_the_date( 'c', $block ),
+				'rating'      => 5,
+			];
+		}
+	}
+
+	return $testimonials;
+}
+
 \add_action(
     hook_name: 'wp_after_insert_post',
     callback: function ( $post_id, $post, $update ) {
@@ -57,8 +131,8 @@ defined( 'ABSPATH' ) || exit;
         $post_url  = \get_permalink( $post_id );
         $site_url  = \get_site_url();
 
-        // Only generate schema for posts, pages, and projects
-        if ( ! \in_array( $post_type, [ 'post', 'page', 'project' ] ) ) {
+        // Only generate schema for posts, pages
+        if ( ! \in_array( $post_type, [ 'post', 'page' ] ) ) {
             return;
         }
 
@@ -795,24 +869,36 @@ defined( 'ABSPATH' ) || exit;
                         break;
 
                     case 'testimonials':
-                        // Get actual review count from Google Reviews
-                        $google_reviews_block = new GoogleReviewsBlock();
-                        $google_reviews_data  = $google_reviews_block->get_google_reviews();
+                        // Extract testimonials from reusable blocks on this page.
+                        $testimonials = extract_testimonials_from_page( $post_id );
 
-                        // Default review count (fallback)
-                        $total_review_count = 5;
-                        $average_rating     = '5.0';
-
-                        // If Google reviews data is available, use the actual count
-                        if ( $google_reviews_data && isset( $google_reviews_data['total_ratings'] ) ) {
-                            $total_review_count = $google_reviews_data['total_ratings'];
-                            if ( isset( $google_reviews_data['rating'] ) ) {
-                                $average_rating = number_format( $google_reviews_data['rating'], 1 );
-                            }
+                        // Build reviews array from extracted testimonials.
+                        $reviews = [];
+                        foreach ( $testimonials as $testimonial ) {
+                            $reviews[] = [
+                                '@type'        => 'Review',
+                                'itemReviewed' => [
+                                    '@type' => 'Organization',
+                                    '@id'   => $site_url . '/#organization',
+                                ],
+                                'reviewRating' => [
+                                    '@type'       => 'Rating',
+                                    'ratingValue' => $testimonial['rating'],
+                                    'bestRating'  => 5,
+                                    'worstRating' => 1,
+                                ],
+                                'author'       => [
+                                    '@type' => 'Person',
+                                    'name'  => $testimonial['attribution'],
+                                ],
+                                'reviewBody'   => $testimonial['quote'],
+                                'datePublished' => $testimonial['date'],
+                            ];
                         }
 
-                        // Add the Clutch reviews to the count.  Hard coded value as this information isn't exposed in the page source.
-                        $total_review_count += 3;
+                        // Calculate aggregate rating.
+                        $review_count   = \count( $testimonials );
+                        $average_rating = $review_count > 0 ? 5.0 : 0;
 
                         $schema['mainEntity'] = [
                             '@type'           => 'Organization',
@@ -823,27 +909,11 @@ defined( 'ABSPATH' ) || exit;
                             'aggregateRating' => [
                                 '@type'       => 'AggregateRating',
                                 'ratingValue' => $average_rating,
-                                'reviewCount' => (string) $total_review_count,
-                                'bestRating'  => '5',
-                                'worstRating' => '1',
+                                'reviewCount' => $review_count,
+                                'bestRating'  => 5,
+                                'worstRating' => 1,
                             ],
-                            'review'          => [
-                                [
-                                    '@type'         => 'Review',
-                                    'reviewRating'  => [
-                                        '@type'       => 'Rating',
-                                        'ratingValue' => '5',
-                                        'bestRating'  => '5',
-                                        'worstRating' => '1',
-                                    ],
-                                    'author'        => [
-                                        '@type' => 'Organization',
-                                        'name'  => 'Clutch.co Verified Client',
-                                    ],
-                                    'reviewBody'    => '84EM is nothing but a breath of fresh air in a world of unreliable vendors.',
-                                    'datePublished' => \get_the_date( 'c', $post_id ),
-                                ],
-                            ],
+                            'review'          => $reviews,
                         ];
                         break;
                 }

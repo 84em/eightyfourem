@@ -5,6 +5,19 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.22.0] - 2025-11-30
+### Changed
+- **Testimonials Schema Refactor** - Schema now parses page content instead of relying on external APIs (`includes/schema.php`)
+  - New `extract_testimonials_from_page()` helper extracts testimonials from reusable blocks
+  - Filters blocks by title containing "testimonial" to skip non-testimonial blocks
+  - Extracts quote text from `<em>` tags and attribution from small font paragraphs
+  - Uses Unicode-aware regex for proper curly quote handling in review text cleanup
+  - Schema `aggregateRating` and `review` array reflect actual page content
+  - All rating values use numeric types per 2025 schema.org best practices
+  - Each review includes proper `itemReviewed` reference to Organization
+  - Eliminates dependency on Google Reviews API for schema data
+  - Prevents schema/content mismatch when external platforms delete reviews
+
 ## [2.21.0] - 2025-11-30
 ### Added
 - **HTML Sitemap Card Layout** - Complete refactor of `[html_sitemap]` shortcode with modern card-based design (`includes/html-sitemap.php`, `assets/css/sitemap.css`)
