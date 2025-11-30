@@ -24,16 +24,13 @@ class ThemeCLI {
 	 * ## OPTIONS
 	 *
 	 * [--all]
-	 * : Regenerate schema for all posts, pages, and projects
+	 * : Regenerate schema for all posts, pages
 	 *
 	 * [--pages]
 	 * : Regenerate schema for all pages only
 	 *
 	 * [--posts]
 	 * : Regenerate schema for all posts only
-	 *
-	 * [--projects]
-	 * : Regenerate schema for all projects only
 	 *
 	 * [--slug=<slug>]
 	 * : Regenerate schema for specific page/post by slug (comma-separated for multiple)
@@ -91,7 +88,7 @@ class ThemeCLI {
 
 			foreach ( $slugs as $slug ) {
 				$slug = trim( $slug );
-				$post = \get_page_by_path( $slug, OBJECT, [ 'page', 'post', 'project' ] );
+				$post = \get_page_by_path( $slug, OBJECT, [ 'page', 'post' ] );
 				if ( $post ) {
 					$this->update_post_schema( $post->ID, $post->post_title );
 					$regenerated++;
@@ -101,8 +98,8 @@ class ThemeCLI {
 			}
 		} elseif ( isset( $assoc_args['all'] ) ) {
 			// Regenerate all
-			\WP_CLI::log( 'Regenerating schema for all posts, pages, and projects...' );
-			$regenerated += $this->regenerate_by_post_type( [ 'post', 'page', 'project' ] );
+			\WP_CLI::log( 'Regenerating schema for all posts, pages...');
+			$regenerated += $this->regenerate_by_post_type( [ 'post', 'page' ] );
 		} elseif ( isset( $assoc_args['pages'] ) ) {
 			// Regenerate all pages
 			\WP_CLI::log( 'Regenerating schema for all pages...' );
@@ -111,12 +108,8 @@ class ThemeCLI {
 			// Regenerate all posts
 			\WP_CLI::log( 'Regenerating schema for all posts...' );
 			$regenerated += $this->regenerate_by_post_type( [ 'post' ] );
-		} elseif ( isset( $assoc_args['projects'] ) ) {
-			// Regenerate all projects
-			\WP_CLI::log( 'Regenerating schema for all projects...' );
-			$regenerated += $this->regenerate_by_post_type( [ 'project' ] );
 		} else {
-			\WP_CLI::error( 'Please specify --all, --pages, --posts, --projects, --slug, or --service-pages' );
+			\WP_CLI::error( 'Please specify --all, --pages, --posts, --slug, or --service-pages' );
 			return;
 		}
 

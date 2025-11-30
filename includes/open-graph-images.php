@@ -171,7 +171,7 @@ function validate_og_image( int $attachment_id ): array {
 	callback: function () {
 		$image_data = null;
 
-		// For singular posts, pages, projects - try post-specific logic
+		// For singular posts, pages - try post-specific logic
 		if ( \is_singular() ) {
 			$post_id = \get_the_ID();
 			$image_data = get_og_image_data( $post_id );
@@ -265,7 +265,7 @@ function render_settings_page(): void {
 			</div>
 		<?php endif; ?>
 
-		<p>Set a default Open Graph image to be used across your site. This can be overridden on individual posts, pages, and projects.</p>
+		<p>Set a default Open Graph image to be used across your site. This can be overridden on individual posts and pages.</p>
 
 		<form method="post" action="">
 			<?php \wp_nonce_field( 'eightyfourem_og_settings', 'eightyfourem_og_nonce' ); ?>
@@ -407,7 +407,7 @@ function render_settings_page(): void {
 );
 
 /**
- * Add meta box to posts, pages, and projects
+ * Add meta box to posts, pages
  */
 \add_action(
 	hook_name: 'add_meta_boxes',
@@ -416,7 +416,7 @@ function render_settings_page(): void {
 			id: 'eightyfourem_og_image',
 			title: 'Open Graph Image',
 			callback: 'EightyFourEM\OpenGraph\render_meta_box',
-			screen: [ 'post', 'page', 'project' ],
+			screen: [ 'post', 'page' ],
 			context: 'side',
 			priority: 'default'
 		);
