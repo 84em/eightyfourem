@@ -25,7 +25,8 @@ const paths = {
       './assets/css/related-case-studies.css',
       './assets/css/search.css',
       './assets/css/modal-search.css',
-      './assets/css/faq-search.css'
+      './assets/css/faq-search.css',
+      './assets/css/sitemap.css'
     ],
     googleReviews: [
       './blocks/google-reviews/style.css',

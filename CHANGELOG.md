@@ -5,6 +5,31 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.21.0] - 2025-11-30
+### Added
+- **HTML Sitemap Card Layout** - Complete refactor of `[html_sitemap]` shortcode with modern card-based design (`includes/html-sitemap.php`, `assets/css/sitemap.css`)
+  - Three distinct sections: Pages, Case Studies, Service Areas
+  - Responsive 3-column grid (desktop), 2-column (tablet), 1-column (mobile)
+  - Section-specific background colors using CSS `color-mix()` for visual distinction
+  - Collapsible child pages using native `<details>`/`<summary>` (no JavaScript required)
+  - Pages sorted alphabetically by permalink-based card titles
+  - Child pages prefixed with `&middot;` for visual hierarchy
+  - Case Studies section spans full width with green accent background
+  - Service Areas organized by state with cities as collapsible children
+  - Verbose location prefixes and state suffixes stripped from titles for cleaner display
+
+### Changed
+- **Code Architecture Refactor** - Reorganized sitemap and shortcode modules for better maintainability
+  - Created `includes/html-sitemap.php` with dedicated `EightyFourEM\HtmlSitemap` namespace
+  - Renamed `includes/sitemap.php` to `includes/xml-sitemap.php` for clarity
+  - Simplified `includes/shortcodes.php` to 38-line registry (register shortcodes, delegate to modules)
+  - Moved `rlv_didyoumean` shortcode implementation to `includes/relevanssi.php`
+  - Helper functions: `permalink_to_title()` for cleaner card titles, `sanitize_local_title()` for location name cleanup
+- **Build Process** - Added `sitemap.css` to gulpfile.js theme styles array
+
+### Removed
+- **Transient Caching** - Removed sitemap output caching for simpler maintenance
+
 ## [2.20.0] - 2025-11-29
 ### Added
 - **Bot User Agent Detection** - Exclude bots and crawlers from analytics tracking by user agent (`includes/ip-utils.php`)

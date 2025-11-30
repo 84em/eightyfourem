@@ -267,3 +267,25 @@ defined( 'ABSPATH' ) || exit;
 		return $classes;
 	}
 );
+
+/**
+ * Enqueue sitemap styles
+ * Only loads on sitemap page (ID: 6964)
+ */
+\add_action(
+	hook_name: 'wp_enqueue_scripts',
+	callback: function (): void {
+		if ( ! \is_page( 6964 ) ) {
+			return;
+		}
+
+		$suffix  = ( ! \defined( 'WP_DEBUG' ) || ! WP_DEBUG ) ? '.min' : '';
+		$version = \wp_get_theme()->get( 'Version' );
+
+		\wp_enqueue_style(
+			handle: 'eightyfourem-sitemap',
+			src: \get_theme_file_uri( "assets/css/sitemap{$suffix}.css" ),
+			ver: $version
+		);
+	}
+);
