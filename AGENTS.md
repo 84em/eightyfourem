@@ -48,7 +48,7 @@ Files in `includes/` directory provide modular functionality:
 
 **SEO & Content:**
 - `meta-tags.php` - SEO meta tags (title, description, Open Graph, Twitter Cards)
-- `schema.php` - Schema.org structured data generation for pages, posts, projects
+- `schema.php` - Schema.org structured data generation for pages and posts; testimonials schema extracts reviews from reusable blocks
 - `xml-sitemap.php` - XML sitemap with batch processing via Action Scheduler
 - `html-sitemap.php` - Card-based HTML sitemap with collapsible sections
 - `search.php` - Search result filtering, Challenge heading removal from excerpts
