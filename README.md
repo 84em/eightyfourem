@@ -98,14 +98,14 @@ npm install
 
 The build process handles:
 - **CSS files**:
-  - Theme: `navigation.css`, `page-specific.css`, `utilities.css`, `sticky-header.css`, `highlight.css`, `modal-search.css`, `case-study-filter.css`, `search.css`
-  - Google Reviews Block: `editor.css`, `style.css` (in `assets/google-reviews-block/`)
+  - Theme: `navigation.css`, `page-specific.css`, `utilities.css`, `sticky-header.css`, `highlight.css`, `modal-search.css`, `case-study-filter.css`, `related-case-studies.css`, `search.css`, `faq-search.css`, `sitemap.css`
+  - Blocks: Google Reviews (`style.css`, `editor.css`), Calendly Booking Details (`style.css`, `editor.css`)
   - Autoprefixer (targets last 2 browser versions)
   - Minification
   - Sourcemaps
 - **JavaScript files**:
-  - Theme: `sticky-header.js`, `highlight.js`, `modal-search.js`, `case-study-filter.js`
-  - Google Reviews Block: `block.js` (in `assets/google-reviews-block/`)
+  - Theme: `sticky-header.js`, `highlight.js`, `modal-search.js`, `case-study-filter.js`, `faq-search.js`, `simple-analytics.js`
+  - Blocks: Google Reviews (`index.js`), Calendly Booking Details (`index.js`)
   - Minification with terser
   - Sourcemaps
 
@@ -132,6 +132,7 @@ eightyfourem/
 │   ├── document-title.php   # Document title filters
 │   ├── enqueue.php          # Script/style enqueuing
 │   ├── google-reviews.php   # Google Reviews block
+│   ├── ip-utils.php         # IP detection, bot exclusion, analytics opt-out
 │   ├── meta-tags.php        # SEO meta tags
 │   ├── open-graph-images.php # Open Graph image handling
 │   ├── pattern-categories.php # Pattern categories
@@ -140,9 +141,10 @@ eightyfourem/
 │   ├── relevanssi.php       # Relevanssi search integration
 │   ├── schema.php           # Schema.org structured data
 │   ├── search.php           # Search customizations
-│   ├── shortcodes.php       # Custom shortcodes
+│   ├── shortcodes.php       # Shortcode registry
 │   ├── shortlinks.php       # Shortlink functionality
-│   └── sitemap.php          # XML sitemap generation
+│   ├── html-sitemap.php     # HTML sitemap card layout
+│   └── xml-sitemap.php      # XML sitemap generation
 ├── parts/            # Template parts
 ├── patterns/         # Block patterns
 ├── templates/        # Page templates

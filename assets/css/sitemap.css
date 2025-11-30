@@ -1,0 +1,165 @@
+/**
+ * Sitemap Styles
+ *
+ * Multi-column card layout for the HTML sitemap shortcode.
+ * Uses theme.json CSS custom properties for consistency.
+ *
+ * @package EightyFourEM
+ */
+
+/* Container */
+.sitemap-container {
+	max-width: var(--wp--style--global--wide-size, 1280px);
+	margin: 0 auto;
+}
+
+/* Section */
+.sitemap-section {
+	margin-bottom: var(--wp--preset--spacing--50);
+}
+
+.sitemap-section:last-child {
+	margin-bottom: 0;
+}
+
+/* Section Title */
+.sitemap-section-title {
+	font-family: var(--wp--preset--font-family--heading);
+	font-size: var(--wp--preset--font-size--x-large);
+	font-weight: 400;
+	color: var(--wp--preset--color--contrast);
+	margin-bottom: var(--wp--preset--spacing--30);
+}
+
+/* Grid Layout */
+.sitemap-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: var(--wp--preset--spacing--30);
+}
+
+/* Tablet: 2 columns */
+@media (max-width: 1024px) {
+	.sitemap-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+/* Mobile: 1 column */
+@media (max-width: 640px) {
+	.sitemap-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* Card */
+.sitemap-card {
+	background: var(--wp--preset--color--base);
+	border: 1px solid var(--wp--preset--color--contrast-2);
+	border-radius: var(--wp--preset--spacing--20);
+	padding: var(--wp--preset--spacing--30);
+	transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.sitemap-card:hover {
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	transform: translateY(-2px);
+}
+
+/* Pages Card - Light blue background */
+.sitemap-pages .sitemap-card {
+	background: color-mix(in srgb, var(--wp--preset--color--custom-color-1) 6%, var(--wp--preset--color--base));
+}
+
+/* Case Studies Card - Full width, distinct styling */
+.sitemap-card-case-study {
+	background: color-mix(in srgb, var(--wp--preset--color--brand-green) 8%, var(--wp--preset--color--base));
+	border-color: var(--wp--preset--color--brand-green);
+	grid-column: 1 / -1;
+}
+
+/* Local Pages Card - Distinct background */
+.sitemap-card-local {
+	background: var(--wp--preset--color--base-2);
+}
+
+/* Card Title */
+.sitemap-card-title {
+	font-family: var(--wp--preset--font-family--heading);
+	font-size: var(--wp--preset--font-size--medium);
+	font-weight: 600;
+	margin: 0;
+	line-height: 1.3;
+}
+
+.sitemap-card-title a {
+	color: var(--wp--preset--color--custom-color-1);
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+
+.sitemap-card-title a:hover {
+	color: var(--wp--preset--color--contrast);
+	text-decoration: underline;
+}
+
+/* Card List - Single column for readability */
+.sitemap-card-list {
+	list-style: none;
+	margin: 0.75rem 0 0 0;
+	padding: 0;
+}
+
+.sitemap-card-list li {
+	break-inside: avoid;
+	margin-bottom: 0.75rem;
+	font-size: var(--wp--preset--font-size--small);
+	line-height: 1.2;
+}
+
+.sitemap-card-list a {
+	color: var(--wp--preset--color--contrast);
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+
+.sitemap-card-list a:hover {
+	color: var(--wp--preset--color--custom-color-1);
+	text-decoration: underline;
+}
+
+/* Collapsible Details */
+.sitemap-card-details {
+	margin-top: 0;
+}
+
+.sitemap-card-summary {
+	cursor: pointer;
+	font-family: var(--wp--preset--font-family--body);
+	font-size: var(--wp--preset--font-size--small);
+	color: var(--wp--preset--color--contrast-2);
+	list-style: none;
+	padding: 0.25rem 0;
+}
+
+.sitemap-card-summary::-webkit-details-marker {
+	display: none;
+}
+
+.sitemap-card-summary::before {
+	content: "+ ";
+	font-weight: 600;
+}
+
+.sitemap-card-details[open] .sitemap-card-summary::before {
+	content: "- ";
+}
+
+.sitemap-card-summary:hover {
+	color: var(--wp--preset--color--contrast);
+}
+
+.sitemap-card-details .sitemap-card-list {
+	margin-top: 0.75rem;
+}
+

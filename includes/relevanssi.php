@@ -53,3 +53,25 @@ global $relevanssi_dym_fallback;
 if ( ! empty( $relevanssi_dym_fallback ) && $relevanssi_dym_fallback !== get_search_query() ) {
     echo "<h2 class='page-title'>Actually searched for: $relevanssi_dym_fallback</h2>";
 }
+
+/**
+ * "Did You Mean" shortcode for Relevanssi spell correction.
+ *
+ * Usage: [rlv_didyoumean]
+ */
+\add_shortcode(
+	tag: 'rlv_didyoumean',
+	callback: function (): string {
+		$didyoumean = '';
+		if ( function_exists( 'relevanssi_didyoumean' ) ) {
+			$didyoumean = relevanssi_didyoumean(
+				query: get_search_query( false ),
+				pre: '<p>Did you mean: ',
+				post: '</p>',
+				n: 5,
+				echoed: false
+			);
+		}
+		return $didyoumean;
+	}
+);

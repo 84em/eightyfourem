@@ -10,6 +10,8 @@ The 84EM Block Theme is a custom WordPress FSE theme optimized for business webs
 - **SEO Suite** - Meta tags, schema.org structured data, XML sitemap with batch processing
 - **Custom 404 Handling** - Automatic redirects for legacy URLs (`includes/404.php`)
 - **Modal Search** - Accessible modal search with keyboard navigation and ARIA support
+- **FAQ Search** - On-page filtering for FAQ page with WCAG 2.1 accessibility support
+- **Simple Analytics** - Privacy-focused analytics with bot exclusion and session opt-out
 
 ## Project Structure & Module Organization
 - `assets/css|js|fonts/` hold front-end sources; compiled files inherit the same path with `.min.(css|js)` suffixes. Keep Google Reviews block assets inside `assets/google-reviews-block/`.
@@ -47,7 +49,8 @@ Files in `includes/` directory provide modular functionality:
 **SEO & Content:**
 - `meta-tags.php` - SEO meta tags (title, description, Open Graph, Twitter Cards)
 - `schema.php` - Schema.org structured data generation for pages, posts, projects
-- `sitemap.php` - XML sitemap with batch processing via Action Scheduler
+- `xml-sitemap.php` - XML sitemap with batch processing via Action Scheduler
+- `html-sitemap.php` - Card-based HTML sitemap with collapsible sections
 - `search.php` - Search result filtering, Challenge heading removal from excerpts
 - `relevanssi.php` - Relevanssi search plugin integration with spell correction
 - `open-graph-images.php` - Open Graph image management with fallback logic
@@ -57,10 +60,14 @@ Files in `includes/` directory provide modular functionality:
 - `block-styles.php` - Custom block style registration
 - `block-stylesheets.php` - Block-specific stylesheet loading
 
+**Analytics & Performance:**
+- `ip-utils.php` - IP detection, bot user agent detection (75+ patterns), session opt-out via `?notrack`
+- `simple-analytics.js` - Simple Analytics loader with auto-events for outbound links, downloads, email clicks
+
 **Integrations:**
 - `cli.php` - WP-CLI commands for schema regeneration
 - `calendly-booking-details.php` - Calendly booking details block
-- `shortcodes.php` - Custom WordPress shortcodes
+- `shortcodes.php` - Shortcode registry (delegates to feature modules)
 
 **Code Quality:**
 - All functions include proper type hints (PHP 8.0+)
@@ -148,6 +155,22 @@ add_shortcode( 'case_study_filters', 'EightyFourEM\CaseStudyFilters\render_filte
   - Test spell correction suggestions appear for misspelled searches
   - Verify fallback search with corrected query when no results found
   - Test "Did You Mean" functionality
+
+- **FAQ Search** (`assets/js/faq-search.js`, `assets/css/faq-search.css`)
+  - Navigate to FAQ page (ID: 6908) to test search functionality
+  - Type in search box and verify live filtering with 300ms debounce
+  - Confirm section headings and separators hide when no matching FAQs in that section
+  - Test keyboard navigation (Escape key clears search)
+  - Verify result count announcements via screen reader
+  - Test clear button functionality
+  - Check reduced motion support in animations
+
+- **Simple Analytics** (`includes/ip-utils.php`, `includes/enqueue.php`, `assets/js/simple-analytics.js`)
+  - Verify analytics script loads for regular visitors (check Network tab for simple-analytics requests)
+  - Test `?notrack` parameter sets session cookie and excludes tracking
+  - Verify logged-in WordPress users are excluded from tracking
+  - Test bot exclusion by checking user agent patterns in `is_ua_excluded()`
+  - Confirm auto-events track outbound links, file downloads, and mailto links
 
 - **Font Loading Performance** (`includes/performance.php`)
   - Check for FOUT (Flash of Unstyled Text) or FOIT (Flash of Invisible Text) on page load

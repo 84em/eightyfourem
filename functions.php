@@ -35,4 +35,5 @@ require_once get_template_directory() . '/includes/schema.php';
 require_once get_template_directory() . '/includes/search.php';
 require_once get_template_directory() . '/includes/shortcodes.php';
 require_once get_template_directory() . '/includes/shortlinks.php';
-require_once get_template_directory() . '/includes/sitemap.php';
+require_once get_template_directory() . '/includes/html-sitemap.php';
+require_once get_template_directory() . '/includes/xml-sitemap.php';
