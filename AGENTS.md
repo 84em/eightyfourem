@@ -44,7 +44,7 @@ Files in `includes/` directory provide modular functionality:
 - `case-study-filters.php` - Interactive filtering system with shortcode `[case_study_filters]`, keyword configuration, JS localization
 - `google-reviews.php` - Custom Gutenberg block for displaying Google Business reviews
 - `404.php` - Custom redirect handler (e.g., `/project/*` → `/case-studies/*`)
-- `performance.php` - Placeholder file; FlyingPress now handles font preloading, critical CSS, and CSS optimization
+- `performance.php` - Font preloading, critical font-face inlining, resource hints to eliminate FOUT/FOIT
 
 **SEO & Content:**
 - `meta-tags.php` - SEO meta tags (title, description, Open Graph, Twitter Cards)
@@ -171,6 +171,15 @@ add_shortcode( 'case_study_filters', 'EightyFourEM\CaseStudyFilters\render_filte
   - Verify logged-in WordPress users are excluded from tracking
   - Test bot exclusion by checking user agent patterns in `is_ua_excluded()`
   - Confirm auto-events track outbound links, file downloads, and mailto links
+
+- **Font Loading Performance** (`includes/performance.php`)
+  - Check for FOUT (Flash of Unstyled Text) or FOIT (Flash of Invisible Text) on page load
+  - Verify fonts preload in Network tab (should appear early in waterfall)
+  - Confirm `<link rel="preload">` tags appear in `<head>` before other resources
+  - Check critical font-face declarations are inlined in `<style id="critical-fonts">`
+  - Verify both Instrument Sans and Jost fonts load correctly
+  - Test on slow 3G connection to ensure fonts load without flash
+  - Confirm `font-display: optional` prevents layout shifts
 
 ## Release Process
 When preparing a release with version bump:
