@@ -5,6 +5,15 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.23.0] - 2025-12-02
+### Added
+- **FlyingPress Cache Footprint Customization** - Converts Unix timestamp to human-readable Central US time (`includes/flying-press.php`)
+  - Uses `flying_press_footprint` filter to modify cache timestamp display
+  - Format: "Dec 2, 2025 at 3:45 PM CST" with automatic CST/CDT handling
+
+### Removed
+- **Project Post Type Support** - Removed unused project post type functionality
+
 ## [2.22.0] - 2025-11-30
 ### Changed
 - **Testimonials Schema Refactor** - Schema now parses page content instead of relying on external APIs (`includes/schema.php`)
