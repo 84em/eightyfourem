@@ -34,6 +34,13 @@ defined( 'ABSPATH' ) || exit;
 				"Cached at {$human_readable}",
 				$footprint
 			);
+
+            // Add affiliate link
+            $footprint = str_replace(
+                'https://flyingpress.com',
+                'https://flyingpress.com/?campaign=84emcom&ref=vyhz',
+                $footprint,
+            );
 		}
 
 		return $footprint;
