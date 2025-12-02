@@ -78,3 +78,39 @@ defined( 'ABSPATH' ) || exit;
 	},
 	priority: 2
 );
+
+/**
+ * Convert async-loaded stylesheets from print to all media
+ * Stylesheets loaded with media="print" are non-blocking but need to be
+ * switched to media="all" after page load to apply to screen
+ * Handles: eightyfourem-modal-search, eightyfourem-highlighter
+ */
+\add_action(
+	hook_name: 'wp_footer',
+	callback: function () {
+		?>
+		<script id="async-css-loader">
+		(function() {
+			var asyncStyles = [
+				'eightyfourem-modal-search-css',
+				'eightyfourem-highlighter-css'
+			];
+			function loadAsyncCSS() {
+				asyncStyles.forEach(function(id) {
+					var link = document.getElementById(id);
+					if (link && link.media === 'print') {
+						link.media = 'all';
+					}
+				});
+			}
+			if (document.readyState === 'complete') {
+				loadAsyncCSS();
+			} else {
+				window.addEventListener('load', loadAsyncCSS);
+			}
+		})();
+		</script>
+		<?php
+	},
+	priority: 99
+);
