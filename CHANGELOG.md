@@ -5,14 +5,6 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.23.1] - 2025-12-02
-### Changed
-- **FlyingPress Affiliate Link** - Cache footprint now includes affiliate tracking parameters (`includes/flying-press.php`)
-
-### Removed
-- **Performance Optimizations** - Removed redundant code from `includes/performance.php`; FlyingPress now handles font preloading, critical CSS inlining, and CSS optimization
-  - File retained as placeholder for future custom performance code
-
 ## [2.23.0] - 2025-12-02
 ### Added
 - **FlyingPress Cache Footprint Customization** - Converts Unix timestamp to human-readable Central US time (`includes/flying-press.php`)
