@@ -35,6 +35,74 @@ namespace EightyFourEM;
 defined( 'ABSPATH' ) || exit;
 
 /**
+ * Extract FAQ items from WordPress core accordion blocks.
+ *
+ * Parses page content to find accordion blocks and extracts question/answer pairs.
+ *
+ * @param int $page_id The page ID containing accordion blocks.
+ *
+ * @return array Array of FAQ data with keys: question, answer.
+ */
+function extract_faqs_from_accordion( int $page_id ): array {
+	$page = \get_post( $page_id );
+	if ( ! $page || empty( $page->post_content ) ) {
+		return [];
+	}
+
+	$faqs    = [];
+	$content = $page->post_content;
+
+	// Match each accordion-item block.
+	$item_pattern = '/<!-- wp:accordion-item -->(.*?)<!-- \/wp:accordion-item -->/s';
+	if ( ! \preg_match_all( $item_pattern, $content, $items ) ) {
+		return [];
+	}
+
+	foreach ( $items[1] as $item ) {
+		// Extract question from accordion-heading toggle-title span.
+		$question = '';
+		if ( \preg_match( '/wp-block-accordion-heading__toggle-title["\']?>([^<]+)</s', $item, $q_match ) ) {
+			$question = \trim( $q_match[1] );
+		}
+
+		// Extract answer from accordion-panel content.
+		$answer = '';
+		if ( \preg_match( '/<!-- wp:accordion-panel -->(.*?)<!-- \/wp:accordion-panel -->/s', $item, $panel_match ) ) {
+			// Get the inner HTML content, strip block comments but keep HTML structure.
+			$panel_content = $panel_match[1];
+			// Remove block comments.
+			$panel_content = \preg_replace( '/<!-- \/?wp:[^>]+ -->/s', '', $panel_content );
+			// Remove the outer panel div wrapper.
+			$panel_content = \preg_replace( '/<div[^>]*class="[^"]*wp-block-accordion-panel[^"]*"[^>]*>(.*)<\/div>/s', '$1', $panel_content );
+			// Normalize whitespace: collapse multiple newlines/spaces to single space between tags.
+			$panel_content = \preg_replace( '/>\s+</', '><', $panel_content );
+			// Clean up but preserve allowed HTML tags per Google guidelines.
+			$answer = \trim( $panel_content );
+		}
+
+		if ( ! empty( $question ) && ! empty( $answer ) ) {
+			// Strip all HTML attributes to avoid quote escaping issues in JSON.
+			// Keep only the tag names per Google's allowed tags.
+			$answer = \preg_replace( '/<(\w+)[^>]*>/', '<$1>', $answer );
+			// Convert special characters to HTML entities for safe JSON encoding.
+			$answer = \str_replace(
+				[ \html_entity_decode( '&ldquo;' ), \html_entity_decode( '&rdquo;' ), \html_entity_decode( '&lsquo;' ), \html_entity_decode( '&rsquo;' ), \html_entity_decode( '&mdash;' ), \html_entity_decode( '&ndash;' ), \html_entity_decode( '&nbsp;' ) ],
+				[ '&quot;', '&quot;', "'", "'", '-', '-', ' ' ],
+				$answer
+			);
+			// Convert remaining double quotes to HTML entities.
+			$answer = \str_replace( '"', '&quot;', $answer );
+			$faqs[] = [
+				'question' => $question,
+				'answer'   => $answer,
+			];
+		}
+	}
+
+	return $faqs;
+}
+
+/**
  * Extract testimonials from a page's reusable blocks.
  *
  * Parses page content to find reusable block references, fetches each block,
@@ -762,6 +830,30 @@ function extract_testimonials_from_page( int $page_id ): array {
                                 '@id'   => $site_url . '/#organization',
                             ],
                         ];
+                        break;
+
+                    case 'faq':
+                        // Extract FAQs from accordion blocks.
+                        $faqs = extract_faqs_from_accordion( $post_id );
+
+                        if ( ! empty( $faqs ) ) {
+                            // Build Question entities for FAQPage schema.
+                            $questions = [];
+                            foreach ( $faqs as $faq ) {
+                                $questions[] = [
+                                    '@type'          => 'Question',
+                                    'name'           => $faq['question'],
+                                    'acceptedAnswer' => [
+                                        '@type' => 'Answer',
+                                        'text'  => $faq['answer'],
+                                    ],
+                                ];
+                            }
+
+                            // Change schema type to FAQPage per Google guidelines.
+                            $schema['@type']      = 'FAQPage';
+                            $schema['mainEntity'] = $questions;
+                        }
                         break;
 
                     case 'testimonials':
