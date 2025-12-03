@@ -5,6 +5,20 @@ All notable changes to the 84EM Block Theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+- **FAQ Schema Support** - Automatically generates FAQPage structured data for pages using WordPress core accordion blocks (`includes/schema.php`)
+  - New `extract_faqs_from_accordion()` function parses accordion-item blocks for Q&A pairs
+  - Extracts questions from accordion-heading toggle-title spans
+  - Extracts answers from accordion-panel content with HTML preserved
+  - Strips HTML attributes and escapes quotes for valid JSON-LD output
+  - Follows Google's FAQ structured data best practices
+- **HTML Separator Block** - Legacy UAGB separator block support with editor preview (`assets/js/uagb-separator-editor.js`)
+  - Registers `uagb/separator` block for WordPress block editor recognition
+  - Displays code icon with horizontal lines in editor preview
+  - Deprecated save function matches original UAGB markup for seamless migration
+
 ## [2.23.0] - 2025-12-02
 ### Added
 - **FlyingPress Cache Footprint Customization** - Converts Unix timestamp to human-readable Central US time (`includes/flying-press.php`)
