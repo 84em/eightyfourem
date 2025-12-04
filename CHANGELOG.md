@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.25.0] - 2025-12-04
+
+### Changed
+- **FAQ Search** - Updated selectors from UAGB FAQ block to WordPress 6.9+ core accordion block (`assets/js/faq-search.js`, `assets/css/faq-search.css`)
+  - `.uagb-faq-item` changed to `.wp-block-accordion-item`
+  - `.uagb-question` changed to `.wp-block-accordion-heading__toggle-title`
+  - `.uagb-faq-content` changed to `.wp-block-accordion-panel`
+  - `.wp-block-uagb-faq` changed to `.wp-block-accordion`
+  - CSS transitions updated for new block structure
+
 ## [2.24.0] - 2025-12-03
 
 ### Added
